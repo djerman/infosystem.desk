@@ -1,0 +1,291 @@
+
+/* za svu dugmad
+.button { 
+   -fx-background-color: red; 
+   -fx-text-fill: white; 
+}*/
+
+.dugme1 { 
+   -fx-background-color: red; 
+   -fx-text-fill: white; 
+   }
+
+.tab-button {
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-content-display: graphic-only;
+    -fx-padding: -1 -1 -1 -1;
+}
+
+.tab-button:hover {
+    -fx-background-color: white;
+    }
+
+.text-field:disabled {
+	-fx-background-color: lightblue;
+	-fx-opacity: 1.0;
+	}
+
+.text-field {
+	/*-fx-background-color: lemonchiffon;*/
+	/*-fx-background-color: #FFF7C0;*/
+	-fx-border-color: black ;  
+	-fx-border-width: 0.5px ; 
+	-fx-padding: 2px; /*-1 1 -1 1 */ 
+	}
+
+
+.text-area {
+    /*text-area-background: lemonchiffon;
+    text-area-background: #EFEFC0;*/
+    text-area-background: #FFF7C0;
+    -fx-border-color: black ;  
+    -fx-border-width: 0.5px ; 
+    /*-fx-font-size: 16;*/ 
+    }
+
+.text-area .content {
+    -fx-background-color: text-area-background ;
+    }
+    
+.button {
+	/*-fx-border-color: black ;  
+	-fx-border-width: 0.5px ; */
+	-fx-padding: 5px;
+	-fx-background-color: transparent;
+	-fx-pref-width: 120px;
+	}
+	
+.button:hover {
+	/*-fx-background-color: deepskyblue;*/
+	-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: -fx-text-base-color;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+	}
+	 
+.button:pressed {
+	-fx-background-color: sandybrown;
+	}
+	
+.combo-box:disabled {
+	-fx-background-color: lightblue;
+	-fx-opacity: 1.0;
+	}
+
+.combo-box .list-cell{
+	-fx-padding: 2px;
+	}
+	
+.combo-box {
+	-fx-border-color: black ;  
+	-fx-border-width: 0.5px ;
+
+	}
+
+.text-input:readonly {
+	-fx-background-color: lightblue;
+	}
+
+/**
+ * маркирање колона по којима се врши претрага
+ */
+.table-view .column-header.pretraga .label {
+    -fx-text-fill: blue;
+    -fx-font-weight: bold;
+    }
+
+.table-view .column-header-background .filler {
+	-fx-background-color: transparent;
+	}
+
+.boldtekst {
+	-fx-font-weight: bold;
+	}
+
+.levo {
+	-fx-alignment: CENTER-LEFT;
+	}
+/*
+ * за боје на табели
+ 
+.table-row-cell:odd:filled {
+    -fx-background-color:  	gainsboro;
+    }
+
+.table-row-cell:even:filled {
+    -fx-background-color: white;
+    }
+*/
+.opstatabela {
+	/*-fx-selection-bar: cornflowerblue;*//*navajowhite  */ 
+	/*-fx-selection-bar-non-focused: lightskyblue;*//*lightyellow */ /*-fx-border-color: red; -fx-padding: 0 0 0 0; */
+	/*-fx-background-color: #FFF7C0;*/
+	-fx-table-cell-border-color: black; 
+	/*-fx-table-cell-background-color: #FFF7C0; */
+	-fx-table-cell-border-width: 1px; 
+	/*-fx-font-size: 14;*/
+	/*-fx-table-header-border-width: 1px; 
+	 * -fx-table-header-border-color: black;*/
+	}
+/*
+.opstatabela .table-row-cell:odd {
+	-fx-background-color: -fx-table-cell-border-color, #FFF7C0;
+	}
+	
+.opstatabela .table-row-cell:even {
+	-fx-background-color: -fx-table-cell-border-color, #FFF790;
+	}*/
+/*
+ * за приказ оквира изабраног реда у табели 
+  */
+.opstatabela .table-row-cell:filled:selected {
+    -fx-border-color: black;
+    /*-fx-background-color: cornflowerblue;*/
+    -fx-padding: -1;
+    }
+    
+.opstatabela .table-row-cell:selected .text {
+	-fx-fill: white;
+	/*-fx-font-family: "Arial"; 
+	-fx-font-style: bold; */
+	}
+    
+/*za zaglavlje svih tabela */
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background,
+.table-view .column-header-background .filler {
+	-fx-font-size: 12;
+    -fx-table-cell-border-color: black; /*#d9e4f1; */
+    -fx-border-width: 1px;
+    /*-fx-background-color: -fx-table-cell-border-color, #d9e4f1;*//* *//*,;#ffffff*/
+    }
+
+/*padding bne radi ali size radi za veličinu zaglavlja
+ * staviti 1px više nego visina teksta */
+.table-view .column-header{
+	/*-fx-padding: -1 0 -1 0;*/
+	-fx-size: 13;
+	}
+	
+    /*regulisanje visine reda u tabeli */
+.table-row-cell {
+    /*-fx-cell-size: 20px;*/
+    }
+    
+.table-cell{
+	-fx-padding: -1 1 -1 1;
+	}
+
+.crvenabojateksta {
+	-fx-text-fill: red;
+	}
+	
+.naslov {
+	-fx-text-fill: red;
+	-fx-font-weight: bold;
+	}
+	
+.podnaslov{
+	-fx-text-fill: green;
+	-fx-font-weight: bold;
+	}
+	
+/*
+ * за боју текста ћелија тебеле
+ */
+.crvenabojatekstacelije .table-cell{
+	-fx-text-fill: red;
+	}
+
+.zelenaabojatekstacelije .table-cell{
+	-fx-text-fill: green;
+	}
+
+.crnabojatekstacelije .table-cell{
+	-fx-text-fill: black;
+	}
+
+.crvenbojapozadine {
+	-fx-background-color: red;
+	}
+
+.zelenabojateksta {
+	-fx-text-fill: green;
+	}
+
+.plavabojateksta {
+	-fx-text-fill: blue;
+	}
+
+.pozadinazadugmad{
+	-fx-background-color: lemonchiffon;
+	}
+	
+.pozadina{
+	-fx-background-color:#87CEFA;
+	}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: red;
+    }
+
+/**
+ * подешавање табова
+ */
+.tab-pane .tab:selected{
+	/*-fx-background-color: #FFD700;*/
+	-fx-background-color: #00E699;
+	/* 3c3c3c*/
+	}
+
+.tab-pane .tab{
+	-fx-background-color: #FFFFFF;
+	/* 3c3c3c*/
+	}
+
+.tab .tab-label{
+	-fx-alignment: CENTER;
+    -fx-text-fill: #000000;
+    /*#828282 */
+   /* -fx-font-size: 12px;*/
+    -fx-font-weight: bold;
+    }
+    
+.tab-pane-graphic-desno .tab-label {
+    -fx-content-display: right
+    }
+    
+.tab-pane-graphic-desno .button {
+	-fx-border-color: black;
+    -fx-border-width: 1 1 1 1; 
+    -fx-padding: 1 2 1 1;
+    }
+    
+.cena > * {
+    -fx-fill: red;
+    }
+
+.cena > .line-1 {
+    -fx-fill: blue;
+    }
+    
+.mnemonic-underline {
+    -fx-stroke: -fx-text-base-color;
+}
+
+.tabela-celija-duple-linije {
+	-fx-alignment: CENTER-RIGHT; -fx-padding: 0 3 0 0;
+}
+/*za kalkulacije gridpane 
+.kalkulacije-grid-cell {
+    -fx-background-color: black, white ;
+    -fx-background-insets: 0, 0 1 1 0 ;
+}
+*/

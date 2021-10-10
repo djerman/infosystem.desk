@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" type="VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rs.atekom.infosystem.desk.a.OsnovniController">
+   <children>
+      <MenuBar id="izbornik" prefHeight="25.0" prefWidth="568.0">
+        <menus>
+            <Menu fx:id="podaci" mnemonicParsing="false" text="%izbornik.podaci">
+              <items>
+                  <MenuItem mnemonicParsing="false" text="%tab.pocetni" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.tipdokumenta" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.poresketarife" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.artikli" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.kupci" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.dobavljaci" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.objekti" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.normativ" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.izlaz" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.beleske" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.imenaadrese" />
+                  <MenuItem mnemonicParsing="false" text="%izbornik.podaci.transakcije" />
+              </items>
+            </Menu>
+            <Menu fx:id="roba" mnemonicParsing="false" text="%izbornik.roba">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%izbornik.izvestaji">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%izbornik.sifarnici">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%izbornik.opste">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%izbornik.kraj">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane fx:id="taboviPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" />
+   </children>
+</fx:root>

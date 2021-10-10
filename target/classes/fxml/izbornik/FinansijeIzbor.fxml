@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+
+<fx:root type="javafx.scene.control.Menu" fx:id="finansije" mnemonicParsing="false" text="%izbornik.finansije" type="Menu" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rs.atekom.infosystem.desk.a.izbornik.FinansijeIzborController">
+  <items>
+      <MenuItem fx:id="izvodiNalozi" mnemonicParsing="false" text="%izbornik.finansije.izvodinalozi" />
+      <MenuItem fx:id="blagajna" mnemonicParsing="false" text="%izbornik.finansije.blagajna" />
+      <MenuItem fx:id="devizniIzvod" mnemonicParsing="false" text="%izbornik.finansije.devizniizvod" />
+      <MenuItem fx:id="troskoviNabavke" mnemonicParsing="false" text="%izbornik.finansije.troskovinabavke" />
+      <MenuItem fx:id="ostalaKnjizenja" mnemonicParsing="false" text="%izbornik.finansije.ostalaknjizenja" />
+      <MenuItem fx:id="pocetnoStanje" mnemonicParsing="false" text="%izbornik.finansije.pocetnostanje" />
+      <MenuItem fx:id="preknjizavanje" mnemonicParsing="false" text="%izbornik.finansije.preknjizavanje" />
+      <MenuItem fx:id="izmenaKonta" mnemonicParsing="false" text="%izbornik.finansije.izmenakonta" />
+  </items>
+</fx:root>
