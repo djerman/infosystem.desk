@@ -1,10 +1,11 @@
 package rs.atekom.infosystem.desk.paneli.a.agencija;
 
 import org.springframework.http.ResponseEntity;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -38,7 +39,7 @@ public class AAgencijePanel extends OsnovniPanel{
 					pokaziGresku(vratiOsnovniLayout().vratiPrevod("obavestenja.brisanje"), vratiOsnovniLayout().vratiPrevod("obavestenja.brisanje.poruka"));
 					}
 			});
-		izmeniSacuvaj.setOnAction(e -> {
+		sacuvaj.setOnAction(e -> {
 			if(pregled.preuzmiObjekat().getNaziv() != null && !pregled.preuzmiObjekat().getNaziv().equals("")) {
 				osveziTabelu(pregled.preuzmiObjekat(), true);
 				pregled.postaviNovo();
@@ -47,7 +48,7 @@ public class AAgencijePanel extends OsnovniPanel{
 							vratiOsnovniLayout().vratiPrevod("obavestenja.obaveznapolja.obavestenje"));
 					}
 			});
-		dodaj.setOnAction(e -> {
+		novo.setOnAction(e -> {
 			pregled.postaviNovo();
 			});
 		postaviTabelu();
@@ -65,13 +66,25 @@ public class AAgencijePanel extends OsnovniPanel{
 		agencije = new AAgencijeTabela(vratiOsnovniLayout().vratiResource());
 		izborAgencije = agencije.getSelectionModel();
 		izborAgencije.setSelectionMode(SelectionMode.SINGLE);
+		izborAgencije.selectedItemProperty().addListener(new ChangeListener<AAgencija>() {
+			@Override
+			public void changed(ObservableValue<? extends AAgencija> observable, AAgencija oldValue, AAgencija newValue) {
+				if(newValue != null) {
+					pregled.postaviObjekat(newValue);
+					}else {
+						pregled.postaviNovo();
+						}
+				}
+			});
+		
+		/*
 		agencije.setRowFactory(tv -> {
 			TableRow<AAgencija> row = new TableRow<>();
 			row.setOnMouseClicked(e -> {
 				pregled.postaviObjekat(row.getItem());
 				});
 			return row;
-			});
+			});*/
 		}
 	
 	
@@ -87,7 +100,11 @@ public class AAgencijePanel extends OsnovniPanel{
 				odgovor = restAgencija.pretraga(null);
 				}else{
 					if(snimi) {
-						odgovor = restAgencija.snimi(agencija);
+						if(agencija.getId() == null) {
+							odgovor = restAgencija.snimi(agencija);
+							}else {
+								odgovor = restAgencija.izmeni(agencija);
+								}
 						}else {
 							odgovor = restAgencija.brisi(agencija);
 							}

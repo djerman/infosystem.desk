@@ -16,11 +16,13 @@ public class CMestoComboBox extends SearchableComboBox<CMesto>{
 				if(object != null) {
 					switch(resource.getLocale().toString()) {
 					case "srb_rs":
-						return object.getSr();
+						return object.getPostanskiBroj() + " " + object.getSr();
 					case "eng_us":
-						return object.getEn();
+						return object.getPostanskiBroj() + " " + object.getEn();
+					case "de_de":
+						return object.getPostanskiBroj() + " " + object.getDe();
 					default:
-						return object.getNaziv();
+						return object.getPostanskiBroj() + " " + object.getNaziv();
 						}
 					}else {
 						return null;

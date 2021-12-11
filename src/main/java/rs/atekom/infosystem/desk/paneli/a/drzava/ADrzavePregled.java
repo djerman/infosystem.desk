@@ -1,9 +1,7 @@
 package rs.atekom.infosystem.desk.paneli.a.drzava;
 
 import java.util.ResourceBundle;
-
 import javafx.geometry.HPos;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -13,9 +11,9 @@ import rs.atekom.infosystem.baza.a.drzava.ADrzava;
 
 public class ADrzavePregled extends GridPane{
 
-	private Label lblNaziv, lblSr, lblEn, lblPozivniBroj, lblOznaka, lblPodrazumevan;
-	private TextField txtNaziv, txtSr, txtEn, txtPozivniBroj, txtOznaka;
-	private CheckBox cbPodrazumevan;
+	private Label lblNaziv, lblSr, lblEn, lblDe, lblPozivniBroj, lblOznaka/*, lblPodrazumevan*/;
+	private TextField txtNaziv, txtSr, txtEn, txtDe, txtPozivniBroj, txtOznaka;
+	//private CheckBox cbPodrazumevan;
 	private ADrzava drzava;
 	
 	public ADrzavePregled(ADrzavePanel panel, ResourceBundle resource) {
@@ -30,16 +28,18 @@ public class ADrzavePregled extends GridPane{
 		lblNaziv.setStyle("-fx-text-fill: red");
 		lblSr = new Label(resource.getString("lbl.sr"));
 		lblEn = new Label(resource.getString("lbl.en"));
+		lblDe = new Label(resource.getString("lbl.de"));
 		lblPozivniBroj = new Label(resource.getString("lbl.pozivnibroj"));
-		lblOznaka = new Label(resource.getString("lbl.oznaka"));
-		lblPodrazumevan = new Label(resource.getString("lbl.podrazumevan"));
+		lblOznaka = new Label(resource.getString("lbl.oznakamedjunarodna"));
+		//lblPodrazumevan = new Label(resource.getString("lbl.podrazumevan"));
 		
 		txtNaziv = new TextField();
 		txtSr = new TextField();
 		txtEn = new TextField();
+		txtDe = new TextField();
 		txtPozivniBroj = new TextField();
 		txtOznaka = new TextField();
-		cbPodrazumevan = new CheckBox();
+		//cbPodrazumevan = new CheckBox();
 		}
 	
 	private void popakujElemente() {
@@ -68,7 +68,7 @@ public class ADrzavePregled extends GridPane{
 		getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6);
 		
 		addColumn(0, lblNaziv); addColumn(1, txtNaziv); addColumn(2, lblSr); addColumn(3, txtSr); addColumn(4, lblEn); addColumn(5, txtEn);
-		addColumn(0, lblPozivniBroj); addColumn(1, txtPozivniBroj); addColumn(2, lblOznaka); addColumn(3, txtOznaka); addColumn(4, lblPodrazumevan); addColumn(5, cbPodrazumevan);
+		addColumn(0, lblDe); addColumn(1, txtDe); addColumn(2, lblPozivniBroj); addColumn(3, txtPozivniBroj); addColumn(4, lblOznaka); addColumn(5, txtOznaka); ;
 
 		}
 	
@@ -78,9 +78,9 @@ public class ADrzavePregled extends GridPane{
 			txtNaziv.setText(drzava.getNaziv());
 			txtSr.setText(drzava.getSr());
 			txtEn.setText(drzava.getEn());
+			txtDe.setText(drzava.getDe());
 			txtPozivniBroj.setText(drzava.getPozivniBroj());
 			txtOznaka.setText(drzava.getOznaka());
-			cbPodrazumevan.setSelected(drzava.getPodrazumevan());
 			}else {
 				postaviNovo();
 				}
@@ -91,22 +91,23 @@ public class ADrzavePregled extends GridPane{
 		txtNaziv.setText("");
 		txtSr.setText("");
 		txtEn.setText("");
+		txtDe.setText("");
 		txtPozivniBroj.setText("");
 		txtOznaka.setText("");
-		cbPodrazumevan.setSelected(false);
 		}
 	
 	public ADrzava preuzmiObjekat() {
 		if(this.drzava == null) {
 			drzava = new ADrzava();
-			drzava.setId(0L);
+			//testdrzava.setId(0L);
+			drzava.setPodrazumevan(false);
 			}
-		drzava.setNaziv(txtNaziv.getText().trim());
-		drzava.setSr(txtSr.getText().trim());
-		drzava.setEn(txtEn.getText().trim());
-		drzava.setPozivniBroj(txtPozivniBroj.getText().trim());
-		drzava.setOznaka(txtOznaka.getText().trim());
-		drzava.setPodrazumevan(cbPodrazumevan.isSelected());
+		drzava.setNaziv(txtNaziv.getText() == null ? null : txtNaziv.getText().trim());
+		drzava.setSr(txtSr.getText() == null ? null : txtSr.getText().trim());
+		drzava.setEn(txtEn.getText() == null ? null : txtEn.getText().trim());
+		drzava.setPozivniBroj(txtPozivniBroj.getText() == null ? null : txtPozivniBroj.getText().trim());
+		drzava.setOznaka(txtOznaka.getText() == null ? null : txtOznaka.getText().trim());
+		drzava.setPodrazumevan(drzava.getPodrazumevan());
 		return drzava;
 		}
 	

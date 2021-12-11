@@ -15,6 +15,7 @@ public class TekstDecimalni extends TextField{
 					setText(String.format("%,.2f", vratiDecimalniBroj(getText())));
 					setStyle("");
 					}catch (Exception e) {
+						setText("0,00");
 						setStyle("-fx-background-color: lightpink");
 						vratiUpozorenje();
 						}
@@ -126,7 +127,7 @@ public class TekstDecimalni extends TextField{
 			return new BigDecimal(brojTekst);
 			}catch (Exception e) {
 				//vratiUpozorenje();
-				return null;
+				return new BigDecimal("0.00	");
 				}
 		}
 	

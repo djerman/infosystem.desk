@@ -2,10 +2,11 @@ package rs.atekom.infosystem.desk.paneli.c.mesto;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -40,7 +41,11 @@ public class CMestoPanel extends OsnovniPanel{
 		restMesto = new CMestoRestKlijent(vratiRestServis());
 		osveziDrzave = true;
 		postaviPregled();
-		postaviKomande();
+		postaviKomandeSaPretragom();
+		
+		vratiPretragu().setOnAction(e -> {
+			pretraga(vratiPretragu().getText().trim());
+			});
 
 		izbrisi.setOnAction(e -> {
 			if(izborMesta.getSelectedItem() != null) {
@@ -49,7 +54,7 @@ public class CMestoPanel extends OsnovniPanel{
 					pokaziGresku(vratiOsnovniLayout().vratiPrevod("obavestenja.brisanje"), vratiOsnovniLayout().vratiPrevod("obavestenja.brisanje.poruka"));
 					}
 			});
-		izmeniSacuvaj.setOnAction(e -> {
+		sacuvaj.setOnAction(e -> {
 			if(pregled.proveraUnosa()) {
 				azurirajTabelu(true);
 				}else {
@@ -57,8 +62,9 @@ public class CMestoPanel extends OsnovniPanel{
 							vratiOsnovniLayout().vratiPrevod("obavestenja.obaveznapolja.obavestenje"));
 					}
 			});
-		dodaj.setOnAction(e -> {
+		novo.setOnAction(e -> {
 			pregled.postaviNovo();
+			izborMesta.clearSelection();
 			});
 		
 		postaviTabelu();
@@ -68,6 +74,7 @@ public class CMestoPanel extends OsnovniPanel{
 		VBox.setVgrow(mesta, Priority.ALWAYS);
 		setContent(vratiRoot());
 		}
+	
 	private void postaviPregled() {
 		pregled = new CMestoPregled(this, vratiOsnovniLayout().vratiResource());
 		}
@@ -76,17 +83,36 @@ public class CMestoPanel extends OsnovniPanel{
 		mesta = new CMestoTabela(vratiOsnovniLayout().vratiResource());
 		izborMesta = mesta.getSelectionModel();
 		izborMesta.setSelectionMode(SelectionMode.SINGLE);
+		izborMesta.selectedItemProperty().addListener(new ChangeListener<CMesto>() {
+			@Override
+			public void changed(ObservableValue<? extends CMesto> observable, CMesto oldValue, CMesto newValue) {
+				if(newValue != null) {
+					pregled.postaviObjekat(newValue);
+					}else {
+						pregled.postaviNovo();
+						}
+				}
+			});
+		/*
 		mesta.setRowFactory(tv -> {
 			TableRow<CMesto> row = new TableRow<>();
 			row.setOnMouseClicked(e -> {
 				pregled.postaviObjekat(row.getItem());
 				});
 			return row;
-			});
+			});*/
 		}
 	@Override
 	public void popuniTabelu() {
-		mesta.setItems(null);
+		ResponseEntity<CMestoOdgovor> odgovor = null;
+		try {
+			odgovor = restMesto.pretraga(null);
+			statusOdgovora(odgovor);
+			}catch (Exception e) {
+				e.printStackTrace();
+				vratiNemaOdgovoraServera();
+				}
+		//mesta.setItems(null);
 		}
 	
 	public void osveziTabelu(List<CMesto> listaMesta) {
@@ -118,6 +144,16 @@ public class CMestoPanel extends OsnovniPanel{
 				}
 		}
 	
+	private void pretraga(String pretraga) {
+		try {
+			ResponseEntity<CMestoOdgovor> odgovor = restMesto.pretraga(pretraga);
+			statusOdgovora(odgovor);
+			}catch (Exception e) {
+				e.printStackTrace();
+				vratiNemaOdgovoraServera();
+				}
+		}
+	
 	public ADrzavaRestKlijent vratiRestDrzava() {
 		return this.restDrzava;
 		}
@@ -140,7 +176,7 @@ public class CMestoPanel extends OsnovniPanel{
 				try {
 					ResponseEntity<ADrzavaOdgovor> odgovor = (ResponseEntity<ADrzavaOdgovor>)odg;
 					pregled.postaviOpstine(FXCollections.observableArrayList(odgovor.getBody() == null ? null : odgovor.getBody().getListaOpstina()));
-					osveziTabelu(odgovor.getBody() == null ? null : odgovor.getBody().getListaMesta());
+					//osveziTabelu(odgovor.getBody() == null ? null : odgovor.getBody().getListaMesta());
 					}catch (Exception ee) {
 						ee.printStackTrace();
 						}

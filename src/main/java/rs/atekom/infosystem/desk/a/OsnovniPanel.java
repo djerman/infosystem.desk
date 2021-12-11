@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -16,7 +18,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import rs.atekom.infosystem.baza.d.DPretplatnik;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
 import rs.atekom.infosystem.desk.app.rest.ServisRest;
 
@@ -31,9 +33,12 @@ public abstract class OsnovniPanel extends ScrollPane{
 	private ObavestenjeBrisanje obavestenje;
 	private String naslov, naslovIzmena, naslovBrisanje;
 	public Double razmak = 5.0;
-	public Button izbrisi, izmeniSacuvaj, dodaj;
-	private Region region;
+	public Button izbrisi, sacuvaj, novo, osvezi;
+	private Region region, region1;
 	public HBox komande;
+	private TextField pretraga;
+	public HBox info;
+	public Label footer, ukupno;
 	//public String putanja;
 	//public Boolean pozvanOsvezi;
 	//public int strana, velicina;
@@ -140,12 +145,57 @@ public abstract class OsnovniPanel extends ScrollPane{
 	public void postaviKomande() {
 		komande = new HBox(razmak);
 		komande.setPadding(new Insets(10));
-		izbrisi = new Button(osnovniLayout.vratiResource().getString("btn.izbrisi"), new Glyph("FontAwesome", "TRASH_ALT").color(Color.RED));
-		region= new Region();
-		izmeniSacuvaj = new Button(osnovniLayout.vratiResource().getString("btn.sacuvaj"), new Glyph("FontAwesome", FontAwesome.Glyph.PENCIL).color(Color.GREEN));
-		dodaj = new Button(osnovniLayout.vratiResource().getString("btn.dodaj"), new Glyph("FontAwesome", FontAwesome.Glyph.PLUS).color(Color.BLUE));
-		komande.getChildren().addAll(izbrisi, region, dodaj, izmeniSacuvaj);
+		
+		napraviIzbrisi();
+		region = new Region();
+		napraviSacuvaj();
+		napraviNovo();
+		napraviOsvezi();
+		
+		komande.getChildren().addAll(izbrisi, region, novo, sacuvaj, osvezi);
 		HBox.setHgrow(region, Priority.ALWAYS);
+		}
+	
+	public void postaviKomandeSaPretragom() {
+		komande = new HBox(razmak);
+		komande.setPadding(new Insets(10));
+		
+		napraviIzbrisi();
+		region = new Region();
+		napraviPretragu();
+		region1 = new Region();
+		napraviSacuvaj();
+		napraviNovo();
+		napraviOsvezi();
+		
+		komande.getChildren().addAll(izbrisi, region, pretraga, region1, novo, sacuvaj, osvezi);
+		HBox.setHgrow(region, Priority.ALWAYS);
+		HBox.setHgrow(region1, Priority.ALWAYS);
+		}
+	
+	public void napraviIzbrisi() {
+		izbrisi = new Button(osnovniLayout.vratiResource().getString("btn.izbrisi"), new Glyph("FontAwesome", "TRASH_ALT").color(Color.RED));
+		}
+	
+	public void napraviPretragu() {
+		pretraga = new TextField();
+		pretraga.setPromptText(osnovniLayout.vratiResource().getString("lbl.pretraga"));
+		}
+	
+	public void napraviSacuvaj() {
+		sacuvaj = new Button(osnovniLayout.vratiResource().getString("btn.sacuvaj"), new Glyph("FontAwesome", FontAwesome.Glyph.PENCIL).color(Color.GREEN));
+		}
+	
+	public void napraviNovo() {
+		novo = new Button(osnovniLayout.vratiResource().getString("btn.dodaj"), new Glyph("FontAwesome", FontAwesome.Glyph.PLUS).color(Color.BLUE));
+		
+		}
+	
+	public void napraviOsvezi() {
+		osvezi = new Button(osnovniLayout.vratiResource().getString("btn.osvezi"), new Glyph("FontAwesome", FontAwesome.Glyph.REFRESH).color(Color.ORANGE));
+		osvezi.setOnAction(e -> {
+			popuniTabelu();
+			});
 		}
 	
 	public void ugasi() {
@@ -242,6 +292,10 @@ public abstract class OsnovniPanel extends ScrollPane{
 		naslovBrisanje = s;
 		}
 	
+	public TextField vratiPretragu() {
+		return this.pretraga;
+		}
+	
 	public void popuniTabelu() {
 		//
 		}
@@ -254,6 +308,20 @@ public abstract class OsnovniPanel extends ScrollPane{
 		root.getChildren().remove(alatke);
 		}
 	*/
+	
+	public void postaviInfo() {
+		info = new HBox();
+		footer = new Label(vratiOsnovniLayout().vratiPrevod("lbl.ukupno"));
+		ukupno = new Label();
+		Region region1 = new Region();
+		info.getChildren().addAll(region1, footer, ukupno);
+		HBox.setHgrow(region1, Priority.ALWAYS);
+		}
+	
+	public void postaviUkupno(int uk) {
+		ukupno.setText(" " + uk);
+		}
+	
 	public int strana(int strana) {
 		return strana + 1;
 		}
@@ -277,8 +345,8 @@ public abstract class OsnovniPanel extends ScrollPane{
 						vratiOsnovniLayout().vratiPrevod("obavestenja.content"));
 				break;
 			case Odgovori.VERZIJA:
-				pokaziNijeUspesno(vratiOsnovniLayout().vratiPrevod("obavestenja.verzija"), 
-						vratiOsnovniLayout().vratiPrevod("obavestenja.content"));
+				pokaziNijeUspesno(vratiOsnovniLayout().vratiPrevod("obavestenja.verzije"), 
+						vratiOsnovniLayout().vratiPrevod("obavestenja.verzijesadrzaj"));
 				break;
 			case Odgovori.POSTOJI:
 				pokaziNijeUspesno(vratiOsnovniLayout().vratiPrevod("obavestenja.postoji"), 

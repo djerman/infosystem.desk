@@ -17,7 +17,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import rs.atekom.infosystem.baza.d.DPretplatnik;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
 import rs.atekom.infosystem.baza.h.HKontakt;
 import rs.atekom.infosystem.desk.app.izbornik.IzbornikBar;
 import rs.atekom.infosystem.desk.app.rest.ServisRest;

@@ -1,24 +1,24 @@
-package rs.atekom.infosystem.desk.app.pomocne.combo;
+package rs.atekom.infosystem.desk.paneli.a.drzava;
 
 import java.util.ResourceBundle;
-
 import org.controlsfx.control.SearchableComboBox;
-
+import rs.atekom.infosystem.baza.a.drzava.ADrzava;
 import javafx.util.StringConverter;
-import rs.atekom.infosystem.baza.b.BOpstina;
 
-public class BOpstinaComboBox extends SearchableComboBox<BOpstina>{
+public class ADrzavaComboBox extends SearchableComboBox<ADrzava>{
 
-	public BOpstinaComboBox(ResourceBundle resource) {
-		setConverter(new StringConverter<BOpstina>() {
+	public ADrzavaComboBox(ResourceBundle resource) {
+		setConverter(new StringConverter<ADrzava>() {
 			@Override
-			public String toString(BOpstina object) {
+			public String toString(ADrzava object) {
 				if(object != null) {
 					switch(resource.getLocale().toString()) {
 					case "srb_rs":
 						return object.getSr();
 					case "eng_us":
 						return object.getEn();
+					case "de_de":
+						return object.getDe();
 					default:
 						return object.getNaziv();
 						}
@@ -27,11 +27,10 @@ public class BOpstinaComboBox extends SearchableComboBox<BOpstina>{
 						}
 				}
 			@Override
-			public BOpstina fromString(String string) {
+			public ADrzava fromString(String string) {
 				// TODO Auto-generated method stub
 				return null;
 				}
 			});
 		}
-	
 	}

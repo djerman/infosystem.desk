@@ -2,10 +2,11 @@ package rs.atekom.infosystem.desk.paneli.b.opstina;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -34,7 +35,11 @@ public class BOpstinePanel extends OsnovniPanel{
 		restOpstina = new BOpstinaRestKlijent(vratiRestServis());
 		restDrzava = new ADrzavaRestKlijent(vratiRestServis());
 		postaviPregled();
-		postaviKomande();
+		postaviKomandeSaPretragom();
+		
+		vratiPretragu().setOnAction(e -> {
+			pretraga(vratiPretragu().getText().trim());
+			});
 		
 		izbrisi.setOnAction(e -> {
 			if(izborOpstine.getSelectedItem() != null) {
@@ -44,7 +49,7 @@ public class BOpstinePanel extends OsnovniPanel{
 					}
 			});
 		
-		izmeniSacuvaj.setOnAction(e -> {
+		sacuvaj.setOnAction(e -> {
 			if(pregled.proveraUnosa()) {
 				azurirajTabelu(true);
 				}else {
@@ -53,8 +58,9 @@ public class BOpstinePanel extends OsnovniPanel{
 					}
 			});
 		
-		dodaj.setOnAction(e -> {
+		novo.setOnAction(e -> {
 			pregled.postaviNovo();
+			izborOpstine.clearSelection();
 			});
 		
 		postaviTabelu();
@@ -73,20 +79,39 @@ public class BOpstinePanel extends OsnovniPanel{
 		opstine = new BOpstineTabela(vratiOsnovniLayout().vratiResource());
 		izborOpstine = opstine.getSelectionModel();
 		izborOpstine.setSelectionMode(SelectionMode.SINGLE);
+		izborOpstine.selectedItemProperty().addListener(new ChangeListener<BOpstina>() {
+			@Override
+			public void changed(ObservableValue<? extends BOpstina> observable, BOpstina oldValue, BOpstina newValue) {
+				if(newValue != null) {
+					pregled.postaviObjekat(newValue);
+					}else {
+						pregled.postaviNovo();
+						}
+				}
+			});
 		
+		/*
 		opstine.setRowFactory(tv -> {
 			TableRow<BOpstina> row = new TableRow<>();
 			row.setOnMouseClicked(e -> {
 				pregled.postaviObjekat(row.getItem());
 				});
 			return row;
-			});
+			});*/
 		
 		}
 	
 	@Override
 	public void popuniTabelu() {
-		opstine.setItems(null);
+		ResponseEntity<BOpstinaOdgovor> odgovor = null;
+		try {
+			odgovor = restOpstina.pretraga(null);
+			statusOdgovora(odgovor);
+			}catch (Exception e) {
+				e.printStackTrace();
+				vratiNemaOdgovoraServera();
+				}
+		//opstine.setItems(null);
 		}
 	
 	public void osveziTabelu(List<BOpstina> listaOpstina) {
@@ -126,6 +151,17 @@ public class BOpstinePanel extends OsnovniPanel{
 				}
 		}
 	
+	private void pretraga(String pretraga) {
+		try {
+			ResponseEntity<BOpstinaOdgovor> odgovor = restOpstina.pretraga(pretraga);
+			statusOdgovora(odgovor);
+			pregled.postaviNovo();
+			}catch (Exception e) {
+				e.printStackTrace();
+				vratiNemaOdgovoraServera();
+				}
+		}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void izvrsen(Object odg) {
@@ -133,7 +169,7 @@ public class BOpstinePanel extends OsnovniPanel{
 			ResponseEntity<BOpstinaOdgovor> odgovor = (ResponseEntity<BOpstinaOdgovor>) odg;
 			osveziTabelu(odgovor.getBody() == null ? null : odgovor.getBody().getLista());
 			}catch (Exception e) {
-				//
+				e.printStackTrace();
 				}
 		}
 	

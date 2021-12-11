@@ -2,15 +2,16 @@ package rs.atekom.infosystem.desk.paneli.d.pretplatnik;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import rs.atekom.infosystem.baza.d.DPretplatnikOdgovor;
-import rs.atekom.infosystem.baza.d.DPretplatnikPodaciOdgovor;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikOdgovor;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaciOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
 import rs.atekom.infosystem.desk.a.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.DPretplatnikRestKlijent;
@@ -40,7 +41,7 @@ public class DPretplatnikPanel extends OsnovniPanel{
 					}
 			});
 		
-		izmeniSacuvaj.setOnAction(e -> {
+		sacuvaj.setOnAction(e -> {
 			if(pregled.proveraUnosa()) {
 				azurirajTabelu(true);
 				}else {
@@ -49,8 +50,9 @@ public class DPretplatnikPanel extends OsnovniPanel{
 					}
 			});
 		
-		dodaj.setOnAction(e -> {
+		novo.setOnAction(e -> {
 			pregled.postaviNovo();
+			izborPretplatnika.clearSelection();
 			});
 		
 		postaviTabelu();
@@ -69,13 +71,24 @@ public class DPretplatnikPanel extends OsnovniPanel{
 		pretplatnici = new DPretplatnikTabela(vratiOsnovniLayout().vratiResource());
 		izborPretplatnika = pretplatnici.getSelectionModel();
 		izborPretplatnika.setSelectionMode(SelectionMode.SINGLE);
+		izborPretplatnika.selectedItemProperty().addListener(new ChangeListener<DPretplatnikPodaciOdgovor>() {
+			@Override
+			public void changed(ObservableValue<? extends DPretplatnikPodaciOdgovor> observable, DPretplatnikPodaciOdgovor oldValue, DPretplatnikPodaciOdgovor newValue) {
+				if(newValue != null) {
+					pregled.postaviObjekat(newValue);
+					}else {
+						pregled.postaviNovo();
+						}
+				}
+			});
+		/*
 		pretplatnici.setRowFactory(tv -> {
 			TableRow<DPretplatnikPodaciOdgovor> row = new TableRow<>();
 			row.setOnMouseClicked(e -> {
 				pregled.postaviObjekat(row.getItem());
 				});
 			return row;
-			});
+			});*/
 		}
 	
 	@Override
@@ -130,10 +143,8 @@ public class DPretplatnikPanel extends OsnovniPanel{
 			ResponseEntity<DPretplatnikOdgovor> odgovor = odg == null ? null : (ResponseEntity<DPretplatnikOdgovor>) odg;
 			osveziTabelu(odgovor == null ? null : odgovor.getBody() == null ? null : odgovor.getBody().getListaSaPodacima());
 			}catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 				}
-		
-		
 		}
 	
 	}

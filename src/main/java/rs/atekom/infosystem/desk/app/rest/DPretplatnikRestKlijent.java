@@ -9,10 +9,10 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import rs.atekom.infosystem.baza.a.agencija.AAgencija;
-import rs.atekom.infosystem.baza.d.DPodaciZaPretplatnikaOdgovor;
-import rs.atekom.infosystem.baza.d.DPretplatnik;
-import rs.atekom.infosystem.baza.d.DPretplatnikOdgovor;
-import rs.atekom.infosystem.baza.d.DPretplatnikPodaciOdgovor;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPodaciZaPretplatnikaOdgovor;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikOdgovor;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaciOdgovor;
 import rs.atekom.infosystem.desk.PrijavaController;
 
 public class DPretplatnikRestKlijent extends OpstiRest{

@@ -99,7 +99,6 @@ public class AAgencijePregled extends GridPane{
 	public AAgencija preuzmiObjekat() {
 		if(this.agencija == null) {
 			agencija = new AAgencija();
-			agencija.setId(0L);
 			}
 		agencija.setNaziv(txtNaziv.getText().trim());
 		agencija.setKontaktOsoba(txtKontaktOsoba.getText().trim());

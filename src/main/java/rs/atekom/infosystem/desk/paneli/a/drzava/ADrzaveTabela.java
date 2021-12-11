@@ -16,7 +16,7 @@ import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
 
 public class ADrzaveTabela extends OpstaTabela<ADrzava>{
 
-	private TableColumn<ADrzava, String>  naziv, sr, en, pozivniBroj, oznaka;
+	private TableColumn<ADrzava, String>  naziv, sr, en, de, pozivniBroj, oznaka;
 	private TableColumn<ADrzava, Boolean> podrazumevan;
 	
 	public ADrzaveTabela(ResourceBundle resource) {
@@ -33,9 +33,11 @@ public class ADrzaveTabela extends OpstaTabela<ADrzava>{
 		sr.setCellValueFactory(new PropertyValueFactory<>("sr"));
 		en = new TableColumn<ADrzava, String>(resource.getString("lbl.en"));
 		en.setCellValueFactory(new PropertyValueFactory<>("en"));
+		de = new TableColumn<ADrzava, String>(resource.getString("lbl.de"));
+		de.setCellValueFactory(new PropertyValueFactory<>("de"));
 		pozivniBroj = new TableColumn<ADrzava, String>(resource.getString("lbl.pozivnibroj"));
 		pozivniBroj.setCellValueFactory(new PropertyValueFactory<>("pozivniBroj"));
-		oznaka = new TableColumn<ADrzava, String>(resource.getString("lbl.oznaka"));
+		oznaka = new TableColumn<ADrzava, String>(resource.getString("lbl.oznakamedjunarodna"));
 		oznaka.setCellValueFactory(new PropertyValueFactory<>("oznaka"));
 		podrazumevan = new TableColumn<ADrzava, Boolean>(resource.getString("lbl.podrazumevan"));
 		podrazumevan.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ADrzava,Boolean>, ObservableValue<Boolean>>() {
@@ -53,7 +55,7 @@ public class ADrzaveTabela extends OpstaTabela<ADrzava>{
 				}
 			});
 		
-		getColumns().addAll(naziv, sr, en, pozivniBroj, oznaka, podrazumevan);
+		getColumns().addAll(naziv, sr, en, de, pozivniBroj, oznaka, podrazumevan);
 		setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		}
 	

@@ -9,7 +9,10 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.paint.Color;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
 import rs.atekom.infosystem.desk.a.PocetniTab;
-import rs.atekom.infosystem.desk.b.TipDokumentaPanel;
+import rs.atekom.infosystem.desk.paneli.a.poreskatarifa.APoreskaTarifaPanel;
+import rs.atekom.infosystem.desk.paneli.e.tipdokumenta.ETipDokumentaPanel;
+import rs.atekom.infosystem.desk.paneli.f.grupapartnera.FGrupaPartneraPanel;
+import rs.atekom.infosystem.desk.paneli.g.partner.GPartnerPanel;
 
 public class PodaciIzbornik extends OpstiIzbornik{
 	
@@ -21,9 +24,12 @@ public class PodaciIzbornik extends OpstiIzbornik{
 		pocetna.setOnAction(e -> osnovniLayout.dodajTab(new PocetniTab()));
 		
 		MenuItem tipDokumenta = new MenuItem(layout.vratiPrevod("izbornik.podaci.tipdokumenta"), new Glyph("FontAwesome", FontAwesome.Glyph.PRINT).color(Color.BISQUE));
-		tipDokumenta.setOnAction(e -> osnovniLayout.dodajTab(layout.vratiPrevod("izbornik.podaci.tipdokumenta"), new TipDokumentaPanel(osnovniLayout)));
+		tipDokumenta.setOnAction(e -> osnovniLayout.dodajTab(layout.vratiPrevod("izbornik.podaci.tipdokumenta"), new ETipDokumentaPanel(osnovniLayout)));
 		
 		MenuItem poreskeTarife = new MenuItem(layout.vratiPrevod("izbornik.podaci.poresketarife"), new Glyph("FontAwesome", FontAwesome.Glyph.TASKS).color(Color.BLACK));
+		poreskeTarife.setOnAction(e -> {
+			osnovniLayout.dodajTab(poreskeTarife.getText(), new APoreskaTarifaPanel(osnovniLayout));
+			});
 		
 		MenuItem artikli = new MenuItem(layout.vratiPrevod("izbornik.podaci.artikli"), fontAwesome.create(FontAwesome.Glyph.CART_PLUS).color(Color.DARKVIOLET));
 		artikli.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
@@ -34,13 +40,18 @@ public class PodaciIzbornik extends OpstiIzbornik{
 		MenuItem kupci = new MenuItem(layout.vratiPrevod("izbornik.podaci.kupci"),  new Glyph("FontAwesome", FontAwesome.Glyph.MONEY).color(Color.GREEN));
 		kupci.setAccelerator(new KeyCodeCombination(KeyCode.F1, KeyCombination.CONTROL_ANY));
 		kupci.setOnAction(e -> {
-			//osnovniLayout.dodajTab(kupci.getText(), new PartneriPanel(osnovniLayout, true, false));
+			osnovniLayout.dodajTab(kupci.getText(), new GPartnerPanel(osnovniLayout, true));
 			});
 		
 		MenuItem dobavljaci = new MenuItem(layout.vratiPrevod("izbornik.podaci.dobavljaci"), fontAwesome.create(FontAwesome.Glyph.BELL_SLASH).color(Color.DARKSLATEBLUE));
-		dobavljaci.setAccelerator(new KeyCodeCombination(KeyCode.F5, KeyCombination.CONTROL_ANY));
+		dobavljaci.setAccelerator(new KeyCodeCombination(KeyCode.F2, KeyCombination.CONTROL_ANY));
 		dobavljaci.setOnAction(e -> {
-			//osnovniLayout.dodajTab(dobavljaci.getText(), new PartneriPanel(osnovniLayout, false, false));
+			osnovniLayout.dodajTab(dobavljaci.getText(), new GPartnerPanel(osnovniLayout, false));
+			});
+		
+		MenuItem grupe = new MenuItem(layout.vratiPrevod("izbornik.podaci.grupepartnera"), fontAwesome.create(FontAwesome.Glyph.GROUP).color(Color.DARKGREEN));
+		grupe.setOnAction(e -> {
+			osnovniLayout.dodajTab(grupe.getText(), new FGrupaPartneraPanel(osnovniLayout));
 			});
 		
 		MenuItem objekti = new MenuItem(layout.vratiPrevod("izbornik.podaci.objekti"), fontAwesome.create(FontAwesome.Glyph.BUILDING).color(Color.BLUE));
@@ -70,7 +81,7 @@ public class PodaciIzbornik extends OpstiIzbornik{
 			//osnovniLayout.dodajTab(naciniPlacanja.getText(), new TipoviPlacanjaPanel(osnovniLayout));
 			});
 		
-		getItems().addAll(pocetna, tipDokumenta, poreskeTarife, artikli, kupci, dobavljaci, objekti, normativ, beleske, 
+		getItems().addAll(pocetna, tipDokumenta, poreskeTarife, artikli, kupci, dobavljaci, grupe, objekti, normativ, beleske, 
 				imenaAdrese, transakcije, izlaz);
 		}
 	

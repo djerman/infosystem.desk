@@ -2,10 +2,11 @@ package rs.atekom.infosystem.desk.paneli.e.godina;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -43,7 +44,7 @@ public class EGodinePanel extends OsnovniPanel{
 					pokaziGresku(vratiOsnovniLayout().vratiPrevod("obavestenja.brisanje"), vratiOsnovniLayout().vratiPrevod("obavestenja.brisanje.poruka"));
 					}
 			});
-		izmeniSacuvaj.setOnAction(e -> {
+		sacuvaj.setOnAction(e -> {
 			if(pregled.proveraUnosa()) {
 				azurirajTabelu(true);
 				}else {
@@ -51,8 +52,9 @@ public class EGodinePanel extends OsnovniPanel{
 							vratiOsnovniLayout().vratiPrevod("obavestenja.obaveznapolja.obavestenje"));
 				}
 			});
-		dodaj.setOnAction(e -> {
+		novo.setOnAction(e -> {
 			pregled.postaviNovo();
+			izborGodine.clearSelection();
 			});
 		
 		postaviTabelu();
@@ -71,14 +73,24 @@ public class EGodinePanel extends OsnovniPanel{
 		godine = new EGodineTabela(vratiOsnovniLayout().vratiResource());
 		izborGodine = godine.getSelectionModel();
 		izborGodine.setSelectionMode(SelectionMode.SINGLE);
-		
+		izborGodine.selectedItemProperty().addListener(new ChangeListener<EGodina>() {
+			@Override
+			public void changed(ObservableValue<? extends EGodina> observable, EGodina oldValue, EGodina newValue) {
+				if(newValue != null) {
+					pregled.postaviObjekat(newValue);
+					}else {
+						pregled.postaviNovo();
+						}
+				}
+			});
+		/*
 		godine.setRowFactory(tv -> {
 			TableRow<EGodina> row = new TableRow<>();
 			row.setOnMouseClicked(e -> {
 				pregled.postaviObjekat(row.getItem());
 				});
 			return row;
-			});
+			});*/
 		}
 	
 	@Override

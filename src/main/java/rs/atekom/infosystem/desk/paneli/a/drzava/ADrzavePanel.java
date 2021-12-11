@@ -39,7 +39,8 @@ public class ADrzavePanel extends OsnovniPanel{
 					pokaziGresku(vratiOsnovniLayout().vratiPrevod("obavestenja.brisanje"), vratiOsnovniLayout().vratiPrevod("obavestenja.brisanje.poruka"));
 					}
 			});
-		izmeniSacuvaj.setOnAction(e -> {
+		
+		sacuvaj.setOnAction(e -> {
 			if(pregled.preuzmiObjekat().getNaziv() != null && !pregled.preuzmiObjekat().getNaziv().equals("")) {
 				osveziTabelu(pregled.preuzmiObjekat(), true);
 				pregled.postaviNovo();
@@ -48,8 +49,10 @@ public class ADrzavePanel extends OsnovniPanel{
 							vratiOsnovniLayout().vratiPrevod("obavestenja.obaveznapolja.obavestenje"));
 					}
 			});
-		dodaj.setOnAction(e -> {
+		
+		novo.setOnAction(e -> {
 			pregled.postaviNovo();
+			izborDrzave.clearSelection();
 			});
 		
 		postaviTabelu();
@@ -111,8 +114,7 @@ public class ADrzavePanel extends OsnovniPanel{
 			if(drzave.getItems() != null) {
 				drzave.getItems().clear();
 				}
-			ObservableList<ADrzava> lista = null;
-			lista = FXCollections.observableArrayList(odgovor.getBody() == null ? null : odgovor.getBody().getLista());
+			ObservableList<ADrzava> lista = FXCollections.observableArrayList(odgovor.getBody() == null ? null : odgovor.getBody().getLista());
 			drzave.getSortOrder().clear();
 			drzave.setItems(lista);
 			drzave.refresh();

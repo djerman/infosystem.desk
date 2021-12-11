@@ -55,6 +55,25 @@ public class AAgencijaRestKlijent extends OpstiRest{
 				}
 		}
 	
+	public ResponseEntity<AAgencijaOdgovor> izmeni(AAgencija agencija){
+		try {
+			String putanja = PrijavaController.adresa + "/agencija/izmeni";
+			HttpEntity<Object> zahtev = new HttpEntity<Object>(agencija, ServisRest.getHeaders());
+			ResponseEntity<AAgencijaOdgovor> odgovor = new RestTemplate().exchange(putanja, HttpMethod.PUT, zahtev, AAgencijaOdgovor.class);
+			return odgovor;
+			}catch (HttpStatusCodeException e) {
+				AAgencijaOdgovor odgovor = null;
+				try {
+					odgovor = mapper.readValue(e.getResponseBodyAsString(), AAgencijaOdgovor.class);
+					}catch (JsonProcessingException ee) {
+						ee.printStackTrace();
+						}
+				return ResponseEntity.status(e.getRawStatusCode())
+						.headers(e.getResponseHeaders())
+						.body(odgovor);
+				}
+		}
+	
 	public ResponseEntity<AAgencijaOdgovor> brisi(AAgencija agencija){
 		try {
 			String putanja = PrijavaController.adresa + "/agencija/brisi/" + agencija.getId();

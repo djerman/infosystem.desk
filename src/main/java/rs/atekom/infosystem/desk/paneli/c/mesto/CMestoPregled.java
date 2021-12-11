@@ -14,10 +14,9 @@ import rs.atekom.infosystem.baza.a.drzava.ADrzava;
 import rs.atekom.infosystem.baza.a.drzava.ADrzavaOdgovor;
 import rs.atekom.infosystem.baza.b.BOpstina;
 import rs.atekom.infosystem.baza.c.CMesto;
-import rs.atekom.infosystem.baza.c.CMestoOdgovor;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
-import rs.atekom.infosystem.desk.app.pomocne.combo.ADrzavaComboBox;
-import rs.atekom.infosystem.desk.app.pomocne.combo.BOpstinaComboBox;
+import rs.atekom.infosystem.desk.paneli.a.drzava.ADrzavaComboBox;
+import rs.atekom.infosystem.desk.paneli.b.opstina.BOpstinaComboBox;
 
 public class CMestoPregled extends GridPane{
 
@@ -70,6 +69,7 @@ public class CMestoPregled extends GridPane{
 			}catch (Exception e) {
 				panel.vratiNemaOdgovoraServera();
 				}
+		
 		cbDrzave.setOnAction(e -> {
 			if(cbDrzave.getValue() != null) {
 				try {
@@ -80,9 +80,10 @@ public class CMestoPregled extends GridPane{
 						// TODO: handle exception
 						}
 				}else {
-					panel.osveziTabelu(null);
+					//panel.osveziTabelu(null);
 					}
 			});
+		/*
 		cbOpstine.setOnAction(e -> {
 			if(cbOpstine.getValue() != null) {
 				try {
@@ -96,7 +97,7 @@ public class CMestoPregled extends GridPane{
 					panel.osveziTabelu(null);
 					}
 			});
-		
+		*/
 		txtNaziv = new TextField();
 		txtSr = new TextField();
 		txtEn = new TextField();
@@ -143,7 +144,8 @@ public class CMestoPregled extends GridPane{
 	public void postaviObjekat(CMesto mesto) {
 		if(mesto != null) {
 			this.mesto = mesto;
-			//cbDrzave.setValue(opstina.getDrzava());
+			cbDrzave.setValue(mesto.getDrzava());
+			cbOpstine.setValue(mesto.getOpstina());
 			txtNaziv.setText(mesto.getNaziv());
 			txtSr.setText(mesto.getSr());
 			txtEn.setText(mesto.getEn());
@@ -161,17 +163,18 @@ public class CMestoPregled extends GridPane{
 			}
 		mesto.setDrzava(cbDrzave.getValue());
 		mesto.setOpstina(cbOpstine.getValue());
-		mesto.setNaziv(txtNaziv.getText().trim());
-		mesto.setSr(txtSr.getText().trim());
-		mesto.setEn(txtEn.getText().trim());
-		mesto.setPozivniBroj(txtPozivniBroj.getText().trim());
-		mesto.setPostanskiBroj(txtPostanskiBroj.getText().trim());
+		mesto.setNaziv(txtNaziv.getText() == null ? null : txtNaziv.getText().trim());
+		mesto.setSr(txtSr.getText() == null ? null : txtSr.getText().trim());
+		mesto.setEn(txtEn.getText() == null ? null : txtEn.getText().trim());
+		mesto.setPozivniBroj(txtPozivniBroj.getText() == null ? null : txtPozivniBroj.getText().trim());
+		mesto.setPostanskiBroj(txtPostanskiBroj.getText() == null ? null : txtPostanskiBroj.getText().trim());
 		return mesto;
 		}
 	
 	public void postaviNovo() {
 		mesto = null;
-		//cbDrzave.setValue(null);
+		cbDrzave.setValue(null);
+		cbOpstine.setValue(null);
 		txtNaziv.setText("");
 		txtSr.setText("");
 		txtEn.setText("");
@@ -198,13 +201,17 @@ public class CMestoPregled extends GridPane{
 	public void postaviOpstine(ObservableList<BOpstina> lista) {
 		cbOpstine.getItems().clear();
 		cbOpstine.getItems().add(null);
-		cbOpstine.getItems().addAll(lista);
+		if(lista != null) {
+			cbOpstine.getItems().addAll(lista);
+			}
 		}
 	
 	public void postaviDrzave(ObservableList<ADrzava> lista) {
 		cbDrzave.getItems().clear();
 		cbDrzave.getItems().add(null);
-		cbDrzave.setItems(lista);
+		if(lista != null) {
+			cbDrzave.getItems().addAll(lista);
+			}
 		}
 	
 	}

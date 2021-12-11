@@ -7,9 +7,14 @@ import javafx.scene.paint.Color;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
 import rs.atekom.infosystem.desk.paneli.a.agencija.AAgencijePanel;
 import rs.atekom.infosystem.desk.paneli.a.drzava.ADrzavePanel;
+import rs.atekom.infosystem.desk.paneli.a.jedinica.AJedinicePanel;
 import rs.atekom.infosystem.desk.paneli.b.opstina.BOpstinePanel;
 import rs.atekom.infosystem.desk.paneli.c.mesto.CMestoPanel;
+import rs.atekom.infosystem.desk.paneli.d.kontoklasa.DKontoKlasaPanel;
+import rs.atekom.infosystem.desk.paneli.da.kontogrupa.DAKontoGrupaPanel;
+import rs.atekom.infosystem.desk.paneli.db.kontoracun.DBKontoRacunPanel;
 import rs.atekom.infosystem.desk.paneli.e.godina.EGodinePanel;
+import rs.atekom.infosystem.desk.paneli.e.konto.EKontoPanel;
 
 public class OpsteIzbornik extends OpstiIzbornik{
 
@@ -37,8 +42,32 @@ public class OpsteIzbornik extends OpstiIzbornik{
 		godine.setOnAction(e -> {
 			osnovniLayout.dodajTab(godine.getText(), new EGodinePanel(layout));
 			});
+		MenuItem jediniceMere = new MenuItem(layout.vratiPrevod("izbornik.opste.jedinicemere"), fontAwesome.create(FontAwesome.Glyph.SLIDERS).color(Color.GREEN));
+		jediniceMere.setOnAction(e -> {
+			osnovniLayout.dodajTab(jediniceMere.getText(), new AJedinicePanel(layout));
+			});
 		
-		getItems().addAll(mesta, opstine, drzave, godine, agencije);
+		MenuItem konta = new MenuItem(layout.vratiPrevod("izbornik.opste.konta"), fontAwesome.create(FontAwesome.Glyph.ANCHOR).color(Color.ORANGERED));
+		konta.setOnAction(e -> {
+			osnovniLayout.dodajTab(konta.getText(), new EKontoPanel(layout));
+			});
+		
+		MenuItem podgrupeKonta = new MenuItem(layout.vratiPrevod("izbornik.opste.podgrupekonta"), fontAwesome.create(FontAwesome.Glyph.GROUP).color(Color.BISQUE));
+		podgrupeKonta.setOnAction(e -> {
+			osnovniLayout.dodajTab(podgrupeKonta.getText(), new DBKontoRacunPanel(layout));
+			});
+		
+		MenuItem grupeKonta = new MenuItem(layout.vratiPrevod("izbornik.opste.grupekonta"), fontAwesome.create(FontAwesome.Glyph.GROUP).color(Color.DARKGOLDENROD));
+		grupeKonta.setOnAction(e -> {
+			osnovniLayout.dodajTab(grupeKonta.getText(), new DAKontoGrupaPanel(layout));
+			});
+		
+		MenuItem klaseKonta = new MenuItem(layout.vratiPrevod("izbornik.opste.klasekonta"), fontAwesome.create(FontAwesome.Glyph.GROUP).color(Color.BROWN));
+		klaseKonta.setOnAction(e -> {
+			osnovniLayout.dodajTab(klaseKonta.getText(), new DKontoKlasaPanel(layout));
+			});
+		
+		getItems().addAll(agencije, godine, mesta, opstine, drzave, jediniceMere, konta, podgrupeKonta, grupeKonta, klaseKonta);
 		}
 
 	}

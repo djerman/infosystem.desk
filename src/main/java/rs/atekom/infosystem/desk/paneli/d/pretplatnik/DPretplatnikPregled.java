@@ -2,15 +2,14 @@ package rs.atekom.infosystem.desk.paneli.d.pretplatnik;
 
 import java.util.List;
 import java.util.ResourceBundle;
-
 import org.controlsfx.control.SearchableComboBox;
 import org.springframework.http.ResponseEntity;
-
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -18,9 +17,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.a.agencija.AAgencija;
 import rs.atekom.infosystem.baza.c.CMesto;
-import rs.atekom.infosystem.baza.d.DPodaciZaPretplatnikaOdgovor;
-import rs.atekom.infosystem.baza.d.DPretplatnik;
-import rs.atekom.infosystem.baza.d.DPretplatnikPodaciOdgovor;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPodaciZaPretplatnikaOdgovor;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaciOdgovor;
 import rs.atekom.infosystem.baza.e.EOrganizacija;
 import rs.atekom.infosystem.baza.i.IAdresa;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
@@ -41,6 +40,8 @@ public class DPretplatnikPregled extends HBox{
 	private TekstCelobrojni txtPoreskiPeriod, txtVrstaVlasnistva, txtVrstaPosla, txtVelicinaObveznika, txtVrstaIzvestaja, txtRacunovodstvenaRegulativa;
 	private GridPane noseci, osnovno, ostalo;
 	private HBankovniRacunTabela racuni;
+	private HBox slikaTabela;
+	//private ImageView slika;
 	private DPretplatnikPanel panel;
 	private DPretplatnik pretplatnik;
 	private DPretplatnikPodaciOdgovor pretplatnikPodaci;
@@ -48,6 +49,8 @@ public class DPretplatnikPregled extends HBox{
 	private IAdresa adresa;
 	private CMestoComboBox cbMesto;
 	private SearchableComboBox<AAgencija> cbAgencija;
+	//private Image prazno, logo;
+	//private File file;
 	
 	public DPretplatnikPregled(DPretplatnikPanel panel, ResourceBundle resource) {
 		setSpacing(20);
@@ -59,6 +62,7 @@ public class DPretplatnikPregled extends HBox{
 	private void napraviElemente(ResourceBundle resource) {
 		noseci = new GridPane();
 		noseci.setHgap(20);
+		
 		ColumnConstraints ccOsnovno = new ColumnConstraints();
 		ccOsnovno.setHalignment(HPos.CENTER);
 		ccOsnovno.setPercentWidth(40);
@@ -79,8 +83,14 @@ public class DPretplatnikPregled extends HBox{
 		ostalo = new GridPane();
 		ostalo.setVgap(5);
 		ostalo.setHgap(5);
+		
+		slikaTabela = new HBox(5);
+
 		racuni = new HBankovniRacunTabela(resource);
-		racuni.setMaxHeight(100);
+		racuni.setMaxHeight(110);
+		slikaTabela.getChildren().addAll(/*slika,*/ racuni);
+		HBox.setHgrow(racuni, Priority.ALWAYS);
+		//HBox.setHgrow(slika, Priority.ALWAYS);
 		//racuni.setMaxWidth(200);
 		
 		lblAgencija = new Label(resource.getString("lbl.agencija"));
@@ -199,15 +209,12 @@ public class DPretplatnikPregled extends HBox{
 		ostalo.addColumn(0, lblRacunovodstvenaRegulativa); ostalo.addColumn(1, txtRacunovodstvenaRegulativa); ostalo.addColumn(2, lblAktivan); ostalo.addColumn(3, cbAktivan);
 		
 		GridPane.setHgrow(txtNaziv, Priority.ALWAYS);
-		desnoVBox.getChildren().addAll(racuni, ostalo);
-		//HBox.setHgrow(racuni, Priority.ALWAYS);
+		desnoVBox.getChildren().addAll(slikaTabela, ostalo);
 		GridPane.setHgrow(txtNaziv, Priority.ALWAYS);
 		GridPane.setHgrow(txtPib, Priority.ALWAYS);
 		GridPane.setHgrow(txtMb, Priority.ALWAYS);
 		HBox.setHgrow(ostalo, Priority.ALWAYS);
 		
-		//osnovno.setMaxWidth(this.getMaxWidth()*0.4);
-		//osnovnoVbox.getStyleClass().add(".sirina-pola");
 		//desnoVBox.getStyleClass().add(".sirina-pola");
 		noseci.addColumn(0, osnovnoVbox); noseci.addColumn(1, desnoVBox);
 		getChildren().add(noseci);
@@ -240,6 +247,7 @@ public class DPretplatnikPregled extends HBox{
 			this.organizacija = pretplatnikPodaci.getOrganizacija();
 			this.adresa = organizacija.getAdresa();
 			
+			cbAgencija.setValue(pretplatnik.getAgencija());
 			txtNaziv.setText(pretplatnik.getNaziv());
 			txtPunNaziv.setText(pretplatnik.getPunNaziv());
 			cbMesto.setValue(adresa == null ? null : adresa.getMesto());
@@ -263,6 +271,14 @@ public class DPretplatnikPregled extends HBox{
 			txtVrstaIzvestaja.setText(pretplatnik.getVrstaIzvestaja().toString());
 			txtRacunovodstvenaRegulativa.setText(pretplatnik.getRacunovodstvenaRegulativa().toString());
 			cbAktivan.setSelected(pretplatnik.getAktivan());
+			/*
+			try {
+				slika.setImage(pretplatnik.getSlika() == null ? logo : new Image(new FileInputStream(file)));
+				} catch (FileNotFoundException e) {
+					slika.setImage(null);
+					e.printStackTrace();
+					}
+			*/
 			}else {
 				postaviNovo();
 				}
@@ -272,13 +288,34 @@ public class DPretplatnikPregled extends HBox{
 		if(this.pretplatnik == null) {
 			pretplatnikPodaci = new DPretplatnikPodaciOdgovor();
 			pretplatnik = new DPretplatnik();
-			pretplatnik.setId(0L);
+			//slika.setImage(logo);
+			//pretplatnik.setSlikaIme(imeSlike(slika.getImage()));
+			//pretplatnik.setSlika(slikaByte(slika.getImage()));
+			//pretplatnik.setSlika(file);
+			//pretplatnik.setId(0L);
 			organizacija = new EOrganizacija();
-			organizacija.setId(0L);
+			//organizacija.setId(0L);
 			organizacija.setNaziv("Sedište");
 			adresa = new IAdresa();
-			adresa.setId(0L);
-			}
+			//adresa.setId(0L);
+			}else {
+				/*
+				if(pretplatnik.getSlika() != null && !pretplatnik.getSlika().equals(file)) {
+					pretplatnik.setSlikaIme(imeSlike(slika.getImage()));
+					pretplatnik.setSlika(slikaByte(slika.getImage()));
+					//pretplatnik.setSlika(file);
+					}else {
+						try {
+							slika.setImage(new Image(new FileInputStream(file)));
+							} catch (FileNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								}
+						pretplatnik.setSlikaIme(imeSlike(slika.getImage()));
+						//pretplatnik.setSlika(file);
+						}
+				*/
+				}
 		if(this.organizacija == null) {
 			organizacija = new EOrganizacija();
 			organizacija.setId(0L);
@@ -290,6 +327,7 @@ public class DPretplatnikPregled extends HBox{
 			adresa = new IAdresa();
 			adresa.setId(0L);
 			}
+		pretplatnik.setAgencija(cbAgencija.getValue());
 		pretplatnik.setNaziv(txtNaziv.getText());
 		pretplatnik.setPunNaziv(txtPunNaziv.getText());
 		
@@ -308,21 +346,28 @@ public class DPretplatnikPregled extends HBox{
 		pretplatnik.setMb(txtMb.getText());
 		pretplatnik.setSifraDelatnosti(txtSifraDelatnosti.getText());
 		pretplatnik.setPoreskaUprava(txtPoreskaUprava.getText());
-		pretplatnik.setVrstaVlasnistva(Integer.valueOf(txtVrstaVlasnistva.getText() == null ? "" : txtVrstaVlasnistva.getText()));
-		pretplatnik.setVrstaPosla(Integer.valueOf(txtVrstaPosla.getText()));
-		pretplatnik.setVelicinaObveznika(Integer.valueOf(txtVelicinaObveznika.getText()));
-		pretplatnik.setVrstaIzvestaja(Integer.valueOf(txtVrstaIzvestaja.getText()));
-		pretplatnik.setRacunovodstvenaRegulativa(Integer.valueOf(txtRacunovodstvenaRegulativa.getText()));
+		pretplatnik.setVrstaVlasnistva(Integer.valueOf(txtVrstaVlasnistva.getText() == null ? "0" : txtVrstaVlasnistva.getText()));
+		pretplatnik.setVrstaPosla(Integer.valueOf(txtVrstaPosla.getText() == null ? "0" : txtVrstaPosla.getText()));
+		pretplatnik.setVelicinaObveznika(Integer.valueOf(txtVelicinaObveznika.getText() == null ? "0" : txtVelicinaObveznika.getText()));
+		pretplatnik.setVrstaIzvestaja(Integer.valueOf(txtVrstaIzvestaja.getText() == null ? "0" : txtVrstaIzvestaja.getText()));
+		pretplatnik.setRacunovodstvenaRegulativa(Integer.valueOf(txtRacunovodstvenaRegulativa.getText() == null ? "0" : txtRacunovodstvenaRegulativa.getText()));
+		
 		pretplatnik.setAktivan(cbAktivan.isSelected());
 		
 		organizacija.setAdresa(adresa);
 		pretplatnikPodaci.setOrganizacija(organizacija);
 		pretplatnikPodaci.setPretplatnik(pretplatnik);
+		
 		return this.pretplatnikPodaci;
 		}
 	
 	public void postaviNovo() {
+		this.pretplatnikPodaci = null;
 		this.pretplatnik = null;
+		this.organizacija = null;
+		this.adresa = null;
+		
+		cbAgencija.setValue(null);
 		txtNaziv.setText("");
 		txtPunNaziv.setText("");
 		txtAdresa.setText("");
@@ -346,6 +391,9 @@ public class DPretplatnikPregled extends HBox{
 		txtVrstaIzvestaja.setText("");
 		txtRacunovodstvenaRegulativa.setText("");
 		cbAktivan.setSelected(false);
+		
+		//slika.setImage(logo);
+		
 		}
 	
 	public Boolean proveraUnosa() {
@@ -393,6 +441,14 @@ public class DPretplatnikPregled extends HBox{
 		cbAgencija.getItems().clear();
 		cbAgencija.getItems().add(null);
 		cbAgencija.getItems().addAll(FXCollections.observableArrayList(lista));
+		}
+	
+	public void ostaviOsnovnuSliku() {
+		//slika.setImage(prazno);
+		}
+	
+	public void postaviSkliku(Image sl) {
+		//slika.setImage(sl);
 		}
 	
 	}

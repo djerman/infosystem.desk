@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import rs.atekom.infosystem.baza.d.DPretplatnik;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
 import rs.atekom.infosystem.baza.e.godina.EGodina;
 import rs.atekom.infosystem.baza.e.godina.EGodinaOdgovor;
 import rs.atekom.infosystem.desk.PrijavaController;

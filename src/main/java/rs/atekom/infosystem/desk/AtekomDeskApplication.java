@@ -10,4 +10,4 @@ public class AtekomDeskApplication {
 		//SpringApplication.run(RmdeskApplication.class, args);
 		Application.launch(AtekomApp.class, args);
 		}
-}
+	}
