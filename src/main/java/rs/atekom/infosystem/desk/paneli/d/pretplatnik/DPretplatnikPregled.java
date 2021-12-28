@@ -177,7 +177,7 @@ public class DPretplatnikPregled extends HBox{
 		ColumnConstraints col24 = new ColumnConstraints();
 		ostalo.getColumnConstraints().addAll(col21, col22, col23, col24);
 		
-		if(panel.vratiOsnovniLayout().vratiKorisnika().getSistem()) {
+		if(panel.vratiOsnovniLayout().vratiKorisnika().getUloga().getNaziv().equals("SISTEM")) {
 			//osnovno.add(lblAgencija, 1, 1); osnovno.add(txtAgencija, 2, 1);
 			osnovno.addColumn(0, lblAgencija); osnovno.addColumn(1, cbAgencija);
 			}
