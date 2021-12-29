@@ -10,8 +10,6 @@ import java.util.ResourceBundle;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.GlyphFont;
 import org.controlsfx.glyphfont.GlyphFontRegistry;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -53,15 +51,15 @@ public class PrijavaController implements Initializable{
 	public static String lozinka;
 	public static String token;
 	private GlyphFont fontAwesome = GlyphFontRegistry.font("FontAwesome");
-	//public static String adresa = "http://192.168.0.104:8080/rmserver";
+	public static String adresa = "http://173.212.202.168:8080/infosystem";
 	//public static String adresa = "http://192.168.199.5:8080/infosystem.server-0.0.1-SNAPSHOT";
-	public static String adresa = "http://localhost:8080";
+	//public static String adresa = "http://localhost:8080";
 	private Stage stage;
 	private ResourceBundle resource;
 	//private JMetro jMetro;
 	
-	@Value("classpath:/fxml/Osnovni.fxml")
-	private Resource resourcefxml;
+	//@Value("classpath:/fxml/Osnovni.fxml")
+	//private Resource resourcefxml;
 	
 	public PrijavaController() {
 		// TODO Auto-generated constructor stub

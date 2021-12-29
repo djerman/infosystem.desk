@@ -15,7 +15,7 @@ public class Slika extends ImageView{
 		// TODO Auto-generated constructor stub
 	}
 	
-	private void postavi() {
+	public void postavi() {
 		/*prazno = generateImage(1, 1, 1, 1);//0, 177.0 / 255, 65.0 / 255
 		logo = new Image("images/Atekom-Logo.png");
 		try {
@@ -50,7 +50,7 @@ public class Slika extends ImageView{
 	    return img;
 	    }
 	
-	private byte[] slikaByte(Image slika) {
+	public byte[] slikaByte(Image slika) {
 		/*
 		int width = (int) slika.getWidth();
 		int height = (int) slika.getHeight();
@@ -71,7 +71,7 @@ public class Slika extends ImageView{
 		return buf;
 		}
 	
-	private String imeSlike(Image slika) {
+	public String imeSlike(Image slika) {
 		try {
 			String putanja = slika.getUrl();
 			String[] niz = putanja.split("/");
@@ -81,7 +81,7 @@ public class Slika extends ImageView{
 				}
 		}
 	
-	private Image napraviSliku(byte[] niz) {
+	public Image napraviSliku(byte[] niz) {
 		try {
 			Image slika = new Image(new ByteArrayInputStream(niz));
 			return slika;
