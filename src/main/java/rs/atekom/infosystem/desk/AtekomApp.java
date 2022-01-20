@@ -25,13 +25,10 @@ public class AtekomApp extends Application {
             public void initialize(GenericApplicationContext genericApplicationContext) {
                 genericApplicationContext.registerBean(Application.class, () -> AtekomApp.this);
                 genericApplicationContext.registerBean(Parameters.class, () -> getParameters());
-                //System.out.print("pre hosta...");
                 genericApplicationContext.registerBean(HostServices.class, () -> getHostServices());
-                //System.out.print("posle hosta... \n " + getHostServices().toString());
                 }
             };
 			
-		//String[] args = getParameters().getRaw().toArray(new String[0]);
 		this.context = new SpringApplicationBuilder()
 				.sources(AtekomDeskApplication.class)
 				.initializers(initializer)

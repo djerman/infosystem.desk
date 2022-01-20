@@ -4,7 +4,7 @@
       <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.1.RELEASE</version>
+		<version>2.6.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	  </parent>
     <groupId>rs.atekom</groupId>
@@ -46,6 +46,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx</artifactId>
@@ -126,15 +127,6 @@
         	<groupId>ar.com.fdvs</groupId>
         	<artifactId>DynamicJasper-test-fonts</artifactId>
         	<version>2.0.0</version>
-        </dependency>
-        <dependency>
-        	<groupId>com.fasterxml.jackson.datatype</groupId>
-        	<artifactId>jackson-datatype-hibernate5</artifactId>
-        </dependency>
-        <dependency>
-        	<groupId>org.jfxtras</groupId>
-        	<artifactId>jmetro</artifactId>
-        	<version>11.6.14</version>
         </dependency>
 	</dependencies>
 
