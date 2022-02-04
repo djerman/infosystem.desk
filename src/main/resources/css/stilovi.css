@@ -103,7 +103,7 @@
 	}
 
 /**
- * маркирање колона по којима се врши претрага
+ *
  */
 .table-view .column-header.pretraga .label {
     -fx-text-fill: blue;
@@ -122,7 +122,7 @@
 	-fx-alignment: CENTER-LEFT;
 	}
 /*
- * за боје на табели
+ *
 */
 /* 
 .table-row-cell:odd:filled {
@@ -153,7 +153,7 @@
 	-fx-background-color: -fx-table-cell-border-color, #FFF790;
 	}*/
 /*
- * за приказ оквира изабраног реда у табели 
+ * 
   */
 .opstatabela .table-row-cell:filled:selected {
     -fx-border-color: black;
@@ -213,7 +213,7 @@
 	}
 	
 /*
- * за боју текста ћелија тебеле
+ * 
  */
 .crvenabojatekstacelije .table-cell{
 	-fx-text-fill: red;
@@ -299,7 +299,11 @@
 .tabela-celija-duple-linije {
 	-fx-alignment: CENTER-RIGHT; -fx-padding: 0 3 0 0;
 }
-/*za kalkulacije gridpane 
+/*
+.label{
+	-fx-font-weight: bold;
+}
+za kalkulacije gridpane 
 .kalkulacije-grid-cell {
     -fx-background-color: black, white ;
     -fx-background-insets: 0, 0 1 1 0 ;

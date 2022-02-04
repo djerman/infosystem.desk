@@ -1,18 +1,19 @@
 package rs.atekom.infosystem.desk.paneli.f.grupapartnera;
 
 import java.util.ResourceBundle;
-
 import javafx.geometry.HPos;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.f.FGrupaPartnera;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 
 public class FGrupaPartneraPregled extends GridPane{
 
-	private Label lblNaziv, lblOpis;
+	private LabelaObaveznaBold lblNaziv;
+	private LabelaBold lblOpis;
 	private TextField txtNaziv, txtOpis;
 	private FGrupaPartnera grupa;
 	private FGrupaPartneraPanel panel;
@@ -26,9 +27,8 @@ public class FGrupaPartneraPregled extends GridPane{
 		}
 	
 	private void napraviElemente(ResourceBundle resource) {
-		lblNaziv = new Label(resource.getString("lbl.naziv"));
-		lblNaziv.setStyle("-fx-text-fill: red");
-		lblOpis = new Label(resource.getString("lbl.opis"));
+		lblNaziv = new LabelaObaveznaBold(resource.getString("lbl.naziv"));
+		lblOpis = new LabelaBold(resource.getString("lbl.opis"));
 		
 		txtNaziv = new TextField();
 		txtOpis = new TextField();

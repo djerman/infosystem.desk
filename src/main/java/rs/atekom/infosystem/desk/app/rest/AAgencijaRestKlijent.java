@@ -28,7 +28,7 @@ public class AAgencijaRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), AAgencijaOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						System.out.println(ee.getOriginalMessage());
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())
@@ -47,7 +47,7 @@ public class AAgencijaRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), AAgencijaOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						System.out.println(ee.getOriginalMessage());
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())
@@ -66,7 +66,7 @@ public class AAgencijaRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), AAgencijaOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						System.out.println(ee.getOriginalMessage());
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())
@@ -84,7 +84,7 @@ public class AAgencijaRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), AAgencijaOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						System.out.println(ee.getOriginalMessage());
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())

@@ -1,19 +1,20 @@
 package rs.atekom.infosystem.desk.paneli.a.agencija;
 
 import java.util.ResourceBundle;
-
 import javafx.geometry.HPos;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.a.agencija.AAgencija;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 
 public class AAgencijePregled extends GridPane{
 
-	private Label lblNaziv, lblKontaktOsoba, lblAdresa, lblTelefon, lblEmail, lblAktivan;
+	private LabelaObaveznaBold lblNaziv;
+	private LabelaBold lblKontaktOsoba, lblAdresa, lblTelefon, lblEmail, lblAktivan;
 	private TextField txtNaziv, txtKontaktOsoba, txtAdresa, txtTelefon, txtEmail;
 	private CheckBox cbAktivan;
 	private AAgencija agencija;
@@ -26,13 +27,12 @@ public class AAgencijePregled extends GridPane{
 		}
 	
 	private void napraviElemente(ResourceBundle resource) {
-		lblNaziv = new Label(resource.getString("lbl.naziv"));
-		lblNaziv.setStyle("-fx-text-fill: red");
-		lblKontaktOsoba = new Label(resource.getString("lbl.kontaktosoba"));
-		lblAdresa = new Label(resource.getString("lbl.adresa"));
-		lblTelefon = new Label(resource.getString("lbl.telefon"));
-		lblEmail = new Label(resource.getString("lbl.email"));
-		lblAktivan = new Label(resource.getString("lbl.aktivan"));
+		lblNaziv = new LabelaObaveznaBold(resource.getString("lbl.naziv"));
+		lblKontaktOsoba = new LabelaBold(resource.getString("lbl.kontaktosoba"));
+		lblAdresa = new LabelaBold(resource.getString("lbl.adresa"));
+		lblTelefon = new LabelaBold(resource.getString("lbl.telefon"));
+		lblEmail = new LabelaBold(resource.getString("lbl.email"));
+		lblAktivan = new LabelaBold(resource.getString("lbl.aktivan"));
 		
 		txtNaziv = new TextField();
 		txtKontaktOsoba = new TextField();

@@ -4,6 +4,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import rs.atekom.infosystem.baza.d.kontoklasa.DKontoKlasaOdgovor;
 import rs.atekom.infosystem.desk.PrijavaController;
 
@@ -22,8 +25,8 @@ public class DKontoKlasaRestKlijent extends OpstiRest{
 				DKontoKlasaOdgovor odgovor = null;
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), DKontoKlasaOdgovor.class);
-					}catch (Exception ee) {
-						ee.printStackTrace();
+					}catch (JsonProcessingException ee) {
+						System.out.println(ee.getOriginalMessage());
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())

@@ -3,24 +3,25 @@ package rs.atekom.infosystem.desk.paneli.e.godina;
 import java.util.ResourceBundle;
 import org.controlsfx.control.SearchableComboBox;
 import org.springframework.http.ResponseEntity;
-
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikOdgovor;
 import rs.atekom.infosystem.baza.e.godina.EGodina;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
 import rs.atekom.infosystem.desk.app.pomocne.TekstCelobrojni;
 
 public class EGodinePregled extends GridPane{
 
-	private Label lblPretplatnik, lblGodina, lblAktivan;
+	private LabelaObaveznaBold lblPretplatnik, lblGodina;
+	private LabelaBold lblAktivan;
 	private ComboBox<DPretplatnik> cbPretplatnici;
 	private TekstCelobrojni txtGodina;
 	private CheckBox cbAktivan;
@@ -36,11 +37,9 @@ public class EGodinePregled extends GridPane{
 		}
 	
 	private void napraviElemente(ResourceBundle resource) {
-		lblPretplatnik = new Label(resource.getString("lbl.pretplatnik"));
-		lblPretplatnik.setStyle("-fx-text-fill: red");
-		lblGodina = new Label(resource.getString("lbl.godina"));
-		lblGodina.setStyle("-fx-text-fill: red");
-		lblAktivan = new Label(resource.getString("lbl.aktivan"));
+		lblPretplatnik = new LabelaObaveznaBold(resource.getString("lbl.pretplatnik"));
+		lblGodina = new LabelaObaveznaBold(resource.getString("lbl.godina"));
+		lblAktivan = new LabelaBold(resource.getString("lbl.aktivan"));
 		
 		cbPretplatnici = new SearchableComboBox<DPretplatnik>();
 		try {

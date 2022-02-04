@@ -2,16 +2,18 @@ package rs.atekom.infosystem.desk.paneli.a.drzava;
 
 import java.util.ResourceBundle;
 import javafx.geometry.HPos;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.a.drzava.ADrzava;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 
 public class ADrzavePregled extends GridPane{
 
-	private Label lblNaziv, lblSr, lblEn, lblDe, lblPozivniBroj, lblOznaka/*, lblPodrazumevan*/;
+	private LabelaObaveznaBold lblNaziv;
+	private LabelaBold lblSr, lblEn, lblDe, lblPozivniBroj, lblOznaka/*, lblPodrazumevan*/;
 	private TextField txtNaziv, txtSr, txtEn, txtDe, txtPozivniBroj, txtOznaka;
 	//private CheckBox cbPodrazumevan;
 	private ADrzava drzava;
@@ -24,13 +26,12 @@ public class ADrzavePregled extends GridPane{
 		}
 	
 	private void napraviElemente(ResourceBundle resource) {
-		lblNaziv = new Label(resource.getString("lbl.naziv"));
-		lblNaziv.setStyle("-fx-text-fill: red");
-		lblSr = new Label(resource.getString("lbl.sr"));
-		lblEn = new Label(resource.getString("lbl.en"));
-		lblDe = new Label(resource.getString("lbl.de"));
-		lblPozivniBroj = new Label(resource.getString("lbl.pozivnibroj"));
-		lblOznaka = new Label(resource.getString("lbl.oznakamedjunarodna"));
+		lblNaziv = new LabelaObaveznaBold(resource.getString("lbl.naziv"));
+		lblSr = new LabelaBold(resource.getString("lbl.sr"));
+		lblEn = new LabelaBold(resource.getString("lbl.en"));
+		lblDe = new LabelaBold(resource.getString("lbl.de"));
+		lblPozivniBroj = new LabelaBold(resource.getString("lbl.pozivnibroj"));
+		lblOznaka = new LabelaBold(resource.getString("lbl.oznakamedjunarodna"));
 		//lblPodrazumevan = new Label(resource.getString("lbl.podrazumevan"));
 		
 		txtNaziv = new TextField();

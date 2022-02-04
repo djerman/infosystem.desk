@@ -4,19 +4,21 @@ import java.util.ResourceBundle;
 import org.springframework.http.ResponseEntity;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.a.drzava.ADrzavaOdgovor;
 import rs.atekom.infosystem.baza.b.BOpstina;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
 import rs.atekom.infosystem.desk.paneli.a.drzava.ADrzavaComboBox;
 
 public class BOpstinePregled extends GridPane{
 
-	private Label lblDrzava, lblNaziv, lblSr, lblEn, lblDe, lblPozivniBroj, lblPostanskiBroj, lblPozivNaBroj;
+	private LabelaObaveznaBold lblDrzava, lblNaziv;
+	private LabelaBold lblSr, lblEn, lblDe, lblPozivniBroj, lblPostanskiBroj, lblPozivNaBroj;
 	private TextField txtNaziv, txtSr, txtEn, txtDe, txtPozivniBroj, txtPostanskiBroj, txtPozivNaBroj;
 	private ADrzavaComboBox cbDrzave;
 	private BOpstina opstina;
@@ -31,16 +33,14 @@ public class BOpstinePregled extends GridPane{
 		}
 	
 	private void napraviElemente(ResourceBundle resource) {
-		lblDrzava = new Label(resource.getString("lbl.drzava"));
-		lblDrzava.setStyle("-fx-text-fill: red");
-		lblNaziv = new Label(resource.getString("lbl.naziv"));
-		lblNaziv.setStyle("-fx-text-fill: red");
-		lblSr = new Label(resource.getString("lbl.sr"));
-		lblEn = new Label(resource.getString("lbl.en"));
-		lblDe = new Label(resource.getString("lbl.de"));
-		lblPozivniBroj = new Label(resource.getString("lbl.pozivnibroj"));
-		lblPostanskiBroj = new Label(resource.getString("lbl.postanskibroj"));
-		lblPozivNaBroj = new Label(resource.getString("lbl.pozivnabroj"));
+		lblDrzava = new LabelaObaveznaBold(resource.getString("lbl.drzava"));
+		lblNaziv = new LabelaObaveznaBold(resource.getString("lbl.naziv"));
+		lblSr = new LabelaBold(resource.getString("lbl.sr"));
+		lblEn = new LabelaBold(resource.getString("lbl.en"));
+		lblDe = new LabelaBold(resource.getString("lbl.de"));
+		lblPozivniBroj = new LabelaBold(resource.getString("lbl.pozivnibroj"));
+		lblPostanskiBroj = new LabelaBold(resource.getString("lbl.postanskibroj"));
+		lblPozivNaBroj = new LabelaBold(resource.getString("lbl.pozivnabroj"));
 		
 		cbDrzave = new ADrzavaComboBox(resource);
 		try {
@@ -48,11 +48,6 @@ public class BOpstinePregled extends GridPane{
 			if(odgovor != null) {
 				switch(odgovor.getStatusCodeValue()) {
 				case Odgovori.IZVRSEN:
-					/*if(cbDrzave.getItems() != null) {
-						cbDrzave.getItems().clear();
-						}
-					cbDrzave.getItems().add(null);
-					cbDrzave.getItems().addAll(odgovor.getBody() == null ? null : odgovor.getBody().getLista());*/
 					cbDrzave.setItems(FXCollections.observableArrayList(odgovor.getBody() == null ? null : odgovor.getBody().getLista()));
 					break;
 				default:

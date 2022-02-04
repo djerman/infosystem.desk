@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -14,13 +13,16 @@ import rs.atekom.infosystem.baza.a.drzava.ADrzava;
 import rs.atekom.infosystem.baza.a.drzava.ADrzavaOdgovor;
 import rs.atekom.infosystem.baza.b.BOpstina;
 import rs.atekom.infosystem.baza.c.CMesto;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
 import rs.atekom.infosystem.desk.paneli.a.drzava.ADrzavaComboBox;
 import rs.atekom.infosystem.desk.paneli.b.opstina.BOpstinaComboBox;
 
 public class CMestoPregled extends GridPane{
 
-	private Label lblDrzava, lblOpstina, lblNaziv, lblSr, lblEn, lblPozivniBroj, lblPostanskiBroj;
+	private LabelaObaveznaBold lblDrzava,lblNaziv;
+	private LabelaBold lblOpstina, lblSr, lblEn, lblPozivniBroj, lblPostanskiBroj;
 	private TextField txtNaziv, txtSr, txtEn, txtPozivniBroj, txtPostanskiBroj;
 	private ADrzavaComboBox cbDrzave;
 	private BOpstinaComboBox cbOpstine;
@@ -38,15 +40,15 @@ public class CMestoPregled extends GridPane{
 	
 	private void napraviElemente(ResourceBundle resource) {
 		//System.out.println(resource.getLocale());
-		lblDrzava = new Label(resource.getString("lbl.drzava"));
-		lblDrzava.setStyle("-fx-text-fill: red");
-		lblOpstina= new Label(resource.getString("lbl.opstina"));
-		lblNaziv = new Label(resource.getString("lbl.naziv"));
-		lblNaziv.setStyle("-fx-text-fill: red");
-		lblSr = new Label(resource.getString("lbl.sr"));
-		lblEn = new Label(resource.getString("lbl.en"));
-		lblPostanskiBroj = new Label(resource.getString("lbl.postanskibroj"));
-		lblPozivniBroj = new Label(resource.getString("lbl.pozivnibroj"));
+		lblDrzava = new LabelaObaveznaBold(resource.getString("lbl.drzava"));
+		//lblDrzava.setStyle("-fx-text-fill: red");
+		lblOpstina= new LabelaBold(resource.getString("lbl.opstina"));
+		lblNaziv = new LabelaObaveznaBold(resource.getString("lbl.naziv"));
+		//lblNaziv.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+		lblSr = new LabelaBold(resource.getString("lbl.sr"));
+		lblEn = new LabelaBold(resource.getString("lbl.en"));
+		lblPostanskiBroj = new LabelaBold(resource.getString("lbl.postanskibroj"));
+		lblPozivniBroj = new LabelaBold(resource.getString("lbl.pozivnibroj"));
 
 		//cbDrzave = new SearchableComboBox<ADrzava>();
 		cbDrzave = new ADrzavaComboBox(resource);

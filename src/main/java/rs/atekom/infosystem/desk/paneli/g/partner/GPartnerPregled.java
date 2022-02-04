@@ -3,11 +3,9 @@ package rs.atekom.infosystem.desk.paneli.g.partner;
 import java.util.List;
 import java.util.ResourceBundle;
 import org.controlsfx.control.SearchableComboBox;
-
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -19,14 +17,17 @@ import rs.atekom.infosystem.baza.f.FPreduzece;
 import rs.atekom.infosystem.baza.g.GPartner;
 import rs.atekom.infosystem.baza.g.GPartnerOdgovorPodaci;
 import rs.atekom.infosystem.baza.i.IAdresa;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 import rs.atekom.infosystem.desk.app.pomocne.TekstCelobrojni;
 import rs.atekom.infosystem.desk.app.pomocne.TekstDecimalni;
 import rs.atekom.infosystem.desk.paneli.c.mesto.CMestoComboBox;
 
 public class GPartnerPregled extends HBox{
 
-	private Label lblGrupaPartnera, lblSifra, lblNaziv, lblPunNaziv, lblPdv, lblPib, lblMb, lblTel, lblNapomena, lblEmail, lblOdgovornoLice,
-	lblKupacKonto, lblDobavljacKonto, lblKupac, lblDobavljac, lblBanka, lblUstanova, lblKupacRabat, lblDobavljacRabat, lblMesto, lblAdresa;
+	private LabelaObaveznaBold lblSifra, lblNaziv, lblAdresa, lblPib, lblMb;
+	private LabelaBold lblGrupaPartnera, lblPunNaziv, lblPdv, lblTel, lblNapomena, lblEmail, lblOdgovornoLice,
+	lblKupacKonto, lblDobavljacKonto, lblKupac, lblDobavljac, lblBanka, lblUstanova, lblKupacRabat, lblDobavljacRabat, lblMesto;
 	private TextField txtSifra, txtNaziv, txtPunNaziv, txtPib, txtMb, txtTel, txtNapomena, txtEmail, txtOdgovornoLice, txtMesto, txtAdresa;
 	private TekstCelobrojni txtKupacKonto, txtDobavljacKonto;
 	private TekstDecimalni txtKupacRabat, txtDobavljacRabat;
@@ -55,10 +56,10 @@ public class GPartnerPregled extends HBox{
 		
 		ColumnConstraints ccOsnovno = new ColumnConstraints();
 		ccOsnovno.setHalignment(HPos.CENTER);
-		ccOsnovno.setPercentWidth(40);
+		ccOsnovno.setPercentWidth(35);
 		ColumnConstraints ccDesno = new ColumnConstraints();
 		ccDesno.setHalignment(HPos.CENTER);
-		ccDesno.setPercentWidth(60);
+		ccDesno.setPercentWidth(65);
         noseci.getColumnConstraints().addAll(ccOsnovno, ccDesno);
         
         prvi = new GridPane();
@@ -69,34 +70,28 @@ public class GPartnerPregled extends HBox{
         drugi.setVgap(5);
         drugi.setHgap(5);
         
-        lblGrupaPartnera = new Label(resource.getString("lbl.grupapartnera"));
-        lblGrupaPartnera.setStyle("-fx-underline: true;");
-        lblSifra = new Label(resource.getString("lbl.sifra"));
-        lblSifra.setStyle("-fx-text-fill: red");
-        lblNaziv = new Label(resource.getString("lbl.naziv"));
-        lblNaziv.setStyle("-fx-text-fill: red");
-        lblPunNaziv = new Label(resource.getString("lbl.punnaziv"));
-        lblPdv = new Label(resource.getString("lbl.updv"));
-        lblPib = new Label(resource.getString("lbl.pib"));
-        lblPib.setStyle("-fx-text-fill: red");
-        lblMb = new Label(resource.getString("lbl.mb"));
-        lblMb.setStyle("-fx-text-fill: red");
-        lblTel = new Label(resource.getString("lbl.telefon"));
-        lblNapomena = new Label(resource.getString("lbl.napomena"));
-        lblEmail = new Label(resource.getString("lbl.email"));
-        lblOdgovornoLice = new Label(resource.getString("lbl.odgovornolice"));
-    	lblKupacKonto = new Label(resource.getString("lbl.kupackonto"));
-    	lblDobavljacKonto = new Label(resource.getString("lbl.dobavljackonto"));
-    	lblKupac = new Label(resource.getString("lbl.kupac"));
-    	lblDobavljac = new Label(resource.getString("lbl.dobavljac"));
-    	lblBanka = new Label(resource.getString("lbl.banka"));
-    	lblUstanova = new Label(resource.getString("lbl.ustanova"));
-    	lblKupacRabat = new Label(resource.getString("lbl.kupacrabat"));
-    	lblDobavljacRabat = new Label(resource.getString("lbl.dobavljacrabat"));
-    	lblMesto = new Label(resource.getString("lbl.mesto"));
-    	lblMesto.setStyle("-fx-underline: true;");
-    	lblAdresa = new Label(resource.getString("lbl.adresa"));
-    	lblAdresa.setStyle("-fx-text-fill: red");
+        lblGrupaPartnera = new LabelaBold(resource.getString("lbl.grupapartnera"));
+        //lblGrupaPartnera.setStyle("-fx-underline: true;");
+        lblSifra = new LabelaObaveznaBold(resource.getString("lbl.sifra"));
+        lblNaziv = new LabelaObaveznaBold(resource.getString("lbl.naziv"));
+        lblPunNaziv = new LabelaBold(resource.getString("lbl.punnaziv"));
+        lblPdv = new LabelaBold(resource.getString("lbl.updv"));
+        lblPib = new LabelaObaveznaBold(resource.getString("lbl.pib"));
+        lblMb = new LabelaObaveznaBold(resource.getString("lbl.mb"));
+        lblTel = new LabelaBold(resource.getString("lbl.telefon"));
+        lblNapomena = new LabelaBold(resource.getString("lbl.napomena"));
+        lblEmail = new LabelaBold(resource.getString("lbl.email"));
+        lblOdgovornoLice = new LabelaBold(resource.getString("lbl.odgovornolice"));
+    	lblKupacKonto = new LabelaBold(resource.getString("lbl.kupackonto"));
+    	lblDobavljacKonto = new LabelaBold(resource.getString("lbl.dobavljackonto"));
+    	lblKupac = new LabelaBold(resource.getString("lbl.kupac"));
+    	lblDobavljac = new LabelaBold(resource.getString("lbl.dobavljac"));
+    	lblBanka = new LabelaBold(resource.getString("lbl.banka"));
+    	lblUstanova = new LabelaBold(resource.getString("lbl.ustanova"));
+    	lblKupacRabat = new LabelaBold(resource.getString("lbl.kupacrabat"));
+    	lblDobavljacRabat = new LabelaBold(resource.getString("lbl.dobavljacrabat"));
+    	lblMesto = new LabelaBold(resource.getString("lbl.mesto"));
+    	lblAdresa = new LabelaObaveznaBold(resource.getString("lbl.adresa"));
     	
     	//txtGrupaPartnera = new TextField();
     	cbGrupe = new SearchableComboBox<FGrupaPartnera>();

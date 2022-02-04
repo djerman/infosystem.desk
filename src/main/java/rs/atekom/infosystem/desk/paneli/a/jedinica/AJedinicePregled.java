@@ -1,18 +1,19 @@
 package rs.atekom.infosystem.desk.paneli.a.jedinica;
 
 import java.util.ResourceBundle;
-
 import javafx.geometry.HPos;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.a.jedinicamere.AJedinicaMere;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
+import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 
 public class AJedinicePregled extends GridPane{
 
-	private Label lblNaziv, lblNazivSr, lblNazivEn, lblNazivDe, lblOznaka, lblOznakaSr, lblOznakaEn, lblOznakaDe;
+	private LabelaObaveznaBold lblNaziv, lblOznaka;
+	private LabelaBold lblNazivSr, lblNazivEn, lblNazivDe, lblOznakaSr, lblOznakaEn, lblOznakaDe;
 	private TextField txtNaziv, txtNazivSr, txtNazivEn, txtNazivDe, txtOznaka, txtOznakaSr, txtOznakaEn, txtOznakaDe;
 	private AJedinicaMere jedinica;
 	
@@ -24,16 +25,14 @@ public class AJedinicePregled extends GridPane{
 		}
 	
 	private void napraviElemente(ResourceBundle resource) {
-		lblNaziv = new Label(resource.getString("lbl.naziv"));
-		lblNaziv.setStyle("-fx-text-fill: red");
-		lblNazivSr = new Label(resource.getString("lbl.nazivsr"));
-		lblNazivEn = new Label(resource.getString("lbl.naziven"));
-		lblNazivDe = new Label(resource.getString("lbl.nazivde"));
-		lblOznaka = new Label(resource.getString("lbl.oznaka"));
-		lblOznaka.setStyle("-fx-text-fill: red");
-		lblOznakaSr = new Label(resource.getString("lbl.sr"));
-		lblOznakaEn = new Label(resource.getString("lbl.en"));
-		lblOznakaDe = new Label(resource.getString("lbl.de"));
+		lblNaziv = new LabelaObaveznaBold(resource.getString("lbl.naziv"));
+		lblNazivSr = new LabelaBold(resource.getString("lbl.nazivsr"));
+		lblNazivEn = new LabelaBold(resource.getString("lbl.naziven"));
+		lblNazivDe = new LabelaBold(resource.getString("lbl.nazivde"));
+		lblOznaka = new LabelaObaveznaBold(resource.getString("lbl.oznaka"));
+		lblOznakaSr = new LabelaBold(resource.getString("lbl.sr"));
+		lblOznakaEn = new LabelaBold(resource.getString("lbl.en"));
+		lblOznakaDe = new LabelaBold(resource.getString("lbl.de"));
 		
 		txtNaziv = new TextField();
 		txtNazivSr = new TextField();
