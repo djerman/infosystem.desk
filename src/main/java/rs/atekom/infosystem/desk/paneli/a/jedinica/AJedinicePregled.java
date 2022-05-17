@@ -4,13 +4,14 @@ import java.util.ResourceBundle;
 import javafx.geometry.HPos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.a.jedinicamere.AJedinicaMere;
+import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 
-public class AJedinicePregled extends GridPane{
+public class AJedinicePregled extends OsnovniPregled{
 
 	private LabelaObaveznaBold lblNaziv, lblOznaka;
 	private LabelaBold lblNazivSr, lblNazivEn, lblNazivDe, lblOznakaSr, lblOznakaEn, lblOznakaDe;
@@ -18,8 +19,7 @@ public class AJedinicePregled extends GridPane{
 	private AJedinicaMere jedinica;
 	
 	public AJedinicePregled(AJedinicePanel panel, ResourceBundle resource) {
-		setHgap(5);
-		setVgap(5);
+		napraviGrid();
 		napraviElemente(resource);
 		popakujElemente();
 		}
@@ -69,14 +69,16 @@ public class AJedinicePregled extends GridPane{
 		col7.setHalignment(HPos.RIGHT);
 		col7.setMinWidth(minSirina);
 		ColumnConstraints col8 = new ColumnConstraints();
-		col6.setHgrow(Priority.ALWAYS);
+		col8.setHgrow(Priority.ALWAYS);
 		
-		getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
+		grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
 		
-		addColumn(0, lblNaziv); addColumn(1, txtNaziv); addColumn(2, lblNazivSr); addColumn(3, txtNazivSr); 
-		addColumn(4, lblNazivEn); addColumn(5, txtNazivEn); addColumn(6, lblNazivDe); addColumn(7, txtNazivDe);
-		addColumn(0, lblOznaka); addColumn(1, txtOznaka); addColumn(2, lblOznakaSr); addColumn(3, txtOznakaSr); 
-		addColumn(4, lblOznakaEn); addColumn(5, txtOznakaEn); addColumn(6, lblOznakaDe); addColumn(7, txtOznakaDe);
+		grid.addColumn(0, lblNaziv); grid.addColumn(1, txtNaziv); grid.addColumn(2, lblNazivSr); grid.addColumn(3, txtNazivSr); 
+		grid.addColumn(4, lblNazivEn); grid.addColumn(5, txtNazivEn); grid.addColumn(6, lblNazivDe); grid.addColumn(7, txtNazivDe);
+		grid.addColumn(0, lblOznaka); grid.addColumn(1, txtOznaka); grid.addColumn(2, lblOznakaSr); grid.addColumn(3, txtOznakaSr); 
+		grid.addColumn(4, lblOznakaEn); grid.addColumn(5, txtOznakaEn); grid.addColumn(6, lblOznakaDe); grid.addColumn(7, txtOznakaDe);
+		getChildren().add(grid);
+		HBox.setHgrow(grid, Priority.ALWAYS);
 		}
 	
 	public void postaviObjekat(AJedinicaMere jedinica) {

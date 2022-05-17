@@ -143,8 +143,7 @@ public abstract class OsnovniPanel extends ScrollPane{
 		*/
 	
 	public void postaviKomande() {
-		komande = new HBox(razmak);
-		komande.setPadding(new Insets(10));
+		napraviKomande();
 		
 		napraviIzbrisi();
 		region = new Region();
@@ -157,8 +156,7 @@ public abstract class OsnovniPanel extends ScrollPane{
 		}
 	
 	public void postaviKomandeSaPretragom() {
-		komande = new HBox(razmak);
-		komande.setPadding(new Insets(10));
+		napraviKomande();
 		
 		napraviIzbrisi();
 		region = new Region();
@@ -171,6 +169,12 @@ public abstract class OsnovniPanel extends ScrollPane{
 		komande.getChildren().addAll(izbrisi, region, pretraga, region1, novo, sacuvaj, osvezi);
 		HBox.setHgrow(region, Priority.ALWAYS);
 		HBox.setHgrow(region1, Priority.ALWAYS);
+		}
+	
+	private void napraviKomande(){
+		komande = new HBox(razmak);
+		//komande.setPadding(new Insets(10));
+		komande.getStyleClass().add("komande-sa-pozadinom");
 		}
 	
 	public void napraviIzbrisi() {

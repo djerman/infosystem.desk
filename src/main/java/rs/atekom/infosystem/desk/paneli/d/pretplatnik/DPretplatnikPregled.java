@@ -19,8 +19,9 @@ import rs.atekom.infosystem.baza.c.CMesto;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPodaciZaPretplatnikaOdgovor;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaciOdgovor;
-import rs.atekom.infosystem.baza.e.EOrganizacija;
+import rs.atekom.infosystem.baza.e.organizacija.EOrganizacija;
 import rs.atekom.infosystem.baza.i.IAdresa;
+import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
@@ -28,9 +29,9 @@ import rs.atekom.infosystem.desk.app.pomocne.TekstCelobrojni;
 import rs.atekom.infosystem.desk.paneli.c.mesto.CMestoComboBox;
 import rs.atekom.infosystem.desk.paneli.h.bankovniracun.HBankovniRacunTabela;
 
-public class DPretplatnikPregled extends HBox{
+public class DPretplatnikPregled extends OsnovniPregled{
 
-	private LabelaObaveznaBold  lblNaziv, lblPunNaziv, lblMesto, lblAdresa, lblOdgovornoLice, lblEmail, lblPib, lblMb,  lblSifraDelatnosti, lblPoreskiPeriod;
+	private LabelaObaveznaBold lblNaziv, lblPunNaziv, lblMesto, lblAdresa, lblOdgovornoLice, lblEmail, lblPib, lblMb,  lblSifraDelatnosti, lblPoreskiPeriod;
 	private LabelaBold lblAgencija, lblOpstina,  lblTelefon, lblFax, lblNadlezanSud, lblNapomena;
 	private LabelaBold lblObveznikPDV, lblAktivan;
 	private LabelaBold  lblPoreskaUprava, lblVrstaVlasnistva, lblVrstaPosla, lblVelicinaObveznika, lblVrstaIzvestaja, lblRacunovodstvenaRegulativa;
@@ -54,7 +55,7 @@ public class DPretplatnikPregled extends HBox{
 	//private File file;
 	
 	public DPretplatnikPregled(DPretplatnikPanel panel, ResourceBundle resource) {
-		setSpacing(20);
+		super();
 		this.panel = panel;
 		napraviElemente(resource);
 		popakujElemente();

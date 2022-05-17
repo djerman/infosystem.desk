@@ -211,10 +211,7 @@
 	-fx-text-fill: green;
 	-fx-font-weight: bold;
 	}
-	
-/*
- * 
- */
+
 .crvenabojatekstacelije .table-cell{
 	-fx-text-fill: red;
 	}
@@ -252,9 +249,6 @@
     -fx-background-color: red;
     }
 
-/**
- * подешавање табова
- */
 .tab-pane .tab:selected{
 	/*-fx-background-color: #FFD700;*/
 	-fx-background-color: #00E699;
@@ -298,6 +292,20 @@
 
 .tabela-celija-duple-linije {
 	-fx-alignment: CENTER-RIGHT; -fx-padding: 0 3 0 0;
+}
+
+.komande-sa-pozadinom{
+	-fx-padding: 10; -fx-border-style: solid inside;
+	-fx-border-width: 2; -fx-border-insets: 2;
+	-fx-border-radius: 5; -fx-background-color: #FAEBD7;
+	-fx-border-color: blue;
+}
+
+.pregled-sa-pozadinom{
+	-fx-padding: 10; -fx-border-style: solid inside;
+	-fx-border-width: 2; -fx-border-insets: 2;
+	-fx-border-radius: 5; -fx-background-color: #FFE4C4;
+	-fx-border-color: red;
 }
 /*
 .label{

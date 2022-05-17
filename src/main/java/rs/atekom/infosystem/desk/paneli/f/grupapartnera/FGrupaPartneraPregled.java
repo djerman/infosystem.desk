@@ -4,13 +4,14 @@ import java.util.ResourceBundle;
 import javafx.geometry.HPos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import rs.atekom.infosystem.baza.f.FGrupaPartnera;
+import rs.atekom.infosystem.baza.f.grupapartnera.FGrupaPartnera;
+import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 
-public class FGrupaPartneraPregled extends GridPane{
+public class FGrupaPartneraPregled extends OsnovniPregled{
 
 	private LabelaObaveznaBold lblNaziv;
 	private LabelaBold lblOpis;
@@ -20,8 +21,7 @@ public class FGrupaPartneraPregled extends GridPane{
 	
 	public FGrupaPartneraPregled(FGrupaPartneraPanel panel, ResourceBundle resource) {
 		this.panel = panel;
-		setHgap(5);
-		setVgap(5);
+		napraviGrid();
 		napraviElemente(resource);
 		popakujElemente();
 		}
@@ -48,9 +48,11 @@ public class FGrupaPartneraPregled extends GridPane{
 		ColumnConstraints col4 = new ColumnConstraints();
 		col4.setHgrow(Priority.ALWAYS);
 		
-		getColumnConstraints().addAll(col1, col2, col3, col4);
+		grid.getColumnConstraints().addAll(col1, col2, col3, col4);
 		
-		addColumn(0, lblNaziv); addColumn(1, txtNaziv); addColumn(2, lblOpis); addColumn(3, txtOpis);
+		grid.addColumn(0, lblNaziv); grid.addColumn(1, txtNaziv); grid.addColumn(2, lblOpis); grid.addColumn(3, txtOpis);
+		getChildren().add(grid);
+		HBox.setHgrow(grid, Priority.ALWAYS);
 		}
 	
 	public void postaviObjekat(FGrupaPartnera grupa) {

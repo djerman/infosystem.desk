@@ -28,7 +28,7 @@ public class AJedinicaMereRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), AJedinicaMereOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						//ee.printStackTrace();
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())
@@ -47,7 +47,7 @@ public class AJedinicaMereRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), AJedinicaMereOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						//ee.printStackTrace();
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())
@@ -65,7 +65,7 @@ public class AJedinicaMereRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), AJedinicaMereOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						//ee.printStackTrace();
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())

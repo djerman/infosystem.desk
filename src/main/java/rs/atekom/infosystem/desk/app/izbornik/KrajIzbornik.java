@@ -1,7 +1,12 @@
 package rs.atekom.infosystem.desk.app.izbornik;
 
 import org.controlsfx.glyphfont.FontAwesome;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.paint.Color;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
 
@@ -67,7 +72,20 @@ public class KrajIzbornik extends OpstiIzbornik{
 		
 		MenuItem izlaz =  new MenuItem(layout.vratiPrevod("izbornik.kraj.izlaz"), fontAwesome.create(FontAwesome.Glyph.VENUS).color(Color.MEDIUMSEAGREEN));
 		izlaz.setOnAction(e -> {
-			//osnovniLayout.dodajTab(tipovi.getText(), new TipArtiklaPanel(osnovniLayout));
+            Alert izlazA = new Alert(AlertType.WARNING);
+    		ButtonType da = new ButtonType(layout.vratiPrevod("upozorenje.otkazi"), ButtonData.OK_DONE);
+    		ButtonType otkazi = new ButtonType(layout.vratiPrevod("upozorenje.izlaz"), ButtonData.CANCEL_CLOSE);
+    		izlazA.setTitle(layout.vratiPrevod(("upozorenje.title")));
+    		izlazA.setHeaderText(layout.vratiPrevod("upozorenje.header"));
+    		izlazA.setContentText(layout.vratiPrevod("upozorenje.content"));
+    		izlazA.getButtonTypes().clear();
+    		izlazA.getButtonTypes().addAll(otkazi, da);
+    		izlazA.showAndWait();
+            if (izlazA.getResult().getButtonData() == ButtonData.CANCEL_CLOSE) {
+                System.exit(0);
+                } else {
+                	//event.consume();
+                	}
 			});
 		
 		/*

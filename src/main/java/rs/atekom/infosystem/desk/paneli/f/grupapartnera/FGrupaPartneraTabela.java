@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import rs.atekom.infosystem.baza.f.FGrupaPartnera;
+import rs.atekom.infosystem.baza.f.grupapartnera.FGrupaPartnera;
 import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
 
 public class FGrupaPartneraTabela extends OpstaTabela<FGrupaPartnera>{

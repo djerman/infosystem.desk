@@ -11,7 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.util.Callback;
-import rs.atekom.infosystem.baza.f.FPreduzece;
+import rs.atekom.infosystem.baza.f.preduzece.FPreduzece;
 import rs.atekom.infosystem.baza.g.GPartner;
 import rs.atekom.infosystem.baza.g.GPartnerOdgovorPodaci;
 import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;

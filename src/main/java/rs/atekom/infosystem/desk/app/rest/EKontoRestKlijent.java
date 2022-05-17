@@ -28,7 +28,7 @@ public class EKontoRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), EKontoOdgovor.class);
 					}catch (Exception ee) {
-						ee.printStackTrace();
+						//ee.printStackTrace();
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())

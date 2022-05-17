@@ -12,18 +12,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.c.CMesto;
-import rs.atekom.infosystem.baza.f.FGrupaPartnera;
-import rs.atekom.infosystem.baza.f.FPreduzece;
+import rs.atekom.infosystem.baza.f.grupapartnera.FGrupaPartnera;
+import rs.atekom.infosystem.baza.f.preduzece.FPreduzece;
 import rs.atekom.infosystem.baza.g.GPartner;
 import rs.atekom.infosystem.baza.g.GPartnerOdgovorPodaci;
 import rs.atekom.infosystem.baza.i.IAdresa;
+import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 import rs.atekom.infosystem.desk.app.pomocne.TekstCelobrojni;
 import rs.atekom.infosystem.desk.app.pomocne.TekstDecimalni;
 import rs.atekom.infosystem.desk.paneli.c.mesto.CMestoComboBox;
 
-public class GPartnerPregled extends HBox{
+public class GPartnerPregled extends OsnovniPregled{
 
 	private LabelaObaveznaBold lblSifra, lblNaziv, lblAdresa, lblPib, lblMb;
 	private LabelaBold lblGrupaPartnera, lblPunNaziv, lblPdv, lblTel, lblNapomena, lblEmail, lblOdgovornoLice,

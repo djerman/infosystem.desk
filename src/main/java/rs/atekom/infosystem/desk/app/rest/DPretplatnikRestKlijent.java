@@ -32,7 +32,7 @@ public class DPretplatnikRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), DPodaciZaPretplatnikaOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						//ee.printStackTrace();
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())
@@ -51,7 +51,7 @@ public class DPretplatnikRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), DPretplatnikOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						//ee.printStackTrace();
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())
@@ -70,7 +70,7 @@ public class DPretplatnikRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), DPretplatnikOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						//ee.printStackTrace();
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())
@@ -88,7 +88,7 @@ public class DPretplatnikRestKlijent extends OpstiRest{
 				try {
 					odgovor = mapper.readValue(e.getResponseBodyAsString(), DPretplatnikOdgovor.class);
 					}catch (JsonProcessingException ee) {
-						ee.printStackTrace();
+						//ee.printStackTrace();
 						}
 				return ResponseEntity.status(e.getRawStatusCode())
 						.headers(e.getResponseHeaders())

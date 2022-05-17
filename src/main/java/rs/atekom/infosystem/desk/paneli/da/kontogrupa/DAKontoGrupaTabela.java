@@ -41,6 +41,7 @@ public class DAKontoGrupaTabela extends OpstaTabela<DAKontoGrupa>{
 		en.setCellValueFactory(new PropertyValueFactory<>("en"));
 		de = new TableColumn<DAKontoGrupa, String>(resource.getString("lbl.de"));
 		de.setCellValueFactory(new PropertyValueFactory<>("de"));
+		
 		getColumns().addAll(klasa, sifra, naziv, sr, en, de);
 		setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 		}

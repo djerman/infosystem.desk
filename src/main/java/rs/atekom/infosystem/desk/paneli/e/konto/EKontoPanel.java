@@ -35,6 +35,7 @@ public class EKontoPanel extends OsnovniPanel{
 		popuniTabelu();
 		
 		vratiRoot().getChildren().addAll(konta, info);
+		
 		VBox.setVgrow(konta, Priority.ALWAYS);
 		setContent(vratiRoot());
 		}

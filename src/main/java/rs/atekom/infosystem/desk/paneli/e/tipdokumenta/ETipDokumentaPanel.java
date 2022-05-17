@@ -32,11 +32,12 @@ public class ETipDokumentaPanel extends OsnovniPanel{
 	public void postaviElemente() {
 		restTip = new ETipDokumentaRestKlijent(vratiRestServis());
 
+		postaviInfo();
 		postaviTabelu();
 		popuniTabelu();
-		postaviInfo();
 		
 		vratiRoot().getChildren().addAll(tipovi, info);
+		
 		VBox.setVgrow(tipovi, Priority.ALWAYS);
 		setContent(vratiRoot());
 		}
@@ -91,5 +92,6 @@ public class ETipDokumentaPanel extends OsnovniPanel{
 			}catch (Exception e) {
 				// TODO: handle exception
 				}
-	}
+		}
+	
 	}

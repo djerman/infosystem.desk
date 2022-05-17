@@ -6,16 +6,17 @@ import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.a.drzava.ADrzavaOdgovor;
 import rs.atekom.infosystem.baza.b.BOpstina;
+import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
 import rs.atekom.infosystem.desk.paneli.a.drzava.ADrzavaComboBox;
 
-public class BOpstinePregled extends GridPane{
+public class BOpstinePregled extends OsnovniPregled{
 
 	private LabelaObaveznaBold lblDrzava, lblNaziv;
 	private LabelaBold lblSr, lblEn, lblDe, lblPozivniBroj, lblPostanskiBroj, lblPozivNaBroj;
@@ -26,8 +27,7 @@ public class BOpstinePregled extends GridPane{
 	
 	public BOpstinePregled(BOpstinePanel panel, ResourceBundle resource) {
 		this.panel = panel;
-		setHgap(5);
-		setVgap(5);
+		napraviGrid();
 		napraviElemente(resource);
 		popakujElemente();
 		}
@@ -113,12 +113,14 @@ public class BOpstinePregled extends GridPane{
 		ColumnConstraints col8 = new ColumnConstraints();
 		col8.setHgrow(Priority.ALWAYS);
 		
-		getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
+		grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
 		
-		addColumn(0, lblDrzava); addColumn(1, cbDrzave); addColumn(2, lblNaziv); addColumn(3, txtNaziv); 
-		addColumn(4, lblSr); addColumn(5, txtSr); addColumn(6, lblEn); addColumn(7, txtEn);
-		addColumn(0, lblDe); addColumn(1, txtDe); addColumn(2, lblPostanskiBroj); addColumn(3, txtPostanskiBroj); 
-		addColumn(4, lblPozivniBroj); addColumn(5, txtPozivniBroj); addColumn(6, lblPozivNaBroj); addColumn(7, txtPozivNaBroj);
+		grid.addColumn(0, lblDrzava); grid.addColumn(1, cbDrzave); grid.addColumn(2, lblNaziv); grid.addColumn(3, txtNaziv); 
+		grid.addColumn(4, lblSr); grid.addColumn(5, txtSr); grid.addColumn(6, lblEn); grid.addColumn(7, txtEn);
+		grid.addColumn(0, lblDe); grid.addColumn(1, txtDe); grid.addColumn(2, lblPostanskiBroj); grid.addColumn(3, txtPostanskiBroj); 
+		grid.addColumn(4, lblPozivniBroj); grid.addColumn(5, txtPozivniBroj); grid.addColumn(6, lblPozivNaBroj); grid.addColumn(7, txtPozivNaBroj);
+		getChildren().add(grid);
+		HBox.setHgrow(grid, Priority.ALWAYS);
 		}
 	
 	public void postaviObjekat(BOpstina opstina) {

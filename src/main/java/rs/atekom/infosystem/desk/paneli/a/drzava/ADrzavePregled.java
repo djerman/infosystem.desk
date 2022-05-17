@@ -4,13 +4,14 @@ import java.util.ResourceBundle;
 import javafx.geometry.HPos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.a.drzava.ADrzava;
+import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 
-public class ADrzavePregled extends GridPane{
+public class ADrzavePregled extends OsnovniPregled{
 
 	private LabelaObaveznaBold lblNaziv;
 	private LabelaBold lblSr, lblEn, lblDe, lblPozivniBroj, lblOznaka/*, lblPodrazumevan*/;
@@ -19,8 +20,7 @@ public class ADrzavePregled extends GridPane{
 	private ADrzava drzava;
 	
 	public ADrzavePregled(ADrzavePanel panel, ResourceBundle resource) {
-		setHgap(5);
-		setVgap(5);
+		napraviGrid();
 		napraviElemente(resource);
 		popakujElemente();
 		}
@@ -66,11 +66,12 @@ public class ADrzavePregled extends GridPane{
 		ColumnConstraints col6 = new ColumnConstraints();
 		col6.setHgrow(Priority.ALWAYS);
 		
-		getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6);
+		grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6);
 		
-		addColumn(0, lblNaziv); addColumn(1, txtNaziv); addColumn(2, lblSr); addColumn(3, txtSr); addColumn(4, lblEn); addColumn(5, txtEn);
-		addColumn(0, lblDe); addColumn(1, txtDe); addColumn(2, lblPozivniBroj); addColumn(3, txtPozivniBroj); addColumn(4, lblOznaka); addColumn(5, txtOznaka); ;
-
+		grid.addColumn(0, lblNaziv); grid.addColumn(1, txtNaziv); grid.addColumn(2, lblSr); grid.addColumn(3, txtSr); grid.addColumn(4, lblEn); grid.addColumn(5, txtEn);
+		grid.addColumn(0, lblDe); grid.addColumn(1, txtDe); grid.addColumn(2, lblPozivniBroj); grid.addColumn(3, txtPozivniBroj); grid.addColumn(4, lblOznaka); grid.addColumn(5, txtOznaka);
+		getChildren().add(grid);
+		HBox.setHgrow(grid, Priority.ALWAYS);
 		}
 	
 	public void postaviObjekat(ADrzava drzava) {

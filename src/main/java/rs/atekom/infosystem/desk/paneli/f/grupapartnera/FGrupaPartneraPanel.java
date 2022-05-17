@@ -12,8 +12,8 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import rs.atekom.infosystem.baza.f.FGrupaPartnera;
-import rs.atekom.infosystem.baza.f.FGrupaPartneraOdgovor;
+import rs.atekom.infosystem.baza.f.grupapartnera.FGrupaPartnera;
+import rs.atekom.infosystem.baza.f.grupapartnera.FGrupaPartneraOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
 import rs.atekom.infosystem.desk.a.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.FGrupaPartneraRestKlijent;
@@ -32,6 +32,8 @@ public class FGrupaPartneraPanel extends OsnovniPanel{
 	
 	private void postaviElemente() {
 		restGrupa = new FGrupaPartneraRestKlijent(vratiRestServis());
+		
+		postaviInfo();
 		postaviPregled();
 		postaviKomande();
 		
@@ -42,6 +44,7 @@ public class FGrupaPartneraPanel extends OsnovniPanel{
 					pokaziGresku(vratiOsnovniLayout().vratiPrevod("obavestenja.brisanje"), vratiOsnovniLayout().vratiPrevod("obavestenja.brisanje.poruka"));
 					}
 			});
+		
 		sacuvaj.setOnAction(e -> {
 			if(pregled.proveraUnosa()) {
 				azurirajTabelu(true);
@@ -50,6 +53,7 @@ public class FGrupaPartneraPanel extends OsnovniPanel{
 							vratiOsnovniLayout().vratiPrevod("obavestenja.obaveznapolja.obavestenje"));
 					}
 			});
+			
 		novo.setOnAction(e -> {
 			pregled.postaviNovo();
 			izborGrupe.clearSelection();
@@ -58,7 +62,7 @@ public class FGrupaPartneraPanel extends OsnovniPanel{
 		postaviTabelu();
 		popuniTabelu();
 		
-		vratiRoot().getChildren().addAll(pregled, komande, grupe);
+		vratiRoot().getChildren().addAll(pregled, komande, grupe, info);
 		VBox.setVgrow(grupe, Priority.ALWAYS);
 		setContent(vratiRoot());
 		}
@@ -103,7 +107,10 @@ public class FGrupaPartneraPanel extends OsnovniPanel{
 		ObservableList<FGrupaPartnera> lista = null;
 		if(listaGrupa != null) {
 			lista = FXCollections.observableArrayList(listaGrupa);
-			}
+			postaviUkupno(listaGrupa.size());
+			}else {
+				postaviUkupno(0);
+				}
 		grupe.getSortOrder().clear();
 		grupe.setItems(lista);
 		grupe.refresh();
@@ -127,9 +134,14 @@ public class FGrupaPartneraPanel extends OsnovniPanel{
 	@SuppressWarnings("unchecked")
 	@Override
 	public void izvrsen(Object odg) {
-		ResponseEntity<FGrupaPartneraOdgovor> odgovor = (ResponseEntity<FGrupaPartneraOdgovor>) odg;
-		osveziTabelu(odgovor.getBody() == null ? null : odgovor.getBody().getLista());
-		pregled.postaviNovo();
+		try {
+			ResponseEntity<FGrupaPartneraOdgovor> odgovor = (ResponseEntity<FGrupaPartneraOdgovor>) odg;
+			osveziTabelu(odgovor.getBody() == null ? null : odgovor.getBody().getLista());
+			pregled.postaviNovo();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		}
 	
 	}

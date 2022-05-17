@@ -8,17 +8,18 @@ import javafx.geometry.HPos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikOdgovor;
 import rs.atekom.infosystem.baza.e.godina.EGodina;
+import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
 import rs.atekom.infosystem.desk.app.pomocne.TekstCelobrojni;
 
-public class EGodinePregled extends GridPane{
+public class EGodinePregled extends OsnovniPregled{
 
 	private LabelaObaveznaBold lblPretplatnik, lblGodina;
 	private LabelaBold lblAktivan;
@@ -30,8 +31,7 @@ public class EGodinePregled extends GridPane{
 	
 	public EGodinePregled(EGodinePanel panel, ResourceBundle resource) {
 		this.panel = panel;
-		setHgap(5);
-		setVgap(5);
+		napraviGrid();
 		napraviElemente(resource);
 		popakujElemente();
 		}
@@ -85,10 +85,11 @@ public class EGodinePregled extends GridPane{
 		ColumnConstraints col6 = new ColumnConstraints();
 		//col6.setHgrow(Priority.ALWAYS);
 		
-		getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6);
+		grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6);
 		
-		addColumn(0, lblPretplatnik); addColumn(1, cbPretplatnici); addColumn(2, lblGodina); addColumn(3, txtGodina); addColumn(4, lblAktivan); addColumn(5, cbAktivan);
-		
+		grid.addColumn(0, lblPretplatnik); grid.addColumn(1, cbPretplatnici); grid.addColumn(2, lblGodina); grid.addColumn(3, txtGodina); grid.addColumn(4, lblAktivan); grid.addColumn(5, cbAktivan);
+		getChildren().add(grid);
+		HBox.setHgrow(grid, Priority.ALWAYS);
 		}
 	
 	public void postaviObjekat(EGodina godina) {

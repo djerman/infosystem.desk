@@ -48,10 +48,13 @@ public class OsnovniLayout extends VBox{
 		
 		info = new HBox(2.0);
 		info.setAlignment(Pos.CENTER);
+		
 		kontaktLabela =  new Label(kontakt.getIme().toUpperCase() + " " + kontakt.getPrezime().toUpperCase() + (kontakt.getPretplatnik() == null ? "" :
 			"/" + kontakt.getPretplatnik().getNaziv().toUpperCase()) + (kontakt.getAgencija() == null ? "" :  "/" + kontakt.getAgencija().getNaziv()));
 		kontaktLabela.setTextFill(Color.RED);////korisnik.setTextFill(Color.web("#0076a3"));
+		
 		region = new Region();
+		
 		HBox.setHgrow(region, Priority.ALWAYS);
 		
 		//pozicijaLabela = new Label("POZICIJA: ");
@@ -131,7 +134,7 @@ public class OsnovniLayout extends VBox{
 	public ResourceBundle vratiResource() {
 		return this.resource;
 		}
-
+	
 	/*
 	public Label getLokacija() {
 		return lokacija;

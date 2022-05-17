@@ -25,9 +25,12 @@ public class APoreskaTarifaPanel extends OsnovniPanel{
 	private void postaviElemente() {
 		restTarifa = new APoreskaTarifaRestKlijent(vratiRestServis());
 		
+		postaviInfo();
 		postaviTabelu();
 		popuniTabelu();
-		vratiRoot().getChildren().add(tarife);
+		
+		vratiRoot().getChildren().addAll(tarife, info);
+		
 		VBox.setVgrow(tarife, Priority.ALWAYS);
 		setContent(vratiRoot());
 		}
@@ -60,6 +63,7 @@ public class APoreskaTarifaPanel extends OsnovniPanel{
 				tarife.getItems().clear();
 				}
 			ObservableList<APoreskaTarifa> lista = FXCollections.observableArrayList(odgovor.getBody() == null ? null : odgovor.getBody().getLista());
+			postaviUkupno(odgovor.getBody() == null ? 0 : odgovor.getBody().getLista() == null ? 0 : odgovor.getBody().getLista().size());
 			tarife.getSortOrder().clear();
 			tarife.setItems(lista);
 			tarife.refresh();

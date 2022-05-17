@@ -13,6 +13,7 @@ public class IzbornikBar extends MenuBar{
 		}
 	
 	private void postaviNоviMeni() {
+		AdministracijaIzbornik administracijaIzbornik = new AdministracijaIzbornik(osnovniLayout);
 		PodaciIzbornik podaciIzbornik = new PodaciIzbornik(osnovniLayout);
 		RobaIzbornik prodajaMeni = new RobaIzbornik(osnovniLayout);
 		//NabavkaIzbornik nabavkaMeni = new NabavkaIzbornik(osnovniLayout);
@@ -23,7 +24,25 @@ public class IzbornikBar extends MenuBar{
 		KrajIzbornik krajIzbornik = new KrajIzbornik(osnovniLayout);
 		//SistemIzbornik sistemMeni = new SistemIzbornik(osnovniLayout);
 		OpsteIzbornik opste = new OpsteIzbornik(osnovniLayout);
-		getMenus().addAll(podaciIzbornik, prodajaMeni, finansijeIzbornik, izvestajiIzbornik, sifarniciMeni, opste, krajIzbornik);
+		
+		switch (osnovniLayout.vratiKorisnika().getUloga().getSr()) {
+		case "SISTEM": 
+			getMenus().addAll(administracijaIzbornik, sifarniciMeni, opste, krajIzbornik);
+			break;
+		case "AGENCIJA" :
+			getMenus().addAll(podaciIzbornik, prodajaMeni, finansijeIzbornik, izvestajiIzbornik, administracijaIzbornik, krajIzbornik);
+			break;
+		case "ADMINISTRATOR": 
+			getMenus().addAll(podaciIzbornik, prodajaMeni, finansijeIzbornik, izvestajiIzbornik, administracijaIzbornik, krajIzbornik);
+			break;
+		case "KORISNIK": 
+			getMenus().addAll(podaciIzbornik, prodajaMeni, finansijeIzbornik, izvestajiIzbornik, krajIzbornik);
+			break;
+		default:
+			//getMenus().addAll(podaciIzbornik, prodajaMeni, finansijeIzbornik, izvestajiIzbornik, administracijaIzbornik, sifarniciMeni, opste, krajIzbornik);
+			throw new IllegalArgumentException("Unexpected value: " + osnovniLayout.vratiKorisnika().getUloga().getSr());
+			}
+		
 		}
 	
 	}

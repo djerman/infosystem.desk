@@ -134,9 +134,8 @@ public class PrijavaController implements Initializable{
 					//URL urlOsnovni = resource.getURL();
 					//FXMLLoader loader = new FXMLLoader(urlOsnovni);
 					//loader.setResources(ResourceBundle.getBundle("prevod", new Locale("srb_RS")));
-					if(kontakt.getJezik() != null) {
+					if(kontakt.getJezik() != null)
 						resource = ResourceBundle.getBundle("prevod", new Locale(kontakt.getJezik()));
-						}
 					
 					Parent root = new OsnovniLayout(kontakt, rest, resource);
 					//Parent root = loader.load(getClass().getResource("/Osnovni.fxml").openStream());

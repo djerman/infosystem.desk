@@ -10,8 +10,8 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
-import rs.atekom.infosystem.baza.f.FGrupaPartnera;
-import rs.atekom.infosystem.baza.f.FGrupaPartneraOdgovor;
+import rs.atekom.infosystem.baza.f.grupapartnera.FGrupaPartnera;
+import rs.atekom.infosystem.baza.f.grupapartnera.FGrupaPartneraOdgovor;
 import rs.atekom.infosystem.desk.PrijavaController;
 
 public class FGrupaPartneraRestKlijent extends OpstiRest{

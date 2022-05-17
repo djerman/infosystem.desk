@@ -5,13 +5,14 @@ import javafx.geometry.HPos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.a.agencija.AAgencija;
+import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 
-public class AAgencijePregled extends GridPane{
+public class AAgencijePregled extends OsnovniPregled{
 
 	private LabelaObaveznaBold lblNaziv;
 	private LabelaBold lblKontaktOsoba, lblAdresa, lblTelefon, lblEmail, lblAktivan;
@@ -20,8 +21,7 @@ public class AAgencijePregled extends GridPane{
 	private AAgencija agencija;
 	
 	public AAgencijePregled(AAgencijePanel panel, ResourceBundle resource) {
-		setHgap(5);
-		setVgap(5);
+		napraviGrid();
 		napraviElemente(resource);
 		popakujElemente();
 		}
@@ -65,11 +65,12 @@ public class AAgencijePregled extends GridPane{
 		ColumnConstraints col6 = new ColumnConstraints();
 		col6.setHgrow(Priority.ALWAYS);
 		
-		getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6);
+		grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6);
 		
-		addColumn(0, lblNaziv); addColumn(1, txtNaziv); addColumn(2, lblKontaktOsoba); addColumn(3, txtKontaktOsoba); addColumn(4, lblAdresa); addColumn(5, txtAdresa);
-		addColumn(0, lblTelefon); addColumn(1, txtTelefon); addColumn(2, lblEmail); addColumn(3, txtEmail); addColumn(4, lblAktivan); addColumn(5, cbAktivan);
-
+		grid.addColumn(0, lblNaziv); grid.addColumn(1, txtNaziv); grid.addColumn(2, lblKontaktOsoba); grid.addColumn(3, txtKontaktOsoba); grid.addColumn(4, lblAdresa); grid.addColumn(5, txtAdresa);
+		grid.addColumn(0, lblTelefon); grid.addColumn(1, txtTelefon); grid.addColumn(2, lblEmail); grid.addColumn(3, txtEmail); grid.addColumn(4, lblAktivan); grid.addColumn(5, cbAktivan);
+		getChildren().add(grid);
+		HBox.setHgrow(grid, Priority.ALWAYS);
 		}
 	
 	public void postaviObjekat(AAgencija agencija) {

@@ -7,19 +7,20 @@ import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.a.drzava.ADrzava;
 import rs.atekom.infosystem.baza.a.drzava.ADrzavaOdgovor;
 import rs.atekom.infosystem.baza.b.BOpstina;
 import rs.atekom.infosystem.baza.c.CMesto;
+import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
 import rs.atekom.infosystem.desk.paneli.a.drzava.ADrzavaComboBox;
 import rs.atekom.infosystem.desk.paneli.b.opstina.BOpstinaComboBox;
 
-public class CMestoPregled extends GridPane{
+public class CMestoPregled extends OsnovniPregled{
 
 	private LabelaObaveznaBold lblDrzava,lblNaziv;
 	private LabelaBold lblOpstina, lblSr, lblEn, lblPozivniBroj, lblPostanskiBroj;
@@ -29,11 +30,9 @@ public class CMestoPregled extends GridPane{
 	private CMesto mesto;
 	private CMestoPanel panel;
 	
-	
 	public CMestoPregled(CMestoPanel panel, ResourceBundle resource) {
 		this.panel = panel;
-		setHgap(5);
-		setVgap(5);
+		napraviGrid();
 		napraviElemente(resource);
 		popakujElemente();
 		}
@@ -137,10 +136,13 @@ public class CMestoPregled extends GridPane{
 		ColumnConstraints col8 = new ColumnConstraints();
 		col8.setHgrow(Priority.ALWAYS);
 		
-		getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
-		addColumn(0, lblDrzava); addColumn(1, cbDrzave); addColumn(2, lblOpstina); addColumn(3, cbOpstine); addColumn(4, lblNaziv); addColumn(5, txtNaziv); addColumn(6, lblSr); addColumn(7, txtSr);
-		addColumn(0, lblEn); addColumn(1, txtEn); addColumn(2, lblPozivniBroj); addColumn(3, txtPozivniBroj); addColumn(4, lblPostanskiBroj); addColumn(5, txtPostanskiBroj);
-		
+		grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
+		grid.addColumn(0, lblDrzava); grid.addColumn(1, cbDrzave); grid.addColumn(2, lblOpstina); grid.addColumn(3, cbOpstine); 
+		grid.addColumn(4, lblNaziv); grid.addColumn(5, txtNaziv); grid.addColumn(6, lblSr); grid.addColumn(7, txtSr);
+		grid.addColumn(0, lblEn); grid.addColumn(1, txtEn); grid.addColumn(2, lblPozivniBroj); grid.addColumn(3, txtPozivniBroj); 
+		grid.addColumn(4, lblPostanskiBroj); grid.addColumn(5, txtPostanskiBroj);
+		getChildren().add(grid);
+		HBox.setHgrow(grid, Priority.ALWAYS);
 		}
 	
 	public void postaviObjekat(CMesto mesto) {
@@ -201,7 +203,9 @@ public class CMestoPregled extends GridPane{
 		}
 	
 	public void postaviOpstine(ObservableList<BOpstina> lista) {
-		cbOpstine.getItems().clear();
+		if(cbOpstine.getItems() != null && cbOpstine.getItems().size() > 0) {
+			cbOpstine.getItems().clear();
+			}
 		cbOpstine.getItems().add(null);
 		if(lista != null) {
 			cbOpstine.getItems().addAll(lista);
