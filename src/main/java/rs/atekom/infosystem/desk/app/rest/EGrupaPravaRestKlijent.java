@@ -5,9 +5,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
-
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
 import rs.atekom.infosystem.baza.e.grupaprava.EGrupaPrava;
 import rs.atekom.infosystem.baza.e.grupaprava.EGrupaPravaOdgovor;
@@ -25,11 +23,12 @@ public class EGrupaPravaRestKlijent extends OpstiRest{
 			ResponseEntity<EGrupaPravaOdgovor> odgovor = new RestTemplate().exchange(putanja, HttpMethod.GET, servis.request, EGrupaPravaOdgovor.class);
 			return odgovor;
 		}catch (HttpStatusCodeException e) {
+			e.printStackTrace();
 			EGrupaPravaOdgovor odgovor = null;
 			try {
 				odgovor = mapper.readValue(e.getResponseBodyAsString(), EGrupaPravaOdgovor.class);
 			}catch (JsonProcessingException ee){
-				
+				ee.printStackTrace();
 			}
 			return ResponseEntity.status(e.getRawStatusCode())
 					.headers(e.getResponseHeaders())
@@ -44,11 +43,12 @@ public class EGrupaPravaRestKlijent extends OpstiRest{
 			ResponseEntity<EGrupaPravaOdgovor> odgovor = new RestTemplate().exchange(putanja, HttpMethod.PUT, zahtev, EGrupaPravaOdgovor.class);
 			return odgovor;
 		}catch (HttpStatusCodeException e) {
+			e.printStackTrace();
 			EGrupaPravaOdgovor odgovor = null;
 			try {
 				odgovor = mapper.readValue(e.getResponseBodyAsString(), EGrupaPravaOdgovor.class);
 			}catch (JsonProcessingException ee){
-				
+				ee.printStackTrace();
 			}
 			return ResponseEntity.status(e.getRawStatusCode())
 					.headers(e.getResponseHeaders())
@@ -62,11 +62,12 @@ public class EGrupaPravaRestKlijent extends OpstiRest{
 			ResponseEntity<EGrupaPravaOdgovor> odgovor = new RestTemplate().exchange(putanja, HttpMethod.DELETE, servis.request, EGrupaPravaOdgovor.class);
 			return odgovor;
 		}catch (HttpStatusCodeException e) {
+			e.printStackTrace();
 			EGrupaPravaOdgovor odgovor = null;
 			try {
 				odgovor = mapper.readValue(e.getResponseBodyAsString(), EGrupaPravaOdgovor.class);
 			}catch (JsonProcessingException ee){
-				
+				ee.printStackTrace();
 			}
 			return ResponseEntity.status(e.getRawStatusCode())
 					.headers(e.getResponseHeaders())

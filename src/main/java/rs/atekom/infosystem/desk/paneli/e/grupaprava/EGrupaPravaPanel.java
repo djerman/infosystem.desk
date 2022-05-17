@@ -121,7 +121,7 @@ public class EGrupaPravaPanel extends OsnovniPanel{
 		}
 
 	private void postaviPregled() {
-		pregled = new EGrupaPravaPregled(vratiOsnovniLayout().vratiResource());
+		pregled = new EGrupaPravaPregled(this, vratiOsnovniLayout().vratiResource());
 		}
 	
 	private void postaviTabelu() {

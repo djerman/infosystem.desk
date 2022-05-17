@@ -19,8 +19,10 @@ public class EGrupaPravaPregled extends OsnovniPregled{
 	private LabelaBold lblOpis, lblOpisSr, lblOpisEn, lblOpisDe;
 	private TextField txtNaziv, txtSr, txtEn, txtDe, txtOpis, txtOpisSr, txtOpisEn, txtOpisDe;
 	private EGrupaPrava grupaPrava;
+	private EGrupaPravaPanel panel;
 	
-	public EGrupaPravaPregled(ResourceBundle resource) {
+	public EGrupaPravaPregled(EGrupaPravaPanel panel, ResourceBundle resource) {
+		this.panel = panel;
 		napraviGrid();
 		napraviElemente(resource);
 		popakujElemente();
@@ -114,6 +116,7 @@ public class EGrupaPravaPregled extends OsnovniPregled{
 	public EGrupaPrava preuzmiObjekat() {
 		if(grupaPrava == null) {
 			grupaPrava = new EGrupaPrava();
+			grupaPrava.setPretplatnik(panel.vratiPretplatnika());
 		}
 		grupaPrava.setNaziv(txtNaziv.getText() == null ? null : txtNaziv.getText().trim());
 		grupaPrava.setSr(txtSr.getText() == null ? null : txtSr.getText().trim());
