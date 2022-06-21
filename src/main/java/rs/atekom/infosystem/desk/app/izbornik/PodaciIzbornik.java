@@ -13,6 +13,8 @@ import rs.atekom.infosystem.desk.paneli.a.poreskatarifa.APoreskaTarifaPanel;
 import rs.atekom.infosystem.desk.paneli.e.tipdokumenta.ETipDokumentaPanel;
 import rs.atekom.infosystem.desk.paneli.f.grupapartnera.FGrupaPartneraPanel;
 import rs.atekom.infosystem.desk.paneli.g.partner.GPartnerPanel;
+import rs.atekom.infosystem.desk.paneli.i.grupaartikala.IGrupaArtikalaPanel;
+import rs.atekom.infosystem.desk.paneli.j.artikal.JArtikalPanel;
 
 public class PodaciIzbornik extends OpstiIzbornik{
 	
@@ -20,6 +22,7 @@ public class PodaciIzbornik extends OpstiIzbornik{
 		super(layout);
 		setText(layout.vratiPrevod("izbornik.podaci"));
 		setGraphic(fontAwesome.create(FontAwesome.Glyph.FILE).color(Color.BLACK));
+		
 		MenuItem pocetna = new MenuItem(layout.vratiPrevod("tab.pocetni"), fontAwesome.create(FontAwesome.Glyph.BAR_CHART_O).color(Color.CRIMSON));
 		pocetna.setOnAction(e -> osnovniLayout.dodajTab(new PocetniTab()));
 		
@@ -31,10 +34,15 @@ public class PodaciIzbornik extends OpstiIzbornik{
 			osnovniLayout.dodajTab(poreskeTarife.getText(), new APoreskaTarifaPanel(osnovniLayout));
 			});
 		
+		MenuItem grupeArtikala = new MenuItem(layout.vratiPrevod("izbornik.podaci.grupeartikala"), fontAwesome.create(FontAwesome.Glyph.GROUP).color(Color.LIGHTGOLDENRODYELLOW));
+		grupeArtikala.setOnAction(e -> {
+			osnovniLayout.dodajTab(grupeArtikala.getText(), new IGrupaArtikalaPanel(osnovniLayout));
+		});
+		
 		MenuItem artikli = new MenuItem(layout.vratiPrevod("izbornik.podaci.artikli"), fontAwesome.create(FontAwesome.Glyph.CART_PLUS).color(Color.DARKVIOLET));
 		artikli.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
 		artikli.setOnAction(e -> {
-			//osnovniLayout.dodajTab(unosArtikala.getText(), new ArtikalPanel(osnovniLayout));
+			osnovniLayout.dodajTab(artikli.getText(), new JArtikalPanel(osnovniLayout));
 			});
 		
 		MenuItem kupci = new MenuItem(layout.vratiPrevod("izbornik.podaci.kupci"),  new Glyph("FontAwesome", FontAwesome.Glyph.MONEY).color(Color.GREEN));
@@ -81,7 +89,7 @@ public class PodaciIzbornik extends OpstiIzbornik{
 			//osnovniLayout.dodajTab(naciniPlacanja.getText(), new TipoviPlacanjaPanel(osnovniLayout));
 			});
 		
-		getItems().addAll(pocetna, tipDokumenta, poreskeTarife, artikli, kupci, dobavljaci, grupe, objekti, normativ, beleske, 
+		getItems().addAll(pocetna, tipDokumenta, poreskeTarife, grupeArtikala, artikli, kupci, dobavljaci, grupe, objekti, normativ, beleske, 
 				imenaAdrese, transakcije, izlaz);
 		}
 	

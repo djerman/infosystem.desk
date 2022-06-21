@@ -74,11 +74,11 @@ public class FGrupaPartneraPregled extends OsnovniPregled{
 	public FGrupaPartnera preuzmiObjekat() {
 		if(this.grupa == null) {
 			grupa = new FGrupaPartnera();
+			grupa.setPretplatnik(panel.vratiPretplatnika());
 			grupa.setId(0L);
 			}
-		grupa.setPretplatnik(panel.vratiPretplatnika());
 		grupa.setNaziv(txtNaziv.getText().trim());
-		grupa.setOpis(txtOpis.getText().trim());
+		grupa.setOpis(txtOpis.getText() == null ? "" : txtOpis.getText().trim());
 		return grupa;
 		}
 	

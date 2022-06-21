@@ -140,8 +140,7 @@ public class FGrupaPartneraPanel extends OsnovniPanel{
 			pregled.postaviNovo();
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
-
+			}
 		}
 	
 	}

@@ -1,4 +1,4 @@
-package rs.atekom.infosystem.desk.paneli.h.bankovniracun;
+package rs.atekom.infosystem.desk.paneli.i.bankovniracun;
 
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,11 +11,11 @@ import javafx.util.Callback;
 import rs.atekom.infosystem.baza.i.IBankovniRacun;
 import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
 
-public class HBankovniRacunTabela extends OpstaTabela<IBankovniRacun>{
+public class IBankovniRacunTabela extends OpstaTabela<IBankovniRacun>{
 
 	private TableColumn<IBankovniRacun, String> banka, brojRacuna;
 	
-	public HBankovniRacunTabela(ResourceBundle resource) {
+	public IBankovniRacunTabela(ResourceBundle resource) {
 		super(resource);
 		postaviTabelu();
 		}

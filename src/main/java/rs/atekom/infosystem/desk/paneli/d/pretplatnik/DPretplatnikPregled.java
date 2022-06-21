@@ -27,7 +27,7 @@ import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
 import rs.atekom.infosystem.desk.app.pomocne.TekstCelobrojni;
 import rs.atekom.infosystem.desk.paneli.c.mesto.CMestoComboBox;
-import rs.atekom.infosystem.desk.paneli.h.bankovniracun.HBankovniRacunTabela;
+import rs.atekom.infosystem.desk.paneli.i.bankovniracun.IBankovniRacunTabela;
 
 public class DPretplatnikPregled extends OsnovniPregled{
 
@@ -41,7 +41,7 @@ public class DPretplatnikPregled extends OsnovniPregled{
 	private CheckBox cbObveznikPdv, cbAktivan;
 	private TekstCelobrojni txtPoreskiPeriod, txtVrstaVlasnistva, txtVrstaPosla, txtVelicinaObveznika, txtVrstaIzvestaja, txtRacunovodstvenaRegulativa;
 	private GridPane noseci, osnovno, ostalo;
-	private HBankovniRacunTabela racuni;
+	private IBankovniRacunTabela racuni;
 	private HBox slikaTabela;
 	//private ImageView slika;
 	private DPretplatnikPanel panel;
@@ -88,7 +88,7 @@ public class DPretplatnikPregled extends OsnovniPregled{
 		
 		slikaTabela = new HBox(5);
 
-		racuni = new HBankovniRacunTabela(resource);
+		racuni = new IBankovniRacunTabela(resource);
 		racuni.setMaxHeight(110);
 		slikaTabela.getChildren().addAll(/*slika,*/ racuni);
 		HBox.setHgrow(racuni, Priority.ALWAYS);
