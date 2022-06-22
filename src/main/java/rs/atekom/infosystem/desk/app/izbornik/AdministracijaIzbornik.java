@@ -6,6 +6,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.paint.Color;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
 import rs.atekom.infosystem.desk.paneli.e.grupaprava.EGrupaPravaPanel;
+import rs.atekom.infosystem.desk.paneli.f.brojac.FBrojacPanel;
 
 public class AdministracijaIzbornik extends OpstiIzbornik{
 
@@ -23,6 +24,11 @@ public class AdministracijaIzbornik extends OpstiIzbornik{
 		grupaPrava.setOnAction(e -> {
 			osnovniLayout.dodajTab(grupaPrava.getText(), new EGrupaPravaPanel(osnovniLayout));
 			});
+		
+		MenuItem brojaci = new MenuItem(osnovniLayout.vratiPrevod("izbornik.administracija.brojaci"), fontAwesome.create(FontAwesome.Glyph.COGS).color(Color.RED));
+		brojaci.setOnAction(e -> {
+			osnovniLayout.dodajTab(brojaci.getText(), new FBrojacPanel(osnovniLayout));
+		});
 		
 		getItems().addAll(korisnici, grupaPrava);
 	}
