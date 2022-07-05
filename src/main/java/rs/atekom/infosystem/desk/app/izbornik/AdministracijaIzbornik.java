@@ -30,7 +30,7 @@ public class AdministracijaIzbornik extends OpstiIzbornik{
 			osnovniLayout.dodajTab(brojaci.getText(), new FBrojacPanel(osnovniLayout));
 		});
 		
-		getItems().addAll(korisnici, grupaPrava);
+		getItems().addAll(korisnici, grupaPrava, brojaci);
 	}
 
 }

@@ -21,13 +21,16 @@ public class JArtikalRestKlijent extends OpstiRest{
 		super(rest);
 	}
 
-	public ResponseEntity<JArtikalOdgovor> lista(DPretplatnik pretplatnik, Optional<String> pretraga, int strana){
+	public ResponseEntity<JArtikalOdgovor> lista(DPretplatnik pretplatnik, Optional<String> pretraga, Optional<Integer> tip,  int strana){
 		try {
 			String pojam = null;
+			Integer tipArtikla = null;
 			if(pretraga != null && pretraga.isPresent()) {
 				pojam = pretraga.get();
 			}
-			String putanja = PrijavaController.adresa + "/artikli?pretplatnikId=" + pretplatnik.getId() + (pojam == null ? "" : "&pretraga=" + pojam) + "&strana=" + strana;
+			if(tip != null && tip.isPresent())
+				tipArtikla = tip.get();
+			String putanja = PrijavaController.adresa + "/artikli?pretplatnikId=" + pretplatnik.getId() + (pojam == null ? "" : "&pretraga=" + pojam) + (tip == null ? "" : "&tip=" + tipArtikla) + "&strana=" + strana;
 			ResponseEntity<JArtikalOdgovor> odgovor = new RestTemplate().exchange(putanja, HttpMethod.GET, servis.request, JArtikalOdgovor.class);
 			return odgovor;
 		}catch (HttpStatusCodeException e) {

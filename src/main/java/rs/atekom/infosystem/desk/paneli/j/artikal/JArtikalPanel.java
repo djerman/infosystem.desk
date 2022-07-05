@@ -1,6 +1,7 @@
 package rs.atekom.infosystem.desk.paneli.j.artikal;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 
@@ -91,7 +92,7 @@ public class JArtikalPanel extends OsnovniPanel{
 	public void popuniTabelu() {
 		ResponseEntity<JArtikalOdgovor> odgovor = null;
 		try {
-			odgovor = restArtikal.lista(vratiPretplatnika(), null, 1);
+			odgovor = restArtikal.lista(vratiPretplatnika(), null, Optional.of(1), 1);
 			statusOdgovora(odgovor);
 			if(odgovor != null && odgovor.getBody() != null) {
 				pregled.setJedinice(odgovor.getBody().getJedinice());

@@ -18,8 +18,9 @@ import rs.atekom.infosystem.baza.a.agencija.AAgencija;
 import rs.atekom.infosystem.baza.c.CMesto;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPodaciZaPretplatnikaOdgovor;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
-import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaciOdgovor;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaci;
 import rs.atekom.infosystem.baza.e.organizacija.EOrganizacija;
+import rs.atekom.infosystem.baza.e.organizacija.EOrganizacijaPodaci;
 import rs.atekom.infosystem.baza.i.IAdresa;
 import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
@@ -46,7 +47,7 @@ public class DPretplatnikPregled extends OsnovniPregled{
 	//private ImageView slika;
 	private DPretplatnikPanel panel;
 	private DPretplatnik pretplatnik;
-	private DPretplatnikPodaciOdgovor pretplatnikPodaci;
+	private DPretplatnikPodaci pretplatnikPodaci;
 	private EOrganizacija organizacija;
 	private IAdresa adresa;
 	private CMestoComboBox cbMesto;
@@ -169,7 +170,7 @@ public class DPretplatnikPregled extends OsnovniPregled{
 		ColumnConstraints col24 = new ColumnConstraints();
 		ostalo.getColumnConstraints().addAll(col21, col22, col23, col24);
 		
-		if(panel.vratiOsnovniLayout().vratiKorisnika().getUloga().getNaziv().equals("SISTEM")) {
+		if(panel.vratiOsnovniLayout().vratiKorisnika().getUloga().getNaziv().equals("СИСТЕМ")) {
 			//osnovno.add(lblAgencija, 1, 1); osnovno.add(txtAgencija, 2, 1);
 			osnovno.addColumn(0, lblAgencija); osnovno.addColumn(1, cbAgencija);
 			}
@@ -232,18 +233,18 @@ public class DPretplatnikPregled extends OsnovniPregled{
 				}
 		}
 	
-	public void postaviObjekat(DPretplatnikPodaciOdgovor pretplatnikPodaci) {
+	public void postaviObjekat(DPretplatnikPodaci pretplatnikPodaci) {
 		if(pretplatnikPodaci != null) {
 			this.pretplatnikPodaci = pretplatnikPodaci;
 			this.pretplatnik = pretplatnikPodaci.getPretplatnik();
-			this.organizacija = pretplatnikPodaci.getOrganizacija();
-			this.adresa = organizacija.getAdresa();
+			this.organizacija = pretplatnikPodaci.getOrganizacijaPodaci().getOrganizacija();
+			this.adresa = (this.organizacija == null ? null : pretplatnikPodaci.getOrganizacijaPodaci().getSediste());
 			
 			cbAgencija.setValue(pretplatnik.getAgencija());
 			txtNaziv.setText(pretplatnik.getNaziv());
 			txtPunNaziv.setText(pretplatnik.getPunNaziv());
 			cbMesto.setValue(adresa == null ? null : adresa.getMesto());
-			txtAdresa.setText(adresa == null ? null : adresa.getAdresa());
+			txtAdresa.setText(adresa == null ? null : adresa.getUlicaBroj());
 			txtOpstina.setText(adresa == null ? "" : adresa.getMesto() == null ? "" : adresa.getMesto().getOpstina().getNaziv());
 			txtTelefon.setText(pretplatnik.getTelefon());
 			txtFax.setText(pretplatnik.getFax());
@@ -276,9 +277,9 @@ public class DPretplatnikPregled extends OsnovniPregled{
 				}
 		}
 	
-	public DPretplatnikPodaciOdgovor preuzmiObjekat() {
+	public DPretplatnikPodaci preuzmiObjekat() {
 		if(this.pretplatnik == null) {
-			pretplatnikPodaci = new DPretplatnikPodaciOdgovor();
+			pretplatnikPodaci = new DPretplatnikPodaci();
 			pretplatnik = new DPretplatnik();
 			//slika.setImage(logo);
 			//pretplatnik.setSlikaIme(imeSlike(slika.getImage()));
@@ -324,7 +325,8 @@ public class DPretplatnikPregled extends OsnovniPregled{
 		pretplatnik.setPunNaziv(txtPunNaziv.getText());
 		
 		adresa.setMesto(cbMesto.getValue());
-		adresa.setAdresa(txtAdresa.getText().trim());
+		adresa.setUlicaBroj(txtAdresa.getText().trim());
+		adresa.setSediste(true);
 		
 		pretplatnik.setTelefon(txtTelefon.getText());
 		pretplatnik.setFax(txtFax.getText());
@@ -346,8 +348,10 @@ public class DPretplatnikPregled extends OsnovniPregled{
 		
 		pretplatnik.setAktivan(cbAktivan.isSelected());
 		
-		organizacija.setAdresa(adresa);
-		pretplatnikPodaci.setOrganizacija(organizacija);
+		EOrganizacijaPodaci organizacijaPodaci = new EOrganizacijaPodaci();
+		organizacijaPodaci.setOrganizacija(organizacija);
+		organizacijaPodaci.setSediste(adresa);
+		pretplatnikPodaci.setOrganizacijaPodaci(organizacijaPodaci);
 		pretplatnikPodaci.setPretplatnik(pretplatnik);
 		
 		return this.pretplatnikPodaci;

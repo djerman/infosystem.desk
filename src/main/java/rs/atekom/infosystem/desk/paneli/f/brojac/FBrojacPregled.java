@@ -2,9 +2,6 @@ package rs.atekom.infosystem.desk.paneli.f.brojac;
 
 import java.util.ResourceBundle;
 
-import org.springframework.boot.ResourceBanner;
-
-import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.HPos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -24,12 +21,10 @@ public class FBrojacPregled extends OsnovniPregled{
 	private TextField prefiks, sufiks, tip;
 	private CheckBox reset;
 	private TekstCelobrojni brojaPolja, stanje;
-	private FBrojacPanel panel;
 	private FBrojac brojac;
 	private ResourceBundle resource;
 	
-	public FBrojacPregled(FBrojacPanel panel, ResourceBundle resource) {
-		this.panel = panel;
+	public FBrojacPregled(ResourceBundle resource) {
 		this.resource = resource;
 		napraviGrid();
 		napraviElemente(resource);
@@ -86,7 +81,7 @@ public class FBrojacPregled extends OsnovniPregled{
 			brojaPolja.setText(String.valueOf(brojac.getBrojPolja()));
 			prefiks.setText(brojac.getPrefiks());
 			stanje.setText(String.valueOf(brojac.getStanje()));
-			sufiks.setText(String.valueOf(brojac.getSufiks()));
+			sufiks.setText(brojac.getSufiks());
 			reset.setSelected(brojac.getReset());
 
 			if(brojac.getTip() != null) {
@@ -111,10 +106,11 @@ public class FBrojacPregled extends OsnovniPregled{
 	
 	public void postaviNovo() {
 		this.brojac = null;
-		brojaPolja.setText(null);
-		prefiks.setText(null);
-		stanje.setText(null);
-		sufiks.setText(null);
+		brojaPolja.setText("");
+		prefiks.setText("");
+		stanje.setText("");
+		sufiks.setText("");
+		tip.setText("");
 		reset.setSelected(false);
 	}
 	

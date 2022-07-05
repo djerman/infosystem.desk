@@ -9,8 +9,8 @@ import org.controlsfx.control.SearchableComboBox;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -37,7 +37,7 @@ public class JArtikalPregled extends OsnovniPregled{
 	private AJedinicaMereComboBox cmbJm;
 	private APoreskaTarifaComboBox cmbPoreskaTarifa;
 	private DatePicker dpRokTrajanja;
-	private TextArea txtOpis, txtOpisEn, txtOpisDe;
+	private TextField txtOpis, txtOpisEn, txtOpisDe;
 	
 	public JArtikalPregled(JArtikalPanel panel, ResourceBundle resource) {
 		this.panel = panel;
@@ -65,6 +65,7 @@ public class JArtikalPregled extends OsnovniPregled{
 		
 		txtSifra = new TextField();
 		txtNaziv = new TextField();
+		txtNaziv.setTooltip(new Tooltip(resource.getString("obavestenja.duzinanaziva")));
 		cmbJm = new AJedinicaMereComboBox(resource);
 		cmbPoreskaTarifa = new APoreskaTarifaComboBox(resource);
 		cmbGrupa = new SearchableComboBox<IGrupaArtikala>();
@@ -75,9 +76,9 @@ public class JArtikalPregled extends OsnovniPregled{
 		dpRokTrajanja = new DatePicker((new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
 		txtInfCena = new TekstDecimalni();
 		txtRastur = new TekstDecimalni();
-		txtOpis = new TextArea();
-		txtOpisEn = new TextArea();
-		txtOpisDe = new TextArea();
+		txtOpis = new TextField();
+		txtOpisEn = new TextField();
+		txtOpisDe = new TextField();
 	}
 	//problem sa comboboxovima i njihovom širinom
 	private void popakujElemente() {
@@ -86,30 +87,35 @@ public class JArtikalPregled extends OsnovniPregled{
 		ColumnConstraints col1 = new ColumnConstraints();
 		col1.setHalignment(HPos.RIGHT);
 		col1.setMinWidth(minSirina);
+		col1.setHgrow(Priority.ALWAYS);
 		ColumnConstraints col2 = new ColumnConstraints();
 		col2.setHgrow(Priority.ALWAYS);
 		
 		ColumnConstraints col3 = new ColumnConstraints();
 		col3.setHalignment(HPos.RIGHT);
 		col3.setMinWidth(minSirina);
+		col3.setHgrow(Priority.ALWAYS);
 		ColumnConstraints col4 = new ColumnConstraints();
 		col4.setHgrow(Priority.ALWAYS);
 		
 		ColumnConstraints col5 = new ColumnConstraints();
 		col5.setHalignment(HPos.RIGHT);
 		col5.setMinWidth(minSirina);
+		col5.setHgrow(Priority.ALWAYS);
 		ColumnConstraints col6 = new ColumnConstraints();
 		col6.setHgrow(Priority.ALWAYS);
 		
 		ColumnConstraints col7 = new ColumnConstraints();
 		col7.setHalignment(HPos.RIGHT);
 		col7.setMinWidth(minSirina);
+		col7.setHgrow(Priority.ALWAYS);
 		ColumnConstraints col8 = new ColumnConstraints();
 		col8.setHgrow(Priority.ALWAYS);
 		
 		ColumnConstraints col9 = new ColumnConstraints();
 		col9.setHalignment(HPos.RIGHT);
 		col9.setMinWidth(minSirina);
+		col9.setHgrow(Priority.ALWAYS);
 		ColumnConstraints col10 = new ColumnConstraints();
 		col10.setHgrow(Priority.ALWAYS);
 		
@@ -122,8 +128,8 @@ public class JArtikalPregled extends OsnovniPregled{
 		grid.addColumn(6, lblProizvodnja); grid.addColumn(7, txtProizvodnja); grid.addColumn(8, lblRokTrajanja); grid.addColumn(9, dpRokTrajanja);
 		
 		
-		grid.addColumn(0, lblEn); grid.addColumn(1, txtEn); grid.addColumn(2, lblDe); grid.addColumn(3, txtDe);//grid.addColumn(4, lblOpis); grid.addColumn(5, txtOpis);
-		//grid.addColumn(6, lblOpisEn); grid.addColumn(7, txtOpisEn); grid.addColumn(8, lblOpisDe); grid.addColumn(9, txtOpisDe);
+		grid.addColumn(0, lblEn); grid.addColumn(1, txtEn); grid.addColumn(2, lblDe); grid.addColumn(3, txtDe); grid.addColumn(4, lblOpis); grid.addColumn(5, txtOpis);
+		grid.addColumn(6, lblOpisEn); grid.addColumn(7, txtOpisEn); grid.addColumn(8, lblOpisDe); grid.addColumn(9, txtOpisDe);
 		
 		getChildren().add(grid);
 		HBox.setHgrow(grid, Priority.ALWAYS);
@@ -224,12 +230,14 @@ public class JArtikalPregled extends OsnovniPregled{
 	}
 	
 	public void setTarife(List<APoreskaTarifa> tarife) {
-		cmbPoreskaTarifa.getItems().clear();
+		if(cmbPoreskaTarifa.getItems() != null)
+			cmbPoreskaTarifa.getItems().clear();
 		cmbPoreskaTarifa.getItems().addAll(FXCollections.observableArrayList(tarife));
 	}
 	
 	public void setGrupe(List<IGrupaArtikala> grupe) {
-		cmbGrupa.getItems().clear();
+		if(cmbGrupa.getItems() != null)
+			cmbGrupa.getItems().clear();
 		cmbGrupa.getItems().addAll(FXCollections.observableArrayList(grupe));
 	}
 }

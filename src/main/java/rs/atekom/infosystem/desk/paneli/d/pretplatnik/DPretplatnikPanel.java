@@ -11,7 +11,7 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikOdgovor;
-import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaciOdgovor;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaci;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
 import rs.atekom.infosystem.desk.a.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.DPretplatnikRestKlijent;
@@ -19,7 +19,7 @@ import rs.atekom.infosystem.desk.app.rest.DPretplatnikRestKlijent;
 public class DPretplatnikPanel extends OsnovniPanel{
 
 	private DPretplatnikTabela pretplatnici;
-	private TableViewSelectionModel<DPretplatnikPodaciOdgovor> izborPretplatnika;
+	private TableViewSelectionModel<DPretplatnikPodaci> izborPretplatnika;
 	private DPretplatnikRestKlijent restPretplatnik;
 	private DPretplatnikPregled pregled;
 	
@@ -71,9 +71,9 @@ public class DPretplatnikPanel extends OsnovniPanel{
 		pretplatnici = new DPretplatnikTabela(vratiOsnovniLayout().vratiResource());
 		izborPretplatnika = pretplatnici.getSelectionModel();
 		izborPretplatnika.setSelectionMode(SelectionMode.SINGLE);
-		izborPretplatnika.selectedItemProperty().addListener(new ChangeListener<DPretplatnikPodaciOdgovor>() {
+		izborPretplatnika.selectedItemProperty().addListener(new ChangeListener<DPretplatnikPodaci>() {
 			@Override
-			public void changed(ObservableValue<? extends DPretplatnikPodaciOdgovor> observable, DPretplatnikPodaciOdgovor oldValue, DPretplatnikPodaciOdgovor newValue) {
+			public void changed(ObservableValue<? extends DPretplatnikPodaci> observable, DPretplatnikPodaci oldValue, DPretplatnikPodaci newValue) {
 				if(newValue != null) {
 					pregled.postaviObjekat(newValue);
 					}else {
@@ -103,11 +103,11 @@ public class DPretplatnikPanel extends OsnovniPanel{
 				}
 		}
 	
-	private void osveziTabelu(List<DPretplatnikPodaciOdgovor> listaPretplatnika) {
+	private void osveziTabelu(List<DPretplatnikPodaci> listaPretplatnika) {
 		if(pretplatnici.getItems() != null) {
 			pretplatnici.getItems().clear();
 			}
-		ObservableList<DPretplatnikPodaciOdgovor> lista = null;
+		ObservableList<DPretplatnikPodaci> lista = null;
 		if(listaPretplatnika != null) {
 			lista = FXCollections.observableArrayList(listaPretplatnika);
 			}

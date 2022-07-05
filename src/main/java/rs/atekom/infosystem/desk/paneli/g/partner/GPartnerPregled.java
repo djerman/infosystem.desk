@@ -199,7 +199,7 @@ public class GPartnerPregled extends OsnovniPregled{
 			
 			if(partnerPodaci.getSediste() != null) {
 				sediste = partnerPodaci.getSediste();
-				txtAdresa.setText(sediste.getAdresa());
+				txtAdresa.setText(sediste.getUlicaBroj());
 				cbMesto.setValue(sediste.getMesto());
 				}else {
 					sediste = null;
@@ -296,7 +296,7 @@ public class GPartnerPregled extends OsnovniPregled{
 				sediste.setPartner(partner);
 				}
 			sediste.setMesto(cbMesto.getValue());
-			sediste.setAdresa(txtAdresa.getText());
+			sediste.setUlicaBroj(txtAdresa.getText());
 
 			if(preduzece == null) {
 				preduzece = new FPreduzece();

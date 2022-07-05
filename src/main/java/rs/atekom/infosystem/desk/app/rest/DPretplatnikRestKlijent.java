@@ -12,7 +12,7 @@ import rs.atekom.infosystem.baza.a.agencija.AAgencija;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPodaciZaPretplatnikaOdgovor;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikOdgovor;
-import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaciOdgovor;
+import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaci;
 import rs.atekom.infosystem.desk.PrijavaController;
 
 public class DPretplatnikRestKlijent extends OpstiRest{
@@ -59,7 +59,7 @@ public class DPretplatnikRestKlijent extends OpstiRest{
 				}
 		}
 	
-	public ResponseEntity<DPretplatnikOdgovor> snimi(DPretplatnikPodaciOdgovor pretplatnik){
+	public ResponseEntity<DPretplatnikOdgovor> snimi(DPretplatnikPodaci pretplatnik){
 		try {
 			String putanja = PrijavaController.adresa + "/pretplatnik/snimi";
 			HttpEntity<Object> zahtev = new HttpEntity<Object>(pretplatnik, ServisRest.getHeaders());

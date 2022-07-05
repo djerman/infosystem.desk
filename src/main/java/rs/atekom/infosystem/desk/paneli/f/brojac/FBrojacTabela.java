@@ -1,11 +1,16 @@
 package rs.atekom.infosystem.desk.paneli.f.brojac;
 
 import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.f.brojac.FBrojac;
@@ -13,7 +18,8 @@ import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
 
 public class FBrojacTabela extends OpstaTabela<FBrojac>{
 
-	private TableColumn<FBrojac, String> tip, naziv, sr, en, de, opis, opissr, opisen, opisde;
+	private TableColumn<FBrojac, String> tip, prefiks, brojPolja, stanje, sufiks;
+	private TableColumn<FBrojac, Boolean> reset;
 	
 	public FBrojacTabela(ResourceBundle resource) {
 		super(resource);
@@ -46,24 +52,32 @@ public class FBrojacTabela extends OpstaTabela<FBrojac>{
 				return tip;
 			}
 		});
-		naziv = new TableColumn<FBrojac, String>(resource.getString("lbl.naziv"));
-		naziv.setCellValueFactory(new PropertyValueFactory<>("naziv"));
-		sr = new TableColumn<FBrojac, String>(resource.getString("lbl.sr"));
-		sr.setCellValueFactory(new PropertyValueFactory<>("sr"));
-		en = new TableColumn<FBrojac, String>(resource.getString("lbl.en"));
-		en.setCellValueFactory(new PropertyValueFactory<>("en"));
-		de = new TableColumn<FBrojac, String>(resource.getString("lbl.de"));
-		de.setCellValueFactory(new PropertyValueFactory<>("de"));
-		opis = new TableColumn<FBrojac, String>(resource.getString("lbl.opis"));
-		opis.setCellValueFactory(new PropertyValueFactory<>("opis"));
-		opissr = new TableColumn<FBrojac, String>(resource.getString("lbl.opissr"));
-		opissr.setCellValueFactory(new PropertyValueFactory<>("opissr"));
-		opisen = new TableColumn<FBrojac, String>(resource.getString("lbl.opisen"));
-		en.setCellValueFactory(new PropertyValueFactory<>("en"));
-		opisde = new TableColumn<FBrojac, String>(resource.getString("lbl.opisde"));
-		opisde.setCellValueFactory(new PropertyValueFactory<>("opisde"));
+		brojPolja = new TableColumn<FBrojac, String>(resource.getString("lbl.brojpolja"));
+		brojPolja.setCellValueFactory(new PropertyValueFactory<>("brojPolja"));
+		prefiks = new TableColumn<FBrojac, String>(resource.getString("lbl.prefiks"));
+		prefiks.setCellValueFactory(new PropertyValueFactory<>("prefiks"));
+		stanje = new TableColumn<FBrojac, String>(resource.getString("lbl.sledecibroj"));
+		stanje.setCellValueFactory(new PropertyValueFactory<>("stanje"));
+		sufiks = new TableColumn<FBrojac, String>(resource.getString("lbl.sufiks"));
+		sufiks.setCellValueFactory(new PropertyValueFactory<>("sufiks"));
+		reset = new TableColumn<FBrojac, Boolean>(resource.getString("lbl.reset"));
+		reset.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FBrojac,Boolean>, ObservableValue<Boolean>>() {
+			@Override
+			public ObservableValue<Boolean> call(CellDataFeatures<FBrojac, Boolean> param) {
+				FBrojac brojac = param.getValue();
+				return new SimpleBooleanProperty(brojac == null ? false : brojac.getReset());
+			}
+		});
+		reset.setCellFactory(new Callback<TableColumn<FBrojac,Boolean>, TableCell<FBrojac,Boolean>>() {
+			@Override
+			public TableCell<FBrojac, Boolean> call(TableColumn<FBrojac, Boolean> param) {
+				CheckBoxTableCell<FBrojac, Boolean> cell = new CheckBoxTableCell<FBrojac, Boolean>();
+				cell.setAlignment(Pos.CENTER);
+				return cell;
+			}
+		});
 		
-		getColumns().addAll(tip, naziv, sr, en, de, opis, opissr, opisen, opisde);
+		getColumns().addAll(tip, brojPolja, prefiks, stanje, sufiks, reset);
 		setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 

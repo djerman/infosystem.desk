@@ -42,7 +42,7 @@ public class PodaciIzbornik extends OpstiIzbornik{
 		MenuItem artikli = new MenuItem(layout.vratiPrevod("izbornik.podaci.artikli"), fontAwesome.create(FontAwesome.Glyph.CART_PLUS).color(Color.DARKVIOLET));
 		artikli.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
 		artikli.setOnAction(e -> {
-			osnovniLayout.dodajTab(artikli.getText(), new JArtikalPanel(osnovniLayout));
+			osnovniLayout.dodajTab(artikli.getText().replace("_", ""), new JArtikalPanel(osnovniLayout));
 			});
 		
 		MenuItem kupci = new MenuItem(layout.vratiPrevod("izbornik.podaci.kupci"),  new Glyph("FontAwesome", FontAwesome.Glyph.MONEY).color(Color.GREEN));
