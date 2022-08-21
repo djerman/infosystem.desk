@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -48,11 +49,10 @@ public class OsnovniLayout extends VBox{
 		
 		info = new HBox(2.0);
 		info.setAlignment(Pos.CENTER);
-		
 		kontaktLabela =  new Label(kontakt.getIme().toUpperCase() + " " + kontakt.getPrezime().toUpperCase() + (kontakt.getPretplatnik() == null ? "" :
 			"/" + kontakt.getPretplatnik().getNaziv().toUpperCase()) + (kontakt.getAgencija() == null ? "" :  "/" + kontakt.getAgencija().getNaziv()));
 		kontaktLabela.setTextFill(Color.RED);////korisnik.setTextFill(Color.web("#0076a3"));
-		
+		HBox.setMargin(kontaktLabela, new Insets(0, 10, 0, 0));
 		region = new Region();
 		
 		HBox.setHgrow(region, Priority.ALWAYS);

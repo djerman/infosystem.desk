@@ -14,8 +14,8 @@ import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
 public class FGrupaPartneraPregled extends OsnovniPregled{
 
 	private LabelaObaveznaBold lblNaziv;
-	private LabelaBold lblOpis;
-	private TextField txtNaziv, txtOpis;
+	private LabelaBold lblSifra, lblOpis;
+	private TextField txtSifra, txtNaziv, txtOpis;
 	private FGrupaPartnera grupa;
 	private FGrupaPartneraPanel panel;
 	
@@ -27,9 +27,11 @@ public class FGrupaPartneraPregled extends OsnovniPregled{
 		}
 	
 	private void napraviElemente(ResourceBundle resource) {
+		lblSifra = new LabelaBold(resource.getString("lbl.sifra"));
 		lblNaziv = new LabelaObaveznaBold(resource.getString("lbl.naziv"));
 		lblOpis = new LabelaBold(resource.getString("lbl.opis"));
 		
+		txtSifra = new TextField();
 		txtNaziv = new TextField();
 		txtOpis = new TextField();
 		}
@@ -48,9 +50,16 @@ public class FGrupaPartneraPregled extends OsnovniPregled{
 		ColumnConstraints col4 = new ColumnConstraints();
 		col4.setHgrow(Priority.ALWAYS);
 		
-		grid.getColumnConstraints().addAll(col1, col2, col3, col4);
+		ColumnConstraints col5 = new ColumnConstraints();
+		col5.setHalignment(HPos.RIGHT);
+		col5.setMinWidth(minSirina);
+		ColumnConstraints col6 = new ColumnConstraints();
+		col6.setHgrow(Priority.ALWAYS);
 		
-		grid.addColumn(0, lblNaziv); grid.addColumn(1, txtNaziv); grid.addColumn(2, lblOpis); grid.addColumn(3, txtOpis);
+		grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6);
+		
+		grid.addColumn(0, lblSifra); grid.addColumn(1, txtSifra); grid.addColumn(2, lblNaziv); grid.addColumn(3, txtNaziv); 
+		grid.addColumn(4, lblOpis); grid.addColumn(5, txtOpis);
 		getChildren().add(grid);
 		HBox.setHgrow(grid, Priority.ALWAYS);
 		}
@@ -58,6 +67,7 @@ public class FGrupaPartneraPregled extends OsnovniPregled{
 	public void postaviObjekat(FGrupaPartnera grupa) {
 		if(grupa != null) {
 			this.grupa = grupa;
+			txtSifra.setText(grupa.getSifra());
 			txtNaziv.setText(grupa.getNaziv());
 			txtOpis.setText(grupa.getOpis());
 			}else {
@@ -67,6 +77,7 @@ public class FGrupaPartneraPregled extends OsnovniPregled{
 	
 	public void postaviNovo() {
 		this.grupa = null;
+		txtSifra.setText("");
 		txtNaziv.setText("");
 		txtOpis.setText("");
 		}
@@ -75,8 +86,9 @@ public class FGrupaPartneraPregled extends OsnovniPregled{
 		if(this.grupa == null) {
 			grupa = new FGrupaPartnera();
 			grupa.setPretplatnik(panel.vratiPretplatnika());
-			grupa.setId(0L);
+			//grupa.setId(0L);
 			}
+		grupa.setSifra(txtSifra.getText());
 		grupa.setNaziv(txtNaziv.getText().trim());
 		grupa.setOpis(txtOpis.getText() == null ? "" : txtOpis.getText().trim());
 		return grupa;

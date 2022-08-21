@@ -26,8 +26,8 @@ import rs.atekom.infosystem.desk.paneli.c.mesto.CMestoComboBox;
 
 public class GPartnerPregled extends OsnovniPregled{
 
-	private LabelaObaveznaBold lblSifra, lblNaziv, lblAdresa, lblPib, lblMb;
-	private LabelaBold lblGrupaPartnera, lblPunNaziv, lblPdv, lblTel, lblNapomena, lblEmail, lblOdgovornoLice,
+	private LabelaObaveznaBold lblNaziv, lblAdresa, lblPib, lblMb;
+	private LabelaBold lblSifra, lblGrupaPartnera, lblPunNaziv, lblPdv, lblTel, lblNapomena, lblEmail, lblOdgovornoLice,
 	lblKupacKonto, lblDobavljacKonto, lblKupac, lblDobavljac, lblBanka, lblUstanova, lblKupacRabat, lblDobavljacRabat, lblMesto;
 	private TextField txtSifra, txtNaziv, txtPunNaziv, txtPib, txtMb, txtTel, txtNapomena, txtEmail, txtOdgovornoLice, txtMesto, txtAdresa;
 	private TekstCelobrojni txtKupacKonto, txtDobavljacKonto;
@@ -73,7 +73,7 @@ public class GPartnerPregled extends OsnovniPregled{
         
         lblGrupaPartnera = new LabelaBold(resource.getString("lbl.grupapartnera"));
         //lblGrupaPartnera.setStyle("-fx-underline: true;");
-        lblSifra = new LabelaObaveznaBold(resource.getString("lbl.sifra"));
+        lblSifra = new LabelaBold(resource.getString("lbl.sifra"));
         lblNaziv = new LabelaObaveznaBold(resource.getString("lbl.naziv"));
         lblPunNaziv = new LabelaBold(resource.getString("lbl.punnaziv"));
         lblPdv = new LabelaBold(resource.getString("lbl.updv"));
@@ -330,9 +330,6 @@ public class GPartnerPregled extends OsnovniPregled{
 	
 	public Boolean proveraUnosa() {
 		Boolean unos = true;
-		if(txtSifra.getText() == null || txtSifra.getText().equals("")) {
-			unos = false;
-			}
 		if(txtNaziv.getText() == null || txtNaziv.getText().equals("")) {
 			unos = false;
 			}
@@ -345,6 +342,15 @@ public class GPartnerPregled extends OsnovniPregled{
 		if(txtMb.getText() == null || txtMb.getText().equals("")) {
 			unos = false;
 			}
+		try {
+			Double dobRabat = Double.valueOf(txtDobavljacRabat.getText());
+			Double kupRabat = Double.valueOf(txtKupacRabat.getText());
+			if(dobRabat > 100 || kupRabat > 100) {
+				unos = false;
+			}
+		}catch (Exception e) {
+			unos = false;
+		}
 		return unos;
 		}
 	

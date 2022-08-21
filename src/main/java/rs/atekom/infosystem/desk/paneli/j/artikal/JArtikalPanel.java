@@ -98,6 +98,7 @@ public class JArtikalPanel extends OsnovniPanel{
 				pregled.setJedinice(odgovor.getBody().getJedinice());
 				pregled.setTarife(odgovor.getBody().getTarife());
 				pregled.setGrupe(odgovor.getBody().getGrupe());
+				pregled.setKonta(odgovor.getBody().getKonta());
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

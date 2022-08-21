@@ -94,6 +94,9 @@ public class IGrupaArtikalaPanel extends OsnovniPanel{
 		try {
 			odgovor = restGrupa.lista(vratiPretplatnika());
 			statusOdgovora(odgovor);
+			if(odgovor != null && odgovor.getBody() != null) {
+				pregled.setKonta(odgovor.getBody().getKonta());
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 			vratiNemaOdgovoraServera();
