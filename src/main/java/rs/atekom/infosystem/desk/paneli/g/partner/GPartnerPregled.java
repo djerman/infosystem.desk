@@ -1,8 +1,11 @@
 package rs.atekom.infosystem.desk.paneli.g.partner;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.ResourceBundle;
 import org.controlsfx.control.SearchableComboBox;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.scene.control.CheckBox;
@@ -12,25 +15,28 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.c.CMesto;
+import rs.atekom.infosystem.baza.e.konto.EKonto;
 import rs.atekom.infosystem.baza.f.grupapartnera.FGrupaPartnera;
 import rs.atekom.infosystem.baza.f.preduzece.FPreduzece;
 import rs.atekom.infosystem.baza.g.GPartner;
 import rs.atekom.infosystem.baza.g.GPartnerOdgovorPodaci;
 import rs.atekom.infosystem.baza.i.IAdresa;
+import rs.atekom.infosystem.desk.a.ComboJezici;
+import rs.atekom.infosystem.desk.a.DesniColumnConstraint;
+import rs.atekom.infosystem.desk.a.Jezik;
 import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
-import rs.atekom.infosystem.desk.app.pomocne.TekstCelobrojni;
 import rs.atekom.infosystem.desk.app.pomocne.TekstDecimalni;
 import rs.atekom.infosystem.desk.paneli.c.mesto.CMestoComboBox;
+import rs.atekom.infosystem.desk.paneli.e.konto.EKontoComboBox;
 
 public class GPartnerPregled extends OsnovniPregled{
 
 	private LabelaObaveznaBold lblNaziv, lblAdresa, lblPib, lblMb;
 	private LabelaBold lblSifra, lblGrupaPartnera, lblPunNaziv, lblPdv, lblTel, lblNapomena, lblEmail, lblOdgovornoLice,
-	lblKupacKonto, lblDobavljacKonto, lblKupac, lblDobavljac, lblBanka, lblUstanova, lblKupacRabat, lblDobavljacRabat, lblMesto;
+	lblKupacKonto, lblDobavljacKonto, lblKupac, lblDobavljac, lblBanka, lblUstanova, lblKupacRabat, lblDobavljacRabat, lblMesto, lblJezik;
 	private TextField txtSifra, txtNaziv, txtPunNaziv, txtPib, txtMb, txtTel, txtNapomena, txtEmail, txtOdgovornoLice, txtMesto, txtAdresa;
-	private TekstCelobrojni txtKupacKonto, txtDobavljacKonto;
 	private TekstDecimalni txtKupacRabat, txtDobavljacRabat;
 	private CheckBox cbPDV, cbKupac, cbDobavljac, cbBanka, cbUstanova;
 	private CMestoComboBox cbMesto;
@@ -42,6 +48,8 @@ public class GPartnerPregled extends OsnovniPregled{
 	private FPreduzece preduzece;
 	private IAdresa sediste;
 	private GPartnerOdgovorPodaci partnerPodaci;
+	private EKontoComboBox cmbKontoKupac, cmbKontoDobavljac;
+	private ComboJezici cmbJezik;
 	
 	public GPartnerPregled(GPartnerPanel panel, ResourceBundle resource, Boolean kupac) {
 		setSpacing(10);
@@ -93,10 +101,24 @@ public class GPartnerPregled extends OsnovniPregled{
     	lblDobavljacRabat = new LabelaBold(resource.getString("lbl.dobavljacrabat"));
     	lblMesto = new LabelaBold(resource.getString("lbl.mesto"));
     	lblAdresa = new LabelaObaveznaBold(resource.getString("lbl.adresa"));
+    	lblJezik = new LabelaBold(resource.getString("lbl.jezik"));
     	
     	//txtGrupaPartnera = new TextField();
     	cbGrupe = new SearchableComboBox<FGrupaPartnera>();
     	//txtGrupaPartnera.setDisable(true);
+    	cbGrupe.valueProperty().addListener(new ChangeListener<FGrupaPartnera>() {
+			@Override
+			public void changed(ObservableValue<? extends FGrupaPartnera> observable, FGrupaPartnera oldValue,
+					FGrupaPartnera newValue) {
+				if(newValue != null) {
+					cmbKontoKupac.setValue(newValue.getPrihod());
+					cmbKontoDobavljac.setValue(newValue.getRashod());
+				}else {
+					cmbKontoKupac.setValue(null);
+					cmbKontoDobavljac.setValue(null);
+				}
+			}
+		});
     	txtSifra = new TextField();
     	txtNaziv = new TextField();
     	txtPunNaziv = new TextField();
@@ -109,8 +131,8 @@ public class GPartnerPregled extends OsnovniPregled{
     	txtMesto = new TextField();
     	txtMesto.setDisable(true);
     	txtAdresa = new TextField();
-    	txtKupacKonto = new TekstCelobrojni();
-    	txtDobavljacKonto = new TekstCelobrojni();
+		cmbKontoKupac = new EKontoComboBox(resource);
+		cmbKontoDobavljac = new EKontoComboBox(resource);
     	txtKupacRabat = new TekstDecimalni();
     	txtKupacRabat.setText("0,00");
     	txtDobavljacRabat = new TekstDecimalni();
@@ -130,33 +152,18 @@ public class GPartnerPregled extends OsnovniPregled{
     	cbBanka = new CheckBox();
     	cbUstanova = new CheckBox();
     	cbMesto = new CMestoComboBox(resource);
+    	cmbJezik = new ComboJezici(resource);
+    	cmbJezik.setMaxWidth(Double.MAX_VALUE);
+    	
 		}
 	
 	private void popakujElemente() {
-		Double minSirina = 100.0;
-		ColumnConstraints col1 = new ColumnConstraints();
-		col1.setHalignment(HPos.RIGHT);
-		col1.setMinWidth(minSirina);
+		ColumnConstraints col1 = new DesniColumnConstraint();
 		ColumnConstraints col2 = new ColumnConstraints();
-		col2.setHgrow(Priority.ALWAYS);
+
 		prvi.getColumnConstraints().addAll(col1, col2);
-		
-		ColumnConstraints col21 = new ColumnConstraints();
-		col21.setHalignment(HPos.RIGHT);
-		col21.setMinWidth(minSirina);
-		ColumnConstraints col22 = new ColumnConstraints();
-		col22.setHgrow(Priority.ALWAYS);
-		ColumnConstraints col23 = new ColumnConstraints();
-		col23.setHalignment(HPos.RIGHT);
-		col23.setMinWidth(minSirina);
-		ColumnConstraints col24 = new ColumnConstraints();
-		col24.setHgrow(Priority.ALWAYS);
-		ColumnConstraints col25 = new ColumnConstraints();
-		col25.setHalignment(HPos.RIGHT);
-		col25.setMinWidth(minSirina);
-		ColumnConstraints col26 = new ColumnConstraints();
-		col26.setHgrow(Priority.ALWAYS);
-		drugi.getColumnConstraints().addAll(col21, col22, col23, col24, col25, col26);
+		prvi.getColumnConstraints().get(0).setPercentWidth(25);
+		prvi.getColumnConstraints().get(1).setPercentWidth(75);
 		
 		prvi.addColumn(0, lblGrupaPartnera); prvi.addColumn(1, cbGrupe);
 		prvi.addColumn(0, lblSifra); prvi.addColumn(1, txtSifra);
@@ -166,15 +173,31 @@ public class GPartnerPregled extends OsnovniPregled{
 		prvi.addColumn(0, lblAdresa); prvi.addColumn(1, txtAdresa);
 		prvi.addColumn(0, lblNapomena); prvi.addColumn(1, txtNapomena);
 		
+		ColumnConstraints col21 = new DesniColumnConstraint();
+		ColumnConstraints col22 = new ColumnConstraints();
+		ColumnConstraints col23 = new DesniColumnConstraint();;
+		ColumnConstraints col24 = new ColumnConstraints();
+		ColumnConstraints col25 = new DesniColumnConstraint();
+		ColumnConstraints col26 = new ColumnConstraints();
+
+		drugi.getColumnConstraints().addAll(col21, col22, col23, col24, col25, col26);
+		drugi.getColumnConstraints().get(0).setPercentWidth(10);
+		drugi.getColumnConstraints().get(1).setPercentWidth(2);
+		drugi.getColumnConstraints().get(2).setPercentWidth(20);
+		drugi.getColumnConstraints().get(3).setPercentWidth(30);
+		drugi.getColumnConstraints().get(4).setPercentWidth(20);
+		drugi.getColumnConstraints().get(5).setPercentWidth(15);
+		
 		drugi.addColumn(0, lblPdv); drugi.addColumn(1, cbPDV); drugi.addColumn(2, lblPib); drugi.addColumn(3, txtPib); 
 		drugi.addColumn(4, lblMb); drugi.addColumn(5, txtMb);
-		drugi.addColumn(0, lblKupac); drugi.addColumn(1, cbKupac); drugi.addColumn(2, lblKupacKonto); drugi.addColumn(3, txtKupacKonto); 
+		drugi.addColumn(0, lblKupac); drugi.addColumn(1, cbKupac); drugi.addColumn(2, lblKupacKonto); drugi.addColumn(3, cmbKontoKupac); 
 		drugi.addColumn(4, lblKupacRabat); drugi.addColumn(5, txtKupacRabat);
-		drugi.addColumn(0, lblDobavljac); drugi.addColumn(1, cbDobavljac); drugi.addColumn(2, lblDobavljacKonto); drugi.addColumn(3, txtDobavljacKonto); 
+		drugi.addColumn(0, lblDobavljac); drugi.addColumn(1, cbDobavljac); drugi.addColumn(2, lblDobavljacKonto); drugi.addColumn(3, cmbKontoDobavljac); 
 		drugi.addColumn(4, lblDobavljacRabat); drugi.addColumn(5, txtDobavljacRabat);
-		drugi.addColumn(0, lblTel); drugi.addColumn(1, txtTel); drugi.addColumn(2, lblEmail); drugi.addColumn(3, txtEmail); 
+		drugi.addColumn(0, lblBanka); drugi.addColumn(1, cbBanka); drugi.addColumn(2, lblEmail); drugi.addColumn(3, txtEmail); 
 		drugi.addColumn(4, lblOdgovornoLice); drugi.addColumn(5, txtOdgovornoLice);
-		drugi.addColumn(2, lblBanka); drugi.addColumn(3, cbBanka); drugi.addColumn(4, lblUstanova); drugi.addColumn(5, cbUstanova);
+		drugi.addColumn(0, lblUstanova); drugi.addColumn(1, cbUstanova); drugi.addColumn(2, lblTel); drugi.addColumn(3, txtTel); 
+		drugi.addColumn(4, lblJezik); drugi.addColumn(5, cmbJezik);
 		
 		noseci.addColumn(0, prvi); noseci.addColumn(1, drugi);
 		getChildren().add(noseci);
@@ -190,12 +213,12 @@ public class GPartnerPregled extends OsnovniPregled{
 			txtSifra.setText(partner.getSifra());
 			
 			cbKupac.setSelected(partner.getKupac());
-			txtKupacKonto.setText(String.valueOf(partner == null ? "" : partner.getKupacKonto()));
-			txtKupacRabat.setText(String.valueOf(partner == null ? "" : partner.getKupacRabat()));
+			cmbKontoKupac.setValue(partner.getKupacKonto());
+			txtKupacRabat.setText(partner == null || partner.getKupacRabat() == null ? "0,00" : txtKupacRabat.vratiFormatiranBroj(partner.getKupacRabat()));
 			
 			cbDobavljac.setSelected(partner.getDobavljac());
-			txtDobavljacKonto.setText(String.valueOf(partner == null ? "" : partner.getDobavljacKonto()));
-			txtDobavljacRabat.setText(String.valueOf(partner == null ? "" : partner.getDobavljacRabat()));
+			cmbKontoDobavljac.setValue(partner.getDobavljacKonto());
+			txtDobavljacRabat.setText(partner == null || partner.getDobavljacRabat() == null ? "0,00" : txtDobavljacRabat.vratiFormatiranBroj(partner.getDobavljacRabat()));
 			
 			if(partnerPodaci.getSediste() != null) {
 				sediste = partnerPodaci.getSediste();
@@ -206,6 +229,19 @@ public class GPartnerPregled extends OsnovniPregled{
 					txtAdresa.setText("");
 					cbMesto.setValue(null);
 					}
+			String jzk = partner.getJezik();
+			if(jzk == null) {
+				cmbJezik.setValue(null);
+			}else {
+				for(int i= 0; i < cmbJezik.getItems().size(); i++) {
+					Jezik jezik = cmbJezik.getItems().get(i);
+					if(jezik.getOznaka().equals(partner.getJezik())) {
+						cmbJezik.setValue(jezik);
+						break;
+					}
+				}
+			}
+			
 			if(preduzece != null) {
 				txtNaziv.setText(preduzece.getNaziv());
 				txtPunNaziv.setText(preduzece.getPunNaziv());
@@ -240,12 +276,13 @@ public class GPartnerPregled extends OsnovniPregled{
     		cbDobavljac.setSelected(true);
     		cbKupac.setSelected(false);
     		}
-		txtKupacKonto.setText("");
+		cmbKontoKupac.setValue(null);
 		txtKupacRabat.setText("0,00");
-		txtDobavljacKonto.setText("");
+		cmbKontoDobavljac.setValue(null);
 		txtDobavljacRabat.setText("0,00");
 		cbMesto.setValue(null);
 		txtAdresa.setText("");
+		cmbJezik.setValue(null);
 		preduzece = null;
 		postaviNovoPreduzece();
 		}
@@ -275,9 +312,9 @@ public class GPartnerPregled extends OsnovniPregled{
 				}
 			partner.setGrupaPartnera(cbGrupe.getValue());
 			partner.setKupac(cbKupac.isSelected());
-			partner.setKupacKonto(null);
+			partner.setKupacKonto(cmbKontoKupac.getValue());
 			partner.setDobavljac(cbDobavljac.isSelected());
-			partner.setDobavljacKonto(null);
+			partner.setDobavljacKonto(cmbKontoDobavljac.getValue());
 			try {
 				partner.setKupacRabat(txtKupacRabat.vratiDecimalniBroj(txtKupacRabat.getText()));//new BigDecimal(txtKupacRabat.getText() == null ? "0.00" : txtKupacRabat.getText().trim())
 				}catch (Exception e) {
@@ -287,8 +324,9 @@ public class GPartnerPregled extends OsnovniPregled{
 			try {
 				partner.setDobavljacRabat(txtDobavljacRabat.vratiDecimalniBroj(txtDobavljacRabat.getText()));
 				}catch (Exception e) {
-					partner.setDobavljacRabat(txtDobavljacRabat.vratiDecimalniBroj("0,00"));//new BigDecimal(txtDobavljacRabat.getText() == null ? "0.00" : txtDobavljacRabat.getText().trim())
+					partner.setDobavljacRabat(txtDobavljacRabat.vratiDecimalniBroj("0,00"));
 					}
+			partner.setJezik(cmbJezik.getValue() == null ? null : cmbJezik.getValue().getOznaka());
 			
 			if(sediste == null) {
 				sediste = new IAdresa();
@@ -343,9 +381,9 @@ public class GPartnerPregled extends OsnovniPregled{
 			unos = false;
 			}
 		try {
-			Double dobRabat = Double.valueOf(txtDobavljacRabat.getText());
-			Double kupRabat = Double.valueOf(txtKupacRabat.getText());
-			if(dobRabat > 100 || kupRabat > 100) {
+			BigDecimal dobRabat = txtDobavljacRabat.vratiDecimalniBroj(txtDobavljacRabat.getText());
+			BigDecimal kupRabat = txtKupacRabat.vratiDecimalniBroj(txtKupacRabat.getText());
+			if(dobRabat.intValue() > 100 || kupRabat.intValue() > 100) {
 				unos = false;
 			}
 		}catch (Exception e) {
@@ -371,5 +409,19 @@ public class GPartnerPregled extends OsnovniPregled{
 				cbMesto.getItems().addAll(FXCollections.observableArrayList(lista));
 				}
 		}
+	
+	public void popuniKonta(List<EKonto> konta) {
+		if(cmbKontoKupac.getItems() != null)
+			cmbKontoKupac.getItems().clear();
+		
+		if(cmbKontoKupac.getItems() != null) {
+			cmbKontoDobavljac.getItems().clear();
+		}
+		
+		if(konta != null) {
+			cmbKontoKupac.getItems().addAll(FXCollections.observableArrayList(konta));
+			cmbKontoDobavljac.getItems().addAll(FXCollections.observableArrayList(konta));
+		}
+	}
 	
 	}

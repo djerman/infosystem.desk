@@ -63,7 +63,7 @@ public class TekstDecimalni extends TextField{
 			if(oldValue) {
 				try {
 					if(cifre) {
-						setText(String.format("%,.4f", vratiDecimalniBroj(getText())));
+						setText(String.format("%,.2f", vratiDecimalniBroj(getText())));
 						}else {
 							setText(String.format("%,.2f", vratiDecimalniBroj(getText())));
 							}

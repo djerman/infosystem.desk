@@ -36,7 +36,7 @@ public class JArtikalPanel extends OsnovniPanel{
 		
 		postaviInfo();
 		postaviPregled();
-		postaviKomande();
+		postaviKomandeSaPretragom();
 		
 		izbrisi.setOnAction(e -> {
 			if(izborArtikla.getSelectedItem() != null) {
@@ -58,6 +58,10 @@ public class JArtikalPanel extends OsnovniPanel{
 		novo.setOnAction(e -> {
 			pregled.postaviNovo();
 			izborArtikla.clearSelection();
+		});
+		
+		vratiPretragu().setOnAction(e -> {
+			popuniTabeluPretragom(vratiPretragu().getText().trim());
 		});
 		
 		postaviTabelu();
@@ -104,6 +108,24 @@ public class JArtikalPanel extends OsnovniPanel{
 			e.printStackTrace();
 			vratiNemaOdgovoraServera();
 		}
+	}
+	
+	private void popuniTabeluPretragom(String pojam) {
+		ResponseEntity<JArtikalOdgovor> odgovor = null;
+		try {
+			odgovor = restArtikal.lista(vratiPretplatnika(), Optional.of(pojam), Optional.of(1), 1);
+			statusOdgovora(odgovor);
+			if(odgovor != null && odgovor.getBody() != null) {
+				pregled.setJedinice(odgovor.getBody().getJedinice());
+				pregled.setTarife(odgovor.getBody().getTarife());
+				pregled.setGrupe(odgovor.getBody().getGrupe());
+				pregled.setKonta(odgovor.getBody().getKonta());
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			vratiNemaOdgovoraServera();
+		}
+	
 	}
 	
 	public void osveziTabelu(List<JArtikal> listaArtikala) {

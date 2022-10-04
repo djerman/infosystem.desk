@@ -10,6 +10,7 @@ D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\izbornik\PreglediIzbornik.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\AtekomDeskApplication.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\izbornik\AdministracijaIzbornik.java
+D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\a\OsnovniGrid.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\pomocne\OpstaTabela.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\a\jedinica\AJedinicaMereComboBox.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\pomocne\TabelaSirinaKolona.java
@@ -17,6 +18,7 @@ D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\izbornik\RobaIzbornik.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\j\artikal\JArtikalPanel.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\a\agencija\AAgencijePanel.java
+D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\a\DesniColumnConstraint.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\e\grupaprava\EGrupaPravaTabela.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\j\artikal\JArtikalPregled.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\rest\APoreskaTarifaRestKlijent.java
@@ -89,6 +91,7 @@ D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\d\pretplatnik\DPretplatnikPanel.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\rest\ServisRest.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\izbornik\FinansijeIzbornik.java
+D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\a\Jezik.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\rest\FGrupaPartneraRestKlijent.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\a\poreskatarifa\APoreskaTarifaPanel.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\f\grupapartnera\FGrupaPartneraTabela.java
@@ -99,7 +102,9 @@ D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\PrijavaController.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\izbornik\OpsteIzbornik.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\app\izbornik\IzbornikBar.java
+D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\a\ComboJezici.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\e\grupaprava\EGrupaPravaPregled.java
+D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\e\konto\EKontoComboBox.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\da\kontogrupa\DAKontoGrupaPanel.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\j\artikal\JArtikalTabela.java
 D:\RADNI\workspace-repro\infosystem.desk\src\main\java\rs\atekom\infosystem\desk\paneli\a\poreskatarifa\APoreskaTarifaComboBox.java

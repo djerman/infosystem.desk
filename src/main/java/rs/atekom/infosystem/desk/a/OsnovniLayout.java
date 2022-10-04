@@ -70,6 +70,8 @@ public class OsnovniLayout extends VBox{
 		meniPane.getChildren().addAll(meni, info);
 
 		tabovi = new TabPane();
+		tabovi.getStyleClass().add("glavni-tab-pane");
+		
 		pocetniTab = new PocetniTab();
 		pocetniTab.setText(resource.getString("tab.pocetni"));
 		pocetniTab.setClosable(false);

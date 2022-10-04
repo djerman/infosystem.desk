@@ -56,6 +56,10 @@ public class GPartnerPanel extends OsnovniPanel{
 			izborPartnera.clearSelection();
 			});
 		
+		vratiPretragu().setOnAction(e -> {
+			popuniTabeluPretragom(vratiPretragu().getText().trim());
+		});
+		
 		postaviTabelu();
 		popuniTabelu();
 		vratiRoot().getChildren().addAll(pregled, komande, partneri);
@@ -108,6 +112,17 @@ public class GPartnerPanel extends OsnovniPanel{
 				}
 		}
 	
+	private void popuniTabeluPretragom(String pojam) {
+		ResponseEntity<GPartnerOdgovor> odgovor = null;
+		try {
+			odgovor = restPartner.lista(pojam, vratiPretplatnika(), kupac);
+			statusOdgovora(odgovor);
+			}catch (Exception e) {
+				e.printStackTrace();
+				vratiNemaOdgovoraServera();
+				}
+		}
+	
 	private void osveziTabelu(List<GPartnerOdgovorPodaci> listaPartnera) {
 		if(partneri.getItems() != null) {
 			partneri.getItems().clear();
@@ -150,9 +165,11 @@ public class GPartnerPanel extends OsnovniPanel{
 				//System.out.println("lista je " + odgovor.getBody().getListaSaPodacima().size() + " mesta " + odgovor.getBody().getMesta().size() + " grupe " + odgovor.getBody().getGrupe().size());
 				pregled.popuniGrupe(odgovor.getBody() == null ? null : odgovor.getBody().getGrupe());
 				pregled.popuniMesta(odgovor.getBody() == null ? null : odgovor.getBody().getMesta());
+				pregled.popuniKonta(odgovor.getBody() == null ? null : odgovor.getBody().getKonta());
 				}else {
 					pregled.popuniGrupe(null);
 					pregled.popuniMesta(null);
+					pregled.popuniKonta(null);
 					osveziTabelu(null);
 					}
 			}catch (Exception e) {

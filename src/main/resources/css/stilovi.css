@@ -182,8 +182,8 @@
     /*-fx-background-color: -fx-table-cell-border-color, #d9e4f1;*//* *//*,;#ffffff*/
     }
 
-/*padding bne radi ali size radi za veličinu zaglavlja
- * staviti 1px više nego visina teksta */
+/*padding ne radi ali size radi za velicinu zaglavlja
+ * staviti 1px vise nego visina teksta */
 .table-view .column-header{
 	/*-fx-padding: -1 0 -1 0;*/
 	-fx-size: 13;
@@ -268,8 +268,51 @@
     -fx-font-weight: bold;
     }
     
+.desni-tab .tab:selected{
+	/*-fx-background-color: #FFD700;*/
+	-fx-background-color: #ff8000;
+	/* 3c3c3c*/
+	}
+
+.desni-tab .tab{
+	-fx-background-color: #FFFFFF;
+	/* 3c3c3c*/
+	}
+
+.desni-tab .tab-label{
+	-fx-alignment: CENTER;
+    -fx-text-fill: #000000;
+    /*#828282 */
+   /* -fx-font-size: 12px;*/
+    -fx-font-weight: bold;
+    -fx-rotate: 270;
+    }
+
+.desni-tab .tab-pane {
+    -fx-tab-min-height: 50; 
+    -fx-tab-max-height: -fx-tab-min-height; 
+    -fx-tab-min-width: 100; 
+    -fx-tab-max-width: -fx-tab-min-width; 
+}
+
+/*
+.horizontal-tab-pane-desno *.tab-label{
+	-fx-rotate: 270;
+	-fx-tab-min-width:30;
+	-fx-tab-max-width:30;
+	-fx-tab-min-height:150;
+	-fx-tab-max-height:150;
+}
+
+.horizontal-tab-pane-levo .tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-rotate: 90;
+    -fx-padding: 0;
+}
+
+*/
+
 .tab-pane-graphic-desno .tab-label {
-    -fx-content-display: right
+    -fx-content-display: right;
     }
     
 .tab-pane-graphic-desno .button {

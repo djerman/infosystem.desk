@@ -1,27 +1,23 @@
 package rs.atekom.infosystem.desk.paneli.j.artikal;
 
-import java.math.BigDecimal;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import org.controlsfx.control.SearchableComboBox;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.geometry.HPos;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import rs.atekom.infosystem.baza.a.jedinicamere.AJedinicaMere;
 import rs.atekom.infosystem.baza.a.poreskatarifa.APoreskaTarifa;
 import rs.atekom.infosystem.baza.e.konto.EKonto;
 import rs.atekom.infosystem.baza.i.grupaartikala.IGrupaArtikala;
 import rs.atekom.infosystem.baza.j.JArtikal;
+import rs.atekom.infosystem.desk.a.DesniColumnConstraint;
 import rs.atekom.infosystem.desk.a.OsnovniPregled;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaObaveznaBold;
@@ -37,7 +33,8 @@ public class JArtikalPregled extends OsnovniPregled{
 	private LabelaObaveznaBold lblNaziv, lblJm, lblPoreskaTarifa;
 	private LabelaBold lblSifra, lblGrupa, lblBarcode, lblEn, lblDe, lblProizvodnja, lblRokTrajanja, lblInfCena, lblRastur,
 	lblOpis, lblOpisEn, lblOpisDe, lblKontoPrihoda, lblKontoRashoda;
-	private TextField txtSifra, txtNaziv, txtBarcode, txtEn, txtDe, txtProizvodnja, txtInfCena, txtRastur;
+	private TextField txtSifra, txtNaziv, txtBarcode, txtEn, txtDe, txtProizvodnja;
+	private TekstDecimalni txtInfCena, txtRastur;
 	private SearchableComboBox<IGrupaArtikala> cmbGrupa;
 	private AJedinicaMereComboBox cmbJm;
 	private APoreskaTarifaComboBox cmbPoreskaTarifa;
@@ -47,7 +44,7 @@ public class JArtikalPregled extends OsnovniPregled{
 	
 	public JArtikalPregled(JArtikalPanel panel, ResourceBundle resource) {
 		this.panel = panel;
-		napraviGrid();
+		napraviTabove(resource);
 		napraviElemente(resource);
 		popakujElemente();
 	}
@@ -77,11 +74,24 @@ public class JArtikalPregled extends OsnovniPregled{
 		cmbJm = new AJedinicaMereComboBox(resource);
 		cmbPoreskaTarifa = new APoreskaTarifaComboBox(resource);
 		cmbGrupa = new SearchableComboBox<IGrupaArtikala>();
+		cmbGrupa.valueProperty().addListener(new ChangeListener<IGrupaArtikala>() {
+			@Override
+			public void changed(ObservableValue<? extends IGrupaArtikala> observable, IGrupaArtikala oldValue, IGrupaArtikala newValue) {
+				if(newValue != null) {
+					cmbKontoPrihoda.setValue(newValue.getPrihod());
+					cmbKontoRashoda.setValue(newValue.getRashod());
+				}else {
+					cmbKontoPrihoda.setValue(null);
+					cmbKontoRashoda.setValue(null);
+				}
+			}
+		});
 		txtBarcode = new TextField();
 		txtEn = new TextField();
 		txtDe = new TextField();
 		txtProizvodnja = new TextField();
 		dpRokTrajanja = new DatePicker((new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+		dpRokTrajanja.setMaxWidth(Double.MAX_VALUE);
 		txtInfCena = new TekstDecimalni();
 		txtRastur = new TekstDecimalni();
 		txtOpis = new TextField();
@@ -92,62 +102,79 @@ public class JArtikalPregled extends OsnovniPregled{
 	}
 	//problem sa comboboxovima i njihovom širinom
 	private void popakujElemente() {
-		Double minSirina = 80.0;
 		
-		ColumnConstraints col1 = new ColumnConstraints();
-		col1.setHalignment(HPos.RIGHT);
-		col1.setMinWidth(minSirina);
-		col1.setHgrow(Priority.ALWAYS);
+		DesniColumnConstraint col1 = new  DesniColumnConstraint();
 		ColumnConstraints col2 = new ColumnConstraints();
-		col2.setHgrow(Priority.ALWAYS);
 		
-		ColumnConstraints col3 = new ColumnConstraints();
-		col3.setHalignment(HPos.RIGHT);
-		col3.setMinWidth(minSirina);
-		col3.setHgrow(Priority.ALWAYS);
+		DesniColumnConstraint col3 = new  DesniColumnConstraint();;
 		ColumnConstraints col4 = new ColumnConstraints();
-		col4.setHgrow(Priority.ALWAYS);
 		
-		ColumnConstraints col5 = new ColumnConstraints();
-		col5.setHalignment(HPos.RIGHT);
-		col5.setMinWidth(minSirina);
-		col5.setHgrow(Priority.ALWAYS);
+		DesniColumnConstraint col5 = new  DesniColumnConstraint();
 		ColumnConstraints col6 = new ColumnConstraints();
-		col6.setHgrow(Priority.ALWAYS);
-		
-		ColumnConstraints col7 = new ColumnConstraints();
-		col7.setHalignment(HPos.RIGHT);
-		col7.setMinWidth(minSirina);
-		col7.setHgrow(Priority.ALWAYS);
+
+		DesniColumnConstraint col7 = new  DesniColumnConstraint();
 		ColumnConstraints col8 = new ColumnConstraints();
-		col8.setHgrow(Priority.ALWAYS);
 		
-		ColumnConstraints col9 = new ColumnConstraints();
-		col9.setHalignment(HPos.RIGHT);
-		col9.setMinWidth(minSirina);
-		col9.setHgrow(Priority.ALWAYS);
-		ColumnConstraints col10 = new ColumnConstraints();
-		col10.setHgrow(Priority.ALWAYS);
-		
-		grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6, col7, col8, col9, col10);
-		for(int i = 0; i < 10; i++) {
-			grid.getColumnConstraints().get(i).setPercentWidth(10);
+		grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
+		for(int i = 0; i < 8; i++) {
+			if((i % 2) == 0) {
+				grid.getColumnConstraints().get(i).setPercentWidth(10);
+			}else {
+				grid.getColumnConstraints().get(i).setPercentWidth(15);
+			}
 		}
 		
-		grid.addColumn(0, lblSifra); grid.addColumn(1, txtSifra); grid.addColumn(2, lblNaziv); grid.addColumn(3, txtNaziv); grid.addColumn(4, lblJm); grid.addColumn(5, cmbJm);
-		grid.addColumn(6, lblPoreskaTarifa); grid.addColumn(7, cmbPoreskaTarifa); grid.addColumn(8, lblGrupa); grid.addColumn(9, cmbGrupa);
+		//podaci
+		grid.addColumn(0, lblSifra); grid.addColumn(1, txtSifra); grid.addColumn(2, lblNaziv); grid.addColumn(3, txtNaziv); 
+		grid.addColumn(4, lblJm); grid.addColumn(5, cmbJm); grid.addColumn(6, lblPoreskaTarifa); grid.addColumn(7, cmbPoreskaTarifa); 
 		
-		grid.addColumn(0, lblBarcode); grid.addColumn(1, txtBarcode); grid.addColumn(2, lblInfCena); grid.addColumn(3, txtInfCena); grid.addColumn(4, lblRastur); grid.addColumn(5, txtRastur);
-		grid.addColumn(6, lblProizvodnja); grid.addColumn(7, txtProizvodnja); grid.addColumn(8, lblRokTrajanja); grid.addColumn(9, dpRokTrajanja);
+		grid.addColumn(0, lblGrupa); grid.addColumn(1, cmbGrupa); grid.addColumn(2, lblBarcode); grid.addColumn(3, txtBarcode); 
+		grid.addColumn(4, lblInfCena); grid.addColumn(5, txtInfCena); grid.addColumn(6, lblRastur); grid.addColumn(7, txtRastur);
 		
+		grid.addColumn(0, lblProizvodnja); grid.addColumn(1, txtProizvodnja); grid.addColumn(2, lblRokTrajanja); grid.addColumn(3, dpRokTrajanja);
+		grid.addColumn(4, lblOpis); grid.addColumn(5, txtOpis); 
 		
-		grid.addColumn(0, lblEn); grid.addColumn(1, txtEn); grid.addColumn(2, lblDe); grid.addColumn(3, txtDe); grid.addColumn(4, lblOpis); grid.addColumn(5, txtOpis);
-		grid.addColumn(6, lblOpisEn); grid.addColumn(7, txtOpisEn); grid.addColumn(8, lblOpisDe); grid.addColumn(9, txtOpisDe);
+		//prevod
+		DesniColumnConstraint col21 = new  DesniColumnConstraint();
+		ColumnConstraints col22 = new ColumnConstraints();
+		DesniColumnConstraint col23 = new  DesniColumnConstraint();
+		ColumnConstraints col24 = new ColumnConstraints();
+		DesniColumnConstraint col25 = new  DesniColumnConstraint();
+		ColumnConstraints col26 = new ColumnConstraints();
+		DesniColumnConstraint col27 = new  DesniColumnConstraint();
+		ColumnConstraints col28 = new ColumnConstraints();
 		
-		grid.addColumn(0, lblKontoPrihoda); grid.addColumn(1, cmbKontoPrihoda); grid.addColumn(2, lblKontoRashoda); grid.addColumn(3, cmbKontoRashoda);
-		
-		getChildren().add(grid);
-		HBox.setHgrow(grid, Priority.ALWAYS);
+		gridPrevod.getColumnConstraints().addAll(col21, col22, col23, col24, col25, col26, col27, col28);
+		for(int i = 0; i < 8; i++) {
+			if((i % 2) == 0) {
+				gridPrevod.getColumnConstraints().get(i).setPercentWidth(10);
+			}else {
+				gridPrevod.getColumnConstraints().get(i).setPercentWidth(15);
+			}
+		}
+		gridPrevod.addColumn(0, lblEn); gridPrevod.addColumn(1, txtEn); gridPrevod.addColumn(2, lblDe); gridPrevod.addColumn(3, txtDe); 
+		gridPrevod.addColumn(4, lblOpisEn); gridPrevod.addColumn(5, txtOpisEn); gridPrevod.addColumn(6, lblOpisDe); gridPrevod.addColumn(7, txtOpisDe);
+
+		//knjigovodstvo
+		DesniColumnConstraint col31 = new  DesniColumnConstraint();
+		ColumnConstraints col32 = new ColumnConstraints();
+		DesniColumnConstraint col33 = new  DesniColumnConstraint();
+		ColumnConstraints col34 = new ColumnConstraints();
+		DesniColumnConstraint col35 = new  DesniColumnConstraint();
+		ColumnConstraints col36 = new ColumnConstraints();
+		DesniColumnConstraint col37 = new  DesniColumnConstraint();
+		ColumnConstraints col38 = new ColumnConstraints();
+		gridKnjigovodstvo.getColumnConstraints().addAll(col31, col32, col33, col34, col35, col36, col37, col38);
+		for(int i = 0; i < 8; i++) {
+			if((i % 2) == 0) {
+				gridKnjigovodstvo.getColumnConstraints().get(i).setPercentWidth(10);
+			}else {
+				gridKnjigovodstvo.getColumnConstraints().get(i).setPercentWidth(15);
+			}
+		}
+		gridKnjigovodstvo.addColumn(0, lblKontoPrihoda); gridKnjigovodstvo.addColumn(1, cmbKontoPrihoda); gridKnjigovodstvo.addColumn(2, lblKontoRashoda); gridKnjigovodstvo.addColumn(3, cmbKontoRashoda);
+
+		getChildren().add(tabPane);
 	}
 	
 	public void postaviObjekat(JArtikal artikal) {
@@ -161,10 +188,10 @@ public class JArtikalPregled extends OsnovniPregled{
 			txtBarcode.setText(artikal.getBarcode());
 			txtEn.setText(artikal.getEn());
 			txtDe.setText(artikal.getDe());
-			txtProizvodnja.setText(artikal.getProizvodnja() == null ? "" : artikal.getProizvodnja().toString());
-			dpRokTrajanja.setValue(artikal.getRokTrajanja() == null ? null : artikal.getRokTrajanja().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-			txtInfCena.setText(artikal.getInfCena() == null ? "0.00" : artikal.getInfCena().toString());
-			txtRastur.setText(artikal.getRastur() == null ? "0.00" : artikal.getRastur().toString());
+			txtProizvodnja.setText(artikal == null || artikal.getProizvodnja() == null ? "" : artikal.getProizvodnja().toString());
+			dpRokTrajanja.setValue(artikal == null || artikal.getRokTrajanja() == null ? null : artikal.getRokTrajanja().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+			txtInfCena.setText(artikal == null || artikal.getInfCena() == null ? "0,00" : txtInfCena.vratiFormatiranBroj(artikal.getInfCena()));
+			txtRastur.setText(artikal == null || artikal.getRastur() == null ? "0,00" : txtRastur.vratiFormatiranBroj(artikal.getRastur()));
 			txtOpis.setText(artikal.getOpis());
 			txtOpisEn.setText(artikal.getOpis_en());
 			txtOpisDe.setText(artikal.getOpis_de());
@@ -200,8 +227,8 @@ public class JArtikalPregled extends OsnovniPregled{
 		txtDe.setText("");
 		txtProizvodnja.setText("");
 		dpRokTrajanja.setValue(null);
-		txtInfCena.setText("0.00");
-		txtRastur.setText("0.00");
+		txtInfCena.setText("0,00");
+		txtRastur.setText("0,0");
 		txtOpis.setText("");
 		txtOpisEn.setText("");
 		txtOpisDe.setText("");
@@ -228,14 +255,14 @@ public class JArtikalPregled extends OsnovniPregled{
 			artikal.setProizvodnja(null);
 		}
 		try {
-			artikal.setInfCena(new BigDecimal(txtInfCena.getText()));
+			artikal.setInfCena(txtInfCena.vratiDecimalniBroj(txtInfCena.getText()));
 		}catch (Exception e) {
-			artikal.setInfCena(new BigDecimal(0));
+			artikal.setInfCena(txtInfCena.vratiDecimalniBroj("0,00"));
 		}
 		try {
-			artikal.setRastur(new BigDecimal(txtRastur.getText()));
+			artikal.setRastur(txtRastur.vratiDecimalniBroj(txtRastur.getText()));
 		}catch (Exception e) {
-			artikal.setRastur(new BigDecimal(0));
+			artikal.setRastur(txtRastur.vratiDecimalniBroj("0,00"));
 		}
 		artikal.setOpis(txtOpis.getText());
 		artikal.setOpis_en(txtOpisEn.getText());
@@ -283,7 +310,10 @@ public class JArtikalPregled extends OsnovniPregled{
 		if(cmbKontoRashoda.getItems() != null) {
 			cmbKontoRashoda.getItems().clear();
 		}
-		cmbKontoPrihoda.getItems().addAll(FXCollections.observableArrayList(konta));
-		cmbKontoRashoda.getItems().addAll(FXCollections.observableArrayList(konta));
+		if(konta != null) {
+			cmbKontoPrihoda.getItems().addAll(konta == null ? null : FXCollections.observableArrayList(konta));
+			cmbKontoRashoda.getItems().addAll(konta == null ? null : FXCollections.observableArrayList(konta));
+		}
+
 	}
 }

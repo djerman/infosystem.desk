@@ -30,6 +30,7 @@ public class IGrupaArtikalaTabela extends OpstaTabela<IGrupaArtikala>{
 		naziv.setCellValueFactory(new PropertyValueFactory<>("naziv"));
 		opis = new TableColumn<IGrupaArtikala, String>(resource.getString("lbl.opis"));
 		opis.setCellValueFactory(new PropertyValueFactory<>("opis"));
+		
 		prihod = new TableColumn<IGrupaArtikala, String>(resource.getString("lbl.kontoprihoda"));
 		prihod.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<IGrupaArtikala,String>, ObservableValue<String>>() {
 			@Override
