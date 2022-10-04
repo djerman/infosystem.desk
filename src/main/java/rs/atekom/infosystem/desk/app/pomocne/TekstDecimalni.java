@@ -45,7 +45,6 @@ public class TekstDecimalni extends TextField{
 			break;
 		default:
 			//System.out.println("boja pozadine je " + pozadina);
-			//throw new IllegalArgumentException("Unexpected value: " + boja);
 			}
 		setEditable(editable);
 		setStyle(pozadina);
