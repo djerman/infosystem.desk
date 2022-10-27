@@ -30,7 +30,8 @@ public class JArtikalRestKlijent extends OpstiRest{
 			}
 			if(tip != null && tip.isPresent())
 				tipArtikla = tip.get();
-			String putanja = PrijavaController.adresa + "/artikli?pretplatnikId=" + pretplatnik.getId() + (pojam == null ? "" : "&pretraga=" + pojam) + (tip == null ? "" : "&tip=" + tipArtikla) + "&strana=" + strana;
+			String putanja = PrijavaController.adresa + "/artikli?pretplatnikId=" + pretplatnik.getId() + (pojam == null ? "" : "&pretraga=" + pojam)
+					+ (tip == null ? "" : "&tip=" + tipArtikla) + "&strana=" + strana;
 			ResponseEntity<JArtikalOdgovor> odgovor = new RestTemplate().exchange(putanja, HttpMethod.GET, servis.request, JArtikalOdgovor.class);
 			return odgovor;
 		}catch (HttpStatusCodeException e) {

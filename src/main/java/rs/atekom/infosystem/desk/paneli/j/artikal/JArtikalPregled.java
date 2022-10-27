@@ -264,6 +264,8 @@ public class JArtikalPregled extends OsnovniPregled{
 		}catch (Exception e) {
 			artikal.setRastur(txtRastur.vratiDecimalniBroj("0,00"));
 		}
+		artikal.setProizvodnja(null);
+		artikal.setRokTrajanja(Date.from(dpRokTrajanja.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		artikal.setOpis(txtOpis.getText());
 		artikal.setOpis_en(txtOpisEn.getText());
 		artikal.setOpis_de(txtOpisDe.getText());

@@ -133,6 +133,6 @@ public class JArtikalTabela extends OpstaTabela<JArtikal>{
 		opisDe.setCellValueFactory(new PropertyValueFactory<>("opis_de"));
 		
 		getColumns().addAll(sifra, naziv, poreskaTarifa, jm, infCena, barcode, grupa, rokTrajanja, rastur, opis, en, de/*, proizvodnja*/, opisEn, opisDe);
-		setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+		setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 }

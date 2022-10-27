@@ -177,7 +177,7 @@ public class GPartnerTabela extends OpstaTabela<GPartnerOdgovorPodaci>{
 			});
 		
 		getColumns().addAll(grupaPartnera, sifra, naziv, punNaziv, pib, mb, tel, napomena, email, kupac, dobavljac, banka, ustanova);
-		setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+		setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		}
 	
 	}
