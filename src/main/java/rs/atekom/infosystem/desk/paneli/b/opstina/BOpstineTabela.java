@@ -10,7 +10,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.b.BOpstina;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class BOpstineTabela extends OpstaTabela<BOpstina>{
 
@@ -18,7 +18,6 @@ public class BOpstineTabela extends OpstaTabela<BOpstina>{
 	
 	public BOpstineTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 
 	@SuppressWarnings("unchecked")

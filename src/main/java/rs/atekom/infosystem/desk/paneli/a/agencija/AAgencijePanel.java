@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.a.agencija.AAgencija;
 import rs.atekom.infosystem.baza.a.agencija.AAgencijaOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.AAgencijaRestKlijent;
 
 public class AAgencijePanel extends OsnovniPanel{
@@ -24,10 +24,10 @@ public class AAgencijePanel extends OsnovniPanel{
 	
 	public AAgencijePanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restAgencija = new AAgencijaRestKlijent(vratiRestServis());
 		postaviPregled();
 		postaviKomande();

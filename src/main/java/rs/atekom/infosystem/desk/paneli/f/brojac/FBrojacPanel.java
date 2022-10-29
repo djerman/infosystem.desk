@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.f.brojac.FBrojac;
 import rs.atekom.infosystem.baza.f.brojac.FBrojacOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.FBrojacKlijent;
 
 public class FBrojacPanel extends OsnovniPanel{
@@ -27,10 +27,10 @@ public class FBrojacPanel extends OsnovniPanel{
 	
 	public FBrojacPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 	}
 
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restBrojac = new FBrojacKlijent(vratiRestServis());
 		
 		postaviInfo();

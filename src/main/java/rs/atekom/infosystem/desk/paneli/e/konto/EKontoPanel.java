@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.e.konto.EKonto;
 import rs.atekom.infosystem.baza.e.konto.EKontoOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.EKontoRestKlijent;
 
 public class EKontoPanel extends OsnovniPanel{
@@ -24,10 +24,10 @@ public class EKontoPanel extends OsnovniPanel{
 	
 	public EKontoPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restKonto = new EKontoRestKlijent(vratiRestServis());
 		
 		postaviInfo();

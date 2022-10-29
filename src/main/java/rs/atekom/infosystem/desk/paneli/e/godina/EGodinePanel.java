@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.e.godina.EGodina;
 import rs.atekom.infosystem.baza.e.godina.EGodinaOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.DPretplatnikRestKlijent;
 import rs.atekom.infosystem.desk.app.rest.EGodinaRestKlijent;
 
@@ -27,11 +27,11 @@ public class EGodinePanel extends OsnovniPanel{
 	
 	public EGodinePanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElmente();
 		pregled.postaviSirinu();
 		}
 	
-	private void postaviElmente() {
+	@Override
+	public void postaviElemente() {
 		restGodina = new EGodinaRestKlijent(vratiRestServis());
 		restPretplatnik = new DPretplatnikRestKlijent(vratiRestServis());
 		postaviPregled();

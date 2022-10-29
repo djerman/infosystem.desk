@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="D:/RADNI/infosystem.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/infosystem.desk/Infosystem.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" mainClassHandleIdentifier="=infosystem.desk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;rs.atekom.infosystem.desk{AtekomDeskApplication.java[AtekomDeskApplication" manifestLocation="/infosystem.desk/infosystem" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
+        <sealing sealJar="true">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <folder path="/infosystem.desk/target"/>
+        <file path="/infosystem.desk/pom.xml"/>
+        <javaElement handleIdentifier="=infosystem.desk/src\/test\/java=/test=/true=/=/optional=/true=/=/maven.pomderived=/true=/"/>
+        <javaElement handleIdentifier="=infosystem.desk/src\/main\/resources=/maven.pomderived=/true=/"/>
+        <javaElement handleIdentifier="=infosystem.desk/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/"/>
+        <javaElement handleIdentifier="=infosystem.desk/resources"/>
+        <folder path="/infosystem.desk/src"/>
+        <file path="/infosystem.desk/.classpath"/>
+        <file path="/infosystem.desk/.gitignore"/>
+        <file path="/infosystem.desk/.project"/>
+    </selectedElements>
+</jardesc>

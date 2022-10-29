@@ -15,7 +15,7 @@ import javafx.util.Callback;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaci;
 import rs.atekom.infosystem.desk.app.pomocne.KolonaInteger;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class DPretplatnikTabela extends OpstaTabela<DPretplatnikPodaci>{
 
@@ -25,10 +25,10 @@ public class DPretplatnikTabela extends OpstaTabela<DPretplatnikPodaci>{
 	
 	public DPretplatnikTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public void postaviTabelu() {
 		agencija = new TableColumn<DPretplatnikPodaci, String>(resource.getString("lbl.agencija"));
 		agencija.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DPretplatnikPodaci,String>, ObservableValue<String>>() {

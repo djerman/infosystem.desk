@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.e.tipdokumenta.ETipDokumenta;
 import rs.atekom.infosystem.baza.e.tipdokumenta.ETipDokumentaOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.ETipDokumentaRestKlijent;
 
 public class ETipDokumentaPanel extends OsnovniPanel{

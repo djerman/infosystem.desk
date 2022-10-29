@@ -14,7 +14,7 @@ import javafx.util.Callback;
 import rs.atekom.infosystem.baza.f.preduzece.FPreduzece;
 import rs.atekom.infosystem.baza.g.GPartner;
 import rs.atekom.infosystem.baza.g.GPartnerOdgovorPodaci;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class GPartnerTabela extends OpstaTabela<GPartnerOdgovorPodaci>{
 
@@ -23,10 +23,10 @@ public class GPartnerTabela extends OpstaTabela<GPartnerOdgovorPodaci>{
 	
 	public GPartnerTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public void postaviTabelu() {
 		grupaPartnera = new TableColumn<GPartnerOdgovorPodaci, String>(resource.getString("lbl.grupapartnera"));
 		grupaPartnera.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<GPartnerOdgovorPodaci,String>, ObservableValue<String>>() {

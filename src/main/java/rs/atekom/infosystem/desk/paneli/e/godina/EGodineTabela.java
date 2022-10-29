@@ -13,7 +13,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.e.godina.EGodina;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class EGodineTabela extends OpstaTabela<EGodina>{
 
@@ -23,7 +23,6 @@ public class EGodineTabela extends OpstaTabela<EGodina>{
 	
 	public EGodineTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")

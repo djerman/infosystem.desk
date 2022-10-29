@@ -12,7 +12,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.j.JArtikal;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class JArtikalTabela extends OpstaTabela<JArtikal>{
 
@@ -22,10 +22,10 @@ public class JArtikalTabela extends OpstaTabela<JArtikal>{
 	
 	public JArtikalTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public void postaviTabelu() {
 		sifra = new TableColumn<JArtikal, String>(resource.getString("lbl.sifra"));
 		sifra.setCellValueFactory(new PropertyValueFactory<>("sifra"));

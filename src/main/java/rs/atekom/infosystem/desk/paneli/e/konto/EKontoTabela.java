@@ -9,7 +9,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.e.konto.EKonto;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class EKontoTabela extends OpstaTabela<EKonto>{
 	
@@ -17,10 +17,10 @@ public class EKontoTabela extends OpstaTabela<EKonto>{
 	
 	public EKontoTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public void postaviTabelu() {
 		klasa = new TableColumn<EKonto, String>(resource.getString("lbl.kontoklasa"));
 		klasa.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<EKonto,String>, ObservableValue<String>>() {

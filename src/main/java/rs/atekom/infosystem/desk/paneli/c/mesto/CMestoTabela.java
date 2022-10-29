@@ -10,7 +10,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.c.CMesto;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class CMestoTabela extends OpstaTabela<CMesto>{
 
@@ -18,7 +18,6 @@ public class CMestoTabela extends OpstaTabela<CMesto>{
 	
 	public CMestoTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")

@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.a.poreskatarifa.APoreskaTarifa;
 import rs.atekom.infosystem.baza.a.poreskatarifa.APoreskaTarifaOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.APoreskaTarifaRestKlijent;
 
 public class APoreskaTarifaPanel extends OsnovniPanel{
@@ -19,10 +19,10 @@ public class APoreskaTarifaPanel extends OsnovniPanel{
 	
 	public APoreskaTarifaPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restTarifa = new APoreskaTarifaRestKlijent(vratiRestServis());
 		
 		postaviInfo();

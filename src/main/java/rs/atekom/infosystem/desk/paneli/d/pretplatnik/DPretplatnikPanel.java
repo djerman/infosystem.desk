@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikOdgovor;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnikPodaci;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.DPretplatnikRestKlijent;
 
 public class DPretplatnikPanel extends OsnovniPanel{
@@ -25,10 +25,10 @@ public class DPretplatnikPanel extends OsnovniPanel{
 	
 	public DPretplatnikPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restPretplatnik = new DPretplatnikRestKlijent(vratiRestServis());
 		postaviPregled();
 		postaviKomande();

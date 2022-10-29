@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import rs.atekom.infosystem.baza.e.grupaprava.EGrupaPrava;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class EGrupaPravaTabela extends OpstaTabela<EGrupaPrava>{
 
@@ -14,7 +14,6 @@ public class EGrupaPravaTabela extends OpstaTabela<EGrupaPrava>{
 	
 	public EGrupaPravaTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")

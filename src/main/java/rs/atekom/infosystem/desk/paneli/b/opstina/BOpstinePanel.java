@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.b.BOpstina;
 import rs.atekom.infosystem.baza.b.BOpstinaOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.ADrzavaRestKlijent;
 import rs.atekom.infosystem.desk.app.rest.BOpstinaRestKlijent;
 
@@ -27,11 +27,11 @@ public class BOpstinePanel extends OsnovniPanel{
 	
 	public BOpstinePanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		pregled.postaviSirinu();
 		}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restOpstina = new BOpstinaRestKlijent(vratiRestServis());
 		restDrzava = new ADrzavaRestKlijent(vratiRestServis());
 		postaviPregled();

@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.e.konto.EKonto;
 import rs.atekom.infosystem.baza.f.grupapartnera.FGrupaPartnera;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class FGrupaPartneraTabela extends OpstaTabela<FGrupaPartnera>{
 
@@ -18,10 +18,10 @@ public class FGrupaPartneraTabela extends OpstaTabela<FGrupaPartnera>{
 	
 	public FGrupaPartneraTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public void postaviTabelu() {
 		sifra = new TableColumn<FGrupaPartnera, String>(resource.getString("lbl.sifra"));
 		sifra.setCellValueFactory(new PropertyValueFactory<>("sifra"));

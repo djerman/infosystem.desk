@@ -14,7 +14,7 @@ import rs.atekom.infosystem.baza.a.drzava.ADrzavaOdgovor;
 import rs.atekom.infosystem.baza.c.CMesto;
 import rs.atekom.infosystem.baza.c.CMestoOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.ADrzavaRestKlijent;
 import rs.atekom.infosystem.desk.app.rest.BOpstinaRestKlijent;
 import rs.atekom.infosystem.desk.app.rest.CMestoRestKlijent;
@@ -31,11 +31,11 @@ public class CMestoPanel extends OsnovniPanel{
 	
 	public CMestoPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		pregled.postaviSirinu();
 		}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restDrzava = new ADrzavaRestKlijent(vratiRestServis());
 		restOpstina = new BOpstinaRestKlijent(vratiRestServis());
 		restMesto = new CMestoRestKlijent(vratiRestServis());

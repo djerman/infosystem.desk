@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.a.jedinicamere.AJedinicaMere;
 import rs.atekom.infosystem.baza.a.jedinicamere.AJedinicaMereOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.AJedinicaMereRestKlijent;
 
 public class AJedinicePanel extends OsnovniPanel{
@@ -24,10 +24,10 @@ public class AJedinicePanel extends OsnovniPanel{
 	
 	public AJedinicePanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restJedinica = new AJedinicaMereRestKlijent(vratiRestServis());
 		postaviPregled();
 		postaviKomande();

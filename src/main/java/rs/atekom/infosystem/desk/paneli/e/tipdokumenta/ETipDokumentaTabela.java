@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import rs.atekom.infosystem.baza.e.tipdokumenta.ETipDokumenta;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class ETipDokumentaTabela extends OpstaTabela<ETipDokumenta>{
 
@@ -15,10 +15,10 @@ public class ETipDokumentaTabela extends OpstaTabela<ETipDokumenta>{
 	
 	public ETipDokumentaTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public void postaviTabelu() {
 		sifra = new TableColumn<ETipDokumenta, String>(resource.getString("lbl.sifra"));
 		sifra.setCellValueFactory(new PropertyValueFactory<>("sifra"));

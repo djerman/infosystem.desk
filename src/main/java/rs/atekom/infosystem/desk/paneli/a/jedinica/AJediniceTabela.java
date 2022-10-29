@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import rs.atekom.infosystem.baza.a.jedinicamere.AJedinicaMere;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class AJediniceTabela extends OpstaTabela<AJedinicaMere>{
 
@@ -14,7 +14,6 @@ public class AJediniceTabela extends OpstaTabela<AJedinicaMere>{
 	
 	public AJediniceTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 
 	@SuppressWarnings("unchecked")

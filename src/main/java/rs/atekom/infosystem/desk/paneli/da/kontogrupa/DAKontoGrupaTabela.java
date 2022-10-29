@@ -10,7 +10,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.da.kontogrupa.DAKontoGrupa;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class DAKontoGrupaTabela extends OpstaTabela<DAKontoGrupa>{
 
@@ -18,10 +18,10 @@ public class DAKontoGrupaTabela extends OpstaTabela<DAKontoGrupa>{
 	
 	public DAKontoGrupaTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public void postaviTabelu() {
 		klasa = new TableColumn<DAKontoGrupa, String>(resource.getString("lbl.kontoklasa"));
 		klasa.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DAKontoGrupa,String>, ObservableValue<String>>() {

@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.da.kontogrupa.DAKontoGrupa;
 import rs.atekom.infosystem.baza.da.kontogrupa.DAKontoGrupaOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.DAKontoGrupaRestKlijent;
 
 public class DAKontoGrupaPanel extends OsnovniPanel{
@@ -26,10 +26,10 @@ public class DAKontoGrupaPanel extends OsnovniPanel{
 	
 	public DAKontoGrupaPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restGrupa = new DAKontoGrupaRestKlijent(vratiRestServis());
 		
 		postaviTabelu();

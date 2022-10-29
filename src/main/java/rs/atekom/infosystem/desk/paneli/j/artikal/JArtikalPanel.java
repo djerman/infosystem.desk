@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.j.JArtikal;
 import rs.atekom.infosystem.baza.j.JArtikalOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.JArtikalRestKlijent;
 
 public class JArtikalPanel extends OsnovniPanel{
@@ -28,10 +28,10 @@ public class JArtikalPanel extends OsnovniPanel{
 	
 	public JArtikalPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 	}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restArtikal = new JArtikalRestKlijent(vratiRestServis());
 		
 		postaviInfo();

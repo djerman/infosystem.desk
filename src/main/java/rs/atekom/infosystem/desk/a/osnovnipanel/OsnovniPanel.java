@@ -1,4 +1,4 @@
-package rs.atekom.infosystem.desk.a;
+package rs.atekom.infosystem.desk.a.osnovnipanel;
 
 import org.controlsfx.control.Notifications;
 import org.controlsfx.glyphfont.FontAwesome;
@@ -19,11 +19,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import rs.atekom.infosystem.baza.d.pretplatnik.DPretplatnik;
+import rs.atekom.infosystem.desk.a.ObavestenjeBrisanje;
+import rs.atekom.infosystem.desk.a.ObavestenjеPotvrda;
+import rs.atekom.infosystem.desk.a.OsnovniLayout;
+import rs.atekom.infosystem.desk.a.VBoxRoot;
 import rs.atekom.infosystem.desk.app.pomocne.Odgovori;
 import rs.atekom.infosystem.desk.app.rest.ServisRest;
 
 @Component
-public abstract class OsnovniPanel extends ScrollPane{
+public abstract class OsnovniPanel extends ScrollPane implements OsnovniPanelInterface{
 
 	private VBoxRoot root;
 	//private AlatkeBar alatke;
@@ -128,6 +132,8 @@ public abstract class OsnovniPanel extends ScrollPane{
 	    
 		setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		
+		postaviElemente();
 		}
 	/*
 	public void postaviFocus() {

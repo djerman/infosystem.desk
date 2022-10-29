@@ -22,7 +22,7 @@ import rs.atekom.infosystem.baza.a.prava.APrava;
 import rs.atekom.infosystem.baza.e.grupaprava.EGrupaPrava;
 import rs.atekom.infosystem.baza.e.grupaprava.EGrupaPravaOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.pomocne.LabelaBold;
 import rs.atekom.infosystem.desk.app.rest.EGrupaPravaRestKlijent;
 
@@ -42,10 +42,10 @@ public class EGrupaPravaPanel extends OsnovniPanel{
 	
 	public EGrupaPravaPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restGrupa = new EGrupaPravaRestKlijent(vratiRestServis());
 		
 		layout = new HBox();

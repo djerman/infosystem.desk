@@ -12,7 +12,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.a.drzava.ADrzava;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class ADrzaveTabela extends OpstaTabela<ADrzava>{
 
@@ -21,7 +21,6 @@ public class ADrzaveTabela extends OpstaTabela<ADrzava>{
 	
 	public ADrzaveTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")

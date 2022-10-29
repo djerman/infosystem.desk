@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import rs.atekom.infosystem.baza.d.kontoklasa.DKontoKlasa;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class DKontoKlasaTabela extends OpstaTabela<DKontoKlasa>{
 
@@ -14,10 +14,10 @@ public class DKontoKlasaTabela extends OpstaTabela<DKontoKlasa>{
 	
 	public DKontoKlasaTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public void postaviTabelu() {
 		sifra = new TableColumn<DKontoKlasa, String>(resource.getString("lbl.sifra"));
 		sifra.setCellValueFactory(new PropertyValueFactory<>("sifra"));

@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.i.grupaartikala.IGrupaArtikala;
 import rs.atekom.infosystem.baza.i.grupaartikala.IGrupaArtikalaOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.IGrupaArtikalaRestKlijent;
 
 public class IGrupaArtikalaPanel extends OsnovniPanel{
@@ -27,10 +27,9 @@ public class IGrupaArtikalaPanel extends OsnovniPanel{
 	
 	public IGrupaArtikalaPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 	}
 
-	private void postaviElemente() {
+	public void postaviElemente() {
 		restGrupa = new IGrupaArtikalaRestKlijent(vratiRestServis());
 		
 		postaviInfo();

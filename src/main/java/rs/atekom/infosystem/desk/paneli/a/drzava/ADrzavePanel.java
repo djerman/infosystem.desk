@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.a.drzava.ADrzava;
 import rs.atekom.infosystem.baza.a.drzava.ADrzavaOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.ADrzavaRestKlijent;
 
 public class ADrzavePanel extends OsnovniPanel{
@@ -23,10 +23,10 @@ public class ADrzavePanel extends OsnovniPanel{
 	
 	public ADrzavePanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restDrzava = new ADrzavaRestKlijent(vratiRestServis());
 		postaviPregled();
 		postaviKomande();

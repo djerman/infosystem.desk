@@ -10,7 +10,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.db.kontoracun.DBKontoRacun;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class DBKontoRacunTabela extends OpstaTabela<DBKontoRacun>{
 
@@ -18,10 +18,10 @@ public class DBKontoRacunTabela extends OpstaTabela<DBKontoRacun>{
 	
 	public DBKontoRacunTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 		}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public void postaviTabelu() {
 		klasa = new TableColumn<DBKontoRacun, String>(resource.getString("lbl.kontoklasa"));
 		klasa.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DBKontoRacun,String>, ObservableValue<String>>() {

@@ -1,4 +1,4 @@
-package rs.atekom.infosystem.desk.app.pomocne;
+package rs.atekom.infosystem.desk.app.pomocne.tabela;
 
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
@@ -7,51 +7,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
 
-public class OpstaTabela<T> extends TableView<T>{
+public abstract class OpstaTabela<T> extends TableView<T> implements OpstaTabelaInterface{
 	
 	private T t;
-	public SimpleDateFormat format;
+	public SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 	public ResourceBundle resource;
-	//private ScrollBar scrollBar;
 
 	public OpstaTabela(ResourceBundle resource) {
-		//scrollBar = new ScrollBar();
-		format = new SimpleDateFormat("dd.MM.yyyy");
+		super();
 		this.resource = resource;
-		//getStyleClass().add("opstatabela");
 		setMaxWidth(Double.MAX_VALUE);
 		setPlaceholder(new Label(resource.getString("lbl.nemapodataka")));
-		//setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-		//setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		//postaviSirinuKolona();
-		/*
-		getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> 
-		Platform.runLater(() -> {
-	        TableViewSkin<?> ts = (TableViewSkin<?>) getSkin();
-	        VirtualFlow<?> vf = (VirtualFlow<?>)ts.getChildren().get(1);
-
-	        int first = vf.getFirstVisibleCell().getIndex();
-	        int last = vf.getLastVisibleCell().getIndex();
-
-	        if((newValue.intValue() - ((last - first) / 2)) >= 0) {
-	            vf.scrollTo(newValue.intValue() - ((last - first) / 2));
-	            getSelectionModel().select(newValue.intValue() - ((last - first) / 2));
-	            System.out.println("ovde sam sa scrolom....");
-	            }
-	        }));**/
-		
-		/*scrollBar.addEventHandler(ScrollEvent.SCROLL, new EventHandler<ScrollEvent>() {
-		    @Override
-		    public void handle(ScrollEvent event) {
-		        ScrollBar tableViewScrolllBar = (ScrollBar) lookup(".scroll-bar:vertical");
-		        tableViewScrolllBar.setValue(scrollBar.getValue() / scrollBar.getMax());
-		        System.out.println("ovde sam sa scrolom....");
-		        }
-		    });*/
-		}
-	
-	public void postaviTabelu() {
-		//
+		postaviTabelu();
 		}
 	
 	public void set(T t) {
@@ -69,8 +36,6 @@ public class OpstaTabela<T> extends TableView<T>{
 		}
 	
 	public static void postaviSirinuKolona(TableView<?> tabela) {
-		//TabelaSirinaKolona.autoFitTable(tabela);
-	    //Set the right policy
 	    tabela.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 	    tabela.refresh();
 	    }

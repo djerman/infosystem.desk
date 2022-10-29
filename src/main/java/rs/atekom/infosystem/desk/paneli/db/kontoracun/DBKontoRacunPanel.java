@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.db.kontoracun.DBKontoRacun;
 import rs.atekom.infosystem.baza.db.kontoracun.DBKontoRacunOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.DBKontoRacunRestKlijent;
 
 public class DBKontoRacunPanel extends OsnovniPanel{
@@ -24,10 +24,10 @@ public class DBKontoRacunPanel extends OsnovniPanel{
 	
 	public DBKontoRacunPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 	
-	private void postaviElemente() {
+	@Override
+	public void postaviElemente() {
 		restRacun = new DBKontoRacunRestKlijent(vratiRestServis());
 		
 		postaviInfo();

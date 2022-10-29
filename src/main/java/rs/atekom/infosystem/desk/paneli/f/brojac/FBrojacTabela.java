@@ -14,7 +14,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import rs.atekom.infosystem.baza.f.brojac.FBrojac;
-import rs.atekom.infosystem.desk.app.pomocne.OpstaTabela;
+import rs.atekom.infosystem.desk.app.pomocne.tabela.OpstaTabela;
 
 public class FBrojacTabela extends OpstaTabela<FBrojac>{
 
@@ -23,10 +23,10 @@ public class FBrojacTabela extends OpstaTabela<FBrojac>{
 	
 	public FBrojacTabela(ResourceBundle resource) {
 		super(resource);
-		postaviTabelu();
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public void postaviTabelu() {
 		tip = new TableColumn<FBrojac, String>(resource.getString("lbl.tip"));
 		tip.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FBrojac,String>, ObservableValue<String>>() {

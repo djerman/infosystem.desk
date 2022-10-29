@@ -134,7 +134,8 @@ public class TekstDecimalni extends TextField{
 		try {
 			String brojTekst = broj.replace(".", "");
 			brojTekst = brojTekst.replace(",", ".");
-			return Double.parseDouble(brojTekst);
+			Double br = Double.parseDouble(brojTekst);
+			return br;
 			}catch (Exception e) {
 				//vratiUpozorenje();
 				return null;

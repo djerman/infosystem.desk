@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import rs.atekom.infosystem.baza.d.kontoklasa.DKontoKlasa;
 import rs.atekom.infosystem.baza.d.kontoklasa.DKontoKlasaOdgovor;
 import rs.atekom.infosystem.desk.a.OsnovniLayout;
-import rs.atekom.infosystem.desk.a.OsnovniPanel;
+import rs.atekom.infosystem.desk.a.osnovnipanel.OsnovniPanel;
 import rs.atekom.infosystem.desk.app.rest.DKontoKlasaRestKlijent;
 
 public class DKontoKlasaPanel extends OsnovniPanel{
@@ -26,10 +26,9 @@ public class DKontoKlasaPanel extends OsnovniPanel{
 	
 	public DKontoKlasaPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 	
-	private void postaviElemente() {
+	public void postaviElemente() {
 		restKlasa = new DKontoKlasaRestKlijent(vratiRestServis());
 		
 		postaviTabelu();
