@@ -26,7 +26,6 @@ public class ETipDokumentaPanel extends OsnovniPanel{
 	
 	public ETipDokumentaPanel(OsnovniLayout ol) {
 		super(ol);
-		postaviElemente();
 		}
 	
 	public void postaviElemente() {

@@ -26,10 +26,16 @@ public class GPartnerPanel extends OsnovniPanel{
 	public GPartnerPanel(OsnovniLayout ol, Boolean kupac) {
 		super(ol);
 		this.kupac = kupac;
+		//pregazizi postaviElemente jer ne uzima u obzir parametar kupac
+		postaviElementePartner();
 		}
 	
 	@Override
 	public void postaviElemente() {
+		
+	}
+	
+	private void postaviElementePartner(){
 		restPartner = new GPartnerRestKlijent(vratiRestServis());
 		postaviPregled();
 		postaviKomandeSaPretragom();
@@ -65,7 +71,7 @@ public class GPartnerPanel extends OsnovniPanel{
 		vratiRoot().getChildren().addAll(pregled, komande, partneri);
 		VBox.setVgrow(partneri, Priority.ALWAYS);
 		setContent(vratiRoot());
-		}
+	}
 	
 	private void postaviPregled() {
 		pregled = new GPartnerPregled(this, vratiOsnovniLayout().vratiResource(), kupac);
@@ -75,18 +81,6 @@ public class GPartnerPanel extends OsnovniPanel{
 		partneri = new GPartnerTabela(vratiOsnovniLayout().vratiResource());
 		izborPartnera = partneri.getSelectionModel();
 		izborPartnera.setSelectionMode(SelectionMode.SINGLE);
-		/*
-		izborPartnera.selectedItemProperty().addListener(new ChangeListener<GPartner>() {
-			@Override
-			public void changed(ObservableValue<? extends GPartner> observable, GPartner oldValue, GPartner newValue) {
-				if(newValue != null) {
-					pregled.postaviObjekat(newValue);
-					}else {
-						pregled.postaviNovo();
-						}
-				}
-			});
-		*/
 		partneri.setRowFactory(tv -> {
 			TableRow<GPartnerOdgovorPodaci> row = new TableRow<>();
 			row.setOnMouseClicked(e -> {

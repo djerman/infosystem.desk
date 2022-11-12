@@ -38,6 +38,7 @@ public class AtekomApp extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.context.publishEvent(new StageReadyEvent(primaryStage));
+		primaryStage.setResizable(false);
 		}
 	
 	@Override

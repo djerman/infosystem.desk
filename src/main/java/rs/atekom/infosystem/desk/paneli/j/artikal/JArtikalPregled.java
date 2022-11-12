@@ -116,6 +116,7 @@ public class JArtikalPregled extends OsnovniPregled{
 		ColumnConstraints col8 = new ColumnConstraints();
 		
 		grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
+		
 		for(int i = 0; i < 8; i++) {
 			if((i % 2) == 0) {
 				grid.getColumnConstraints().get(i).setPercentWidth(10);
@@ -164,7 +165,9 @@ public class JArtikalPregled extends OsnovniPregled{
 		ColumnConstraints col36 = new ColumnConstraints();
 		DesniColumnConstraint col37 = new  DesniColumnConstraint();
 		ColumnConstraints col38 = new ColumnConstraints();
+		
 		gridKnjigovodstvo.getColumnConstraints().addAll(col31, col32, col33, col34, col35, col36, col37, col38);
+		
 		for(int i = 0; i < 8; i++) {
 			if((i % 2) == 0) {
 				gridKnjigovodstvo.getColumnConstraints().get(i).setPercentWidth(10);
@@ -172,6 +175,7 @@ public class JArtikalPregled extends OsnovniPregled{
 				gridKnjigovodstvo.getColumnConstraints().get(i).setPercentWidth(15);
 			}
 		}
+		
 		gridKnjigovodstvo.addColumn(0, lblKontoPrihoda); gridKnjigovodstvo.addColumn(1, cmbKontoPrihoda); gridKnjigovodstvo.addColumn(2, lblKontoRashoda); gridKnjigovodstvo.addColumn(3, cmbKontoRashoda);
 
 		getChildren().add(tabPane);
@@ -237,7 +241,7 @@ public class JArtikalPregled extends OsnovniPregled{
 	}
 	
 	public JArtikal preuzmiObjekat() {
-		if(this.artikal == null) {
+		if(artikal == null) {
 			artikal = new JArtikal();
 			artikal.setPretplatnik(panel.vratiPretplatnika());
 		}
@@ -316,6 +320,6 @@ public class JArtikalPregled extends OsnovniPregled{
 			cmbKontoPrihoda.getItems().addAll(konta == null ? null : FXCollections.observableArrayList(konta));
 			cmbKontoRashoda.getItems().addAll(konta == null ? null : FXCollections.observableArrayList(konta));
 		}
-
 	}
+	
 }

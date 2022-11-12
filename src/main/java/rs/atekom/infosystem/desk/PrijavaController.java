@@ -64,7 +64,7 @@ public class PrijavaController implements Initializable{
 	public PrijavaController() {
 		// TODO Auto-generated constructor stub
 		//jMetro = new JMetro(Style.LIGHT);
-		resource = ResourceBundle.getBundle("prevod", new Locale(""));
+		resource = ResourceBundle.getBundle("prevod", Locale.of(""));
 		}
 
 	@Override
@@ -81,11 +81,6 @@ public class PrijavaController implements Initializable{
 	@FXML
 	public void prijava(ActionEvent event) {
 		try {
-		    //HttpHeaders headers = new HttpHeaders();
-		    //headers.setBasicAuth(korisnickoTxt.getText().trim(), lozinkaTxt.getText().toString());
-		    // create request
-		    //HttpEntity<String> request = new HttpEntity<String>(headers);
-		    // make a request
 			korisnik = korisnickoTxt.getText().trim();
 			lozinka = lozinkaTxt.getText().trim().toString();
 		    
@@ -127,29 +122,28 @@ public class PrijavaController implements Initializable{
 				if(response.getStatusCodeValue() == 200 && kontakt != null) {
 					korisnik = kontakt.getKorisnicko();
 					lozinka = kontakt.getLozinka();
-					stage = (Stage) prijavaBtn.getScene().getWindow();
-					int width = (int) Screen.getPrimary().getBounds().getWidth();
-					int height = (int) Screen.getPrimary().getBounds().getHeight();
 					
-					//URL urlOsnovni = resource.getURL();
-					//FXMLLoader loader = new FXMLLoader(urlOsnovni);
-					//loader.setResources(ResourceBundle.getBundle("prevod", new Locale("srb_RS")));
+					stage = (Stage) prijavaBtn.getScene().getWindow();
+					double width = Screen.getPrimary().getBounds().getWidth();
+					double height = Screen.getPrimary().getBounds().getHeight();
+					
 					if(kontakt.getJezik() != null)
-						resource = ResourceBundle.getBundle("prevod", new Locale(kontakt.getJezik()));
+						resource = ResourceBundle.getBundle("prevod", Locale.of(kontakt.getJezik()));
+					
+					//stage.getScene().getRoot().setVisible(false);
+					stage.hide();
 					
 					Parent root = new OsnovniLayout(kontakt, rest, resource);
-					//Parent root = loader.load(getClass().getResource("/Osnovni.fxml").openStream());
-					//Parent root = loader.load();
-					//OsnovniController osnovniController = (OsnovniController) loader.getController();
-					//osnovniController.setRestServis(rest);
-					//osnovniController.setKontakt(kontakt);
 					
 					Scene scene = new Scene(root, width, height);
 				    scene.getStylesheets().add("/css/stilovi.css");
-				    //jMetro.setScene(scene); 
-				    stage = (Stage) prijavaBtn.getScene().getWindow();
-					stage.setScene(scene);
+
+					stage.setResizable(true);
 					stage.setMaximized(true);
+					stage.setScene(scene);
+					stage.show();
+					stage.setResizable(false);
+					
 					stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
 						public void handle(WindowEvent event) {

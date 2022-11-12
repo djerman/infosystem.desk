@@ -149,7 +149,7 @@ public class JArtikalPanel extends OsnovniPanel{
 			if(snimi) {
 				odgovor = restArtikal.snimi(pregled.preuzmiObjekat());
 			}else {
-				odgovor= restArtikal.brisi(izborArtikla.getSelectedItem());
+				odgovor = restArtikal.brisi(izborArtikla.getSelectedItem());
 			}
 			statusOdgovora(odgovor);
 		}catch (Exception e) {

@@ -344,6 +344,20 @@
 	-fx-border-color: blue;
 }
 
+.komande-za-pregled{
+	-fx-padding: 10; -fx-border-style: solid inside;
+	-fx-border-width: 2; -fx-border-insets: 2;
+	-fx-border-radius: 5; -fx-background-color: #FAEBD7;
+	-fx-border-color: orange;
+}
+
+.komande-za-combo{
+	-fx-padding: 2test; -fx-border-style: solid inside;
+	-fx-border-width: 2; -fx-border-insets: 2;
+	-fx-border-radius: 5; -fx-background-color: #FAEBD7;
+	-fx-border-color: orange;
+}
+
 .pregled-sa-pozadinom{
 	-fx-padding: 10; -fx-border-style: solid inside;
 	-fx-border-width: 2; -fx-border-insets: 2;
