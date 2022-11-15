@@ -52,7 +52,7 @@ public class PrijavaController implements Initializable{
 	public static String token;
 	private GlyphFont fontAwesome = GlyphFontRegistry.font("FontAwesome");
 	//public static String adresa = "http://173.212.202.168:8080/infosystem";
-	//public static String adresa = "http://192.168.199.5:8080/infosystem.server-0.0.1-SNAPSHOT";
+	//public static String adresa = "http://192.168.199.5:8080/infosystem";
 	public static String adresa = "http://localhost:8080";
 	private Stage stage;
 	private ResourceBundle resource;
